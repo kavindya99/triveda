@@ -1,9 +1,4 @@
-import 'package:ayu/pages/sub_menus/channel_doctor/channel_doctor.dart';
-import 'package:ayu/pages/sub_menus/check_symptoms/check_symptoms.dart';
-import 'package:ayu/pages/sub_menus/doctor_profile.dart';
-import 'package:ayu/pages/sub_menus/food_recipes/food_recipes.dart';
-import 'package:ayu/pages/sub_menus/online_yoga_class/online_yoga_class.dart';
-import 'package:ayu/pages/sub_menus/yoga_poses/yoga_poses.dart';
+import 'package:ayu/pages/doctor_profile.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 

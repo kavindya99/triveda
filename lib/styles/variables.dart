@@ -27,3 +27,7 @@ BoxDecoration inputFieldDecoration = BoxDecoration(
     boxShadow,
   ],
 );
+
+SizedBox spaceSignUpDoctor = SizedBox(
+  height: 30.0,
+);

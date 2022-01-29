@@ -1,14 +1,11 @@
-import 'package:ayu/pages/sub_menus/channel_doctor/channel_doctor.dart';
-import 'package:ayu/pages/sub_menus/check_symptoms/check_symptoms.dart';
-import 'package:ayu/pages/sub_menus/food_recipes/food_recipes.dart';
-import 'package:ayu/pages/sub_menus/online_consultation/doctor_list.dart';
-import 'package:ayu/pages/sub_menus/online_consultation/online_consultation.dart';
-import 'package:ayu/pages/sub_menus/online_yoga_class/online_yoga_class.dart';
-import 'package:ayu/pages/sub_menus/yoga_poses/yoga_poses.dart';
+import 'package:ayu/pages/patient/channel_doctor/channel_doctor.dart';
+import 'package:ayu/pages/patient/check_symptoms/check_symptoms.dart';
+import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
+import 'package:ayu/pages/patient/doctor_list.dart';
+import 'package:ayu/pages/patient/yoga/online_yoga_class.dart';
+import 'package:ayu/pages/patient/yoga/yoga_poses.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
-
-import 'forget_password.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key key}) : super(key: key);
@@ -116,7 +113,7 @@ class _MainMenuState extends State<MainMenu> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
                     child: Text(
-                      'Online Yoga\nClass',
+                      'Buy\nMedicine',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -208,7 +205,7 @@ class _MainMenuState extends State<MainMenu> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
                     child: Text(
-                      'Yoga \nPoses',
+                      'Yoga',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,

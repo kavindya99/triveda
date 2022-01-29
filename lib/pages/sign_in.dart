@@ -1,6 +1,7 @@
 import 'package:ayu/pages/forget_password.dart';
-import 'package:ayu/pages/main_menu.dart';
-import 'package:ayu/pages/sign_up.dart';
+import 'package:ayu/pages/main_menu_patient.dart';
+import 'package:ayu/pages/sign_up_doctor.dart';
+import 'package:ayu/pages/sign_up_patient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -120,57 +121,77 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 Container(
+                  padding: EdgeInsets.symmetric(vertical: 25),
                   alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUp()),
-                      );
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Don't you have an account?",
-                          style: TextStyle(
-                            color: secondaryColorOne,
-                            fontWeight: FontWeight.w400,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't you have an account?",
+                            style: TextStyle(
+                              color: secondaryColorOne,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                        ),
-                        Text(
-                          "Doctor",
-                          style: TextStyle(
-                            color: primaryColor,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w600,
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpDoctor()),
+                              );
+                            },
+                            child: Text(
+                              "Doctor",
+                              style: TextStyle(
+                                color: primaryColor,
+                                shadows: [
+                                  letterShadow,
+                                ],
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
-                        ),
-                        Text(
-                          "or ",
-                          style: TextStyle(
-                            color: secondaryColorOne,
-                            fontWeight: FontWeight.w400,
+                          Text(
+                            "or ",
+                            style: TextStyle(
+                              color: secondaryColorOne,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                        ),
-                        Text(
-                          "Patient",
-                          style: TextStyle(
-                            color: primaryColor,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w600,
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUp()),
+                              );
+                            },
+                            child: Text(
+                              "Patient",
+                              style: TextStyle(
+                                color: primaryColor,
+                                shadows: [
+                                  letterShadow,
+                                ],
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 25),
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: secondaryColorOne),

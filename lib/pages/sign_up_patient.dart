@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'forget_password.dart';
-import 'main_menu.dart';
+import 'main_menu_patient.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key key}) : super(key: key);
