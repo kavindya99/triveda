@@ -6,7 +6,7 @@ import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
 import 'package:ayu/pages/patient/doctor_list.dart';
 import 'package:ayu/pages/patient/online_consultation/online_consultation.dart';
 import 'package:ayu/pages/patient/yoga/online_yoga_class.dart';
-import 'package:ayu/pages/patient/yoga/yoga_poses.dart';
+import 'package:ayu/pages/patient/yoga/yoga.dart';
 import 'package:ayu/pages/reset_password.dart';
 import 'package:ayu/pages/sign_in.dart';
 import 'package:ayu/pages/sign_up_doctor.dart';
@@ -37,7 +37,7 @@ void main() {
       '/sub_menus/online_consultation/doctor_list.dart': (context) =>
           DoctorList(),
       '/sub_menus/onlineyoga': (context) => OnlineYogaClass(),
-      '/sub_menus/yogaposes': (context) => YogaPoses(),
+      '/sub_menus/yogaposes': (context) => Yoga(),
       '/sub_menus/': (context) => DoctorProfile(),
     },
   ));

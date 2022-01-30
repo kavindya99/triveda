@@ -5,6 +5,7 @@ Color secondaryColorOne = Color.fromRGBO(174, 182, 142, 1);
 Color secondaryColorTwo = Color.fromRGBO(186, 198, 184, 1);
 Color secondaryColorThree = Color.fromRGBO(215, 218, 180, 1);
 Color errorColor = Color.fromRGBO(208, 72, 72, 1);
+Color whiteColor = Colors.white;
 
 Color shadowColor = Color.fromRGBO(0, 0, 0, 0.25);
 Shadow letterShadow = Shadow(
@@ -29,5 +30,9 @@ BoxDecoration inputFieldDecoration = BoxDecoration(
 );
 
 SizedBox spaceSignUpDoctor = SizedBox(
+  height: 30.0,
+);
+
+SizedBox spaceCollapseMenu = SizedBox(
   height: 30.0,
 );

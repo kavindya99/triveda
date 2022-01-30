@@ -3,7 +3,7 @@ import 'package:ayu/pages/patient/check_symptoms/check_symptoms.dart';
 import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
 import 'package:ayu/pages/patient/doctor_list.dart';
 import 'package:ayu/pages/patient/yoga/online_yoga_class.dart';
-import 'package:ayu/pages/patient/yoga/yoga_poses.dart';
+import 'package:ayu/pages/patient/yoga/yoga.dart';
 import 'package:flutter/material.dart';
 import 'package:ayu/styles/variables.dart';
 
@@ -200,7 +200,7 @@ class _MainMenuDoctorState extends State<MainMenuDoctor> {
                   style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => YogaPoses()));
+                        MaterialPageRoute(builder: (context) => Yoga()));
                   },
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
