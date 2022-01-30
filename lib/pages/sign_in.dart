@@ -2,6 +2,7 @@ import 'package:ayu/pages/forget_password.dart';
 import 'package:ayu/pages/main_menu_patient.dart';
 import 'package:ayu/pages/sign_up_doctor.dart';
 import 'package:ayu/pages/sign_up_patient.dart';
+import 'package:ayu/styles/appBarMain.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -15,45 +16,10 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
+    final textTitle = 'SIGN IN';
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(250),
-        child: AppBar(
-          shadowColor: Colors.transparent,
-          backgroundColor: Colors.white,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/appbar.png'), fit: BoxFit.fill),
-            ),
-          ),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(250),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: Text(
-                        'SIGN IN',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 200.0,
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
+      appBar: appBarMain(textTitle, ''),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(

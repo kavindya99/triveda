@@ -1,7 +1,7 @@
 import 'package:ayu/pages/reset_password.dart';
+import 'package:ayu/styles/appBar.dart';
+import 'package:ayu/styles/navigationDrawer.dart';
 import 'package:flutter/material.dart';
-import 'package:ayu/pages/main_menu_patient.dart';
-import 'package:ayu/pages/sign_up_patient.dart';
 import 'package:ayu/styles/variables.dart';
 
 class SupportPatient extends StatefulWidget {
@@ -14,45 +14,16 @@ class SupportPatient extends StatefulWidget {
 class _SupportPatientState extends State<SupportPatient> {
   @override
   Widget build(BuildContext context) {
+    final pageTitle = "Support";
+    final appBarBg = 'images/appbar-dark.png';
+    final textColor = whiteColor;
+    final iconColor = whiteColor;
+    final bgColor = whiteColor;
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(250),
-        child: AppBar(
-          shadowColor: Colors.transparent,
-          backgroundColor: Colors.white,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/appbar.png'), fit: BoxFit.fill),
-            ),
-          ),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(250),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: Text(
-                        'SUPPORT',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 200.0,
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
+      backgroundColor: bgColor,
+      drawer: NavigationDrawer(),
+      appBar:
+          appBarComponent(pageTitle, appBarBg, textColor, iconColor, bgColor),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(

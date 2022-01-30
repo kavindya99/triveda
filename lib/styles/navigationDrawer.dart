@@ -1,6 +1,7 @@
 import 'package:ayu/pages/main_menu_patient.dart';
 import 'package:ayu/pages/patient/buy_medicine/buy_medicine.dart';
 import 'package:ayu/pages/patient/channel_doctor/channel_doctor.dart';
+import 'package:ayu/pages/patient/check_symptoms/check_symptoms.dart';
 import 'package:ayu/pages/patient/doctor_list.dart';
 import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
 import 'package:ayu/pages/patient/online_consultation/online_consultation.dart';
@@ -76,7 +77,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => OnlineConsultaion()));
+                                builder: (context) => CheckSymptoms()));
                       },
                       child: Row(
                         children: [

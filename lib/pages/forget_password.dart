@@ -1,7 +1,6 @@
 import 'package:ayu/pages/reset_password.dart';
+import 'package:ayu/styles/appBarMain.dart';
 import 'package:flutter/material.dart';
-import 'package:ayu/pages/main_menu_patient.dart';
-import 'package:ayu/pages/sign_up_patient.dart';
 import 'package:ayu/styles/variables.dart';
 
 class ForgetPassword extends StatefulWidget {
@@ -16,43 +15,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(250),
-        child: AppBar(
-          shadowColor: Colors.transparent,
-          backgroundColor: Colors.white,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/appbar.png'), fit: BoxFit.fill),
-            ),
-          ),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(250),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: Text(
-                        'FORGET',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 200.0,
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
+      appBar: appBarMain('FORGET', ''),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(

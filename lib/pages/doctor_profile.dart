@@ -19,7 +19,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('images/sub.png'), fit: BoxFit.fill),
+                  image: AssetImage('images/appbar-light.png'),
+                  fit: BoxFit.fill),
             ),
           ),
           bottom: PreferredSize(

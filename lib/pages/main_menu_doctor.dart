@@ -27,7 +27,8 @@ class _MainMenuDoctorState extends State<MainMenuDoctor> {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('images/appbar.png'), fit: BoxFit.fill),
+                  image: AssetImage('images/appbar-main.png'),
+                  fit: BoxFit.fill),
             ),
           ),
           bottom: PreferredSize(

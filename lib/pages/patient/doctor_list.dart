@@ -1,4 +1,6 @@
 import 'package:ayu/pages/doctor_profile.dart';
+import 'package:ayu/styles/appBar.dart';
+import 'package:ayu/styles/navigationDrawer.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -12,49 +14,17 @@ class DoctorList extends StatefulWidget {
 class _DoctorListState extends State<DoctorList> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(160),
-        child: AppBar(
-          shadowColor: Colors.transparent,
-          backgroundColor: Colors.transparent,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/sub.png'), fit: BoxFit.fill),
-            ),
-          ),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(200),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'List of Doctors,',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
+    final pageTitle = "Doctor List";
+    final appBarBg = 'images/appbar-light.png';
+    final textColor = primaryColor;
+    final iconColor = primaryColor;
+    final bgColor = primaryColor;
 
+    return Scaffold(
+      backgroundColor: bgColor,
+      drawer: NavigationDrawer(),
+      appBar:
+          appBarComponent(pageTitle, appBarBg, textColor, iconColor, bgColor),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(

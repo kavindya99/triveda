@@ -1,10 +1,10 @@
 import 'package:ayu/pages/patient/channel_doctor/channel_doctor.dart';
 import 'package:ayu/pages/patient/check_symptoms/check_symptoms.dart';
 import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
-import 'package:ayu/pages/patient/doctor_list.dart';
 import 'package:ayu/pages/patient/online_consultation/online_consultation.dart';
 import 'package:ayu/pages/patient/yoga/online_yoga_class.dart';
 import 'package:ayu/pages/patient/yoga/yoga.dart';
+import 'package:ayu/styles/navigationDrawer.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +20,7 @@ class _MainMenuState extends State<MainMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      drawer: NavigationDrawer(),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(250),
         child: AppBar(
@@ -28,7 +29,8 @@ class _MainMenuState extends State<MainMenu> {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('images/appbar.png'), fit: BoxFit.fill),
+                  image: AssetImage('images/appbar-main.png'),
+                  fit: BoxFit.fill),
             ),
           ),
           bottom: PreferredSize(
@@ -202,10 +204,8 @@ class _MainMenuState extends State<MainMenu> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OnlineYogaClass()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Yoga()));
                   },
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
