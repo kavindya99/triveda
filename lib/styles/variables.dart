@@ -29,10 +29,54 @@ BoxDecoration inputFieldDecoration = BoxDecoration(
   ],
 );
 
-SizedBox spaceSignUpDoctor = SizedBox(
+SizedBox spaceBetweenInputFields = SizedBox(
   height: 30.0,
 );
 
 SizedBox spaceCollapseMenu = SizedBox(
   height: 30.0,
 );
+
+Container inputFields(hint) => Container(
+      decoration: inputFieldDecoration,
+      child: TextField(
+        decoration: InputDecoration(
+          counterText: "",
+          contentPadding: EdgeInsets.all(10.0),
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+              borderRadius: new BorderRadius.circular(10.0),
+              borderSide: BorderSide.none),
+          hintText: hint,
+          hintStyle: TextStyle(
+            color: secondaryColorOne,
+          ),
+        ),
+      ),
+    );
+
+Container buttonInPages(buttonText, context, callFunction, topPadding) =>
+    Container(
+      padding: EdgeInsets.symmetric(vertical: topPadding),
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(primary: secondaryColorOne),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => callFunction));
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Text(
+            buttonText,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 24.0,
+                shadows: [
+                  letterShadow,
+                ],
+                fontWeight: FontWeight.w400),
+          ),
+        ),
+      ),
+    );

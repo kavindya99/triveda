@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 PreferredSize appBarMain(textTitleMain, textTitleSub) => PreferredSize(
-      preferredSize: Size.fromHeight(250),
+      preferredSize: Size.fromHeight(240),
       child: AppBar(
         shadowColor: Colors.transparent,
         backgroundColor: Colors.white,
@@ -13,7 +13,7 @@ PreferredSize appBarMain(textTitleMain, textTitleSub) => PreferredSize(
           ),
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(450),
+          preferredSize: Size.fromHeight(0),
           child: Column(
             children: [
               Row(

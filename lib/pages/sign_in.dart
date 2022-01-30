@@ -17,6 +17,11 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     final textTitle = 'SIGN IN';
+
+    final buttonText = 'Sign In';
+    final callFunction = MainMenu();
+    final topPadding = 5.0;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBarMain(textTitle, ''),
@@ -27,43 +32,9 @@ class _SignInState extends State<SignIn> {
           child: Container(
             child: Column(
               children: [
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Email',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50.0,
-                ),
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Password',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
+                inputFields('Email'),
+                spaceBetweenInputFields,
+                inputFields('Password'),
                 Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -87,7 +58,7 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 25),
+                  padding: EdgeInsets.symmetric(vertical: 10),
                   alignment: Alignment.center,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -157,29 +128,7 @@ class _SignInState extends State<SignIn> {
                     ],
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainMenu()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                ),
+                buttonInPages(buttonText, context, callFunction, topPadding),
               ],
             ),
           ),

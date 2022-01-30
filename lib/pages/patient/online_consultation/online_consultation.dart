@@ -28,49 +28,7 @@ class _OnlineConsultaionState extends State<OnlineConsultaion> {
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(30.0),
-          child: Container(
-            child: Column(
-              children: [
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Email',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50.0,
-                ),
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Password',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          child: Container(),
         ),
       ),
     );

@@ -32,6 +32,10 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
     final textTitleMain = 'SIGN UP';
     final textTitleSub = 'Doctor';
 
+    final buttonText = 'Sign Up';
+    final callFunction = SignIn();
+    final topPadding = 25.0;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBarMain(textTitleMain, textTitleSub),
@@ -42,42 +46,10 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
           child: Container(
             child: Column(
               children: [
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Name',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                spaceSignUpDoctor,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Email',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                spaceSignUpDoctor,
+                inputFields('Name'),
+                spaceBetweenInputFields,
+                inputFields('Email'),
+                spaceBetweenInputFields,
                 Row(
                   children: [
                     Radio(
@@ -108,79 +80,15 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                     ),
                   ],
                 ),
-                spaceSignUpDoctor,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Doctor ID',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                spaceSignUpDoctor,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Position',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                spaceSignUpDoctor,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Hospital',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                spaceSignUpDoctor,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Password',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                spaceSignUpDoctor,
+                spaceBetweenInputFields,
+                inputFields('Doctor ID'),
+                spaceBetweenInputFields,
+                inputFields('Position'),
+                spaceBetweenInputFields,
+                inputFields('Hospital'),
+                spaceBetweenInputFields,
+                inputFields('Password'),
+                spaceBetweenInputFields,
                 Row(
                   children: [
                     Text(
@@ -193,61 +101,13 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                     ),
                   ],
                 ),
-                spaceSignUpDoctor,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Lane',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                spaceSignUpDoctor,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'District',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                spaceSignUpDoctor,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Province',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                spaceSignUpDoctor,
+                spaceBetweenInputFields,
+                inputFields('Lane'),
+                spaceBetweenInputFields,
+                inputFields('District'),
+                spaceBetweenInputFields,
+                inputFields('Province'),
+                spaceBetweenInputFields,
                 Row(
                   children: [
                     Text(
@@ -260,7 +120,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                     ),
                   ],
                 ),
-                spaceSignUpDoctor,
+                spaceBetweenInputFields,
                 Container(
                   decoration: inputFieldDecoration,
                   child: Row(
@@ -295,7 +155,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                     ],
                   ),
                 ),
-                spaceSignUpDoctor,
+                spaceBetweenInputFields,
                 Container(
                   decoration: inputFieldDecoration,
                   child: Row(
@@ -330,7 +190,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                     ],
                   ),
                 ),
-                spaceSignUpDoctor,
+                spaceBetweenInputFields,
                 Row(
                   children: [
                     Text(
@@ -343,7 +203,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                     ),
                   ],
                 ),
-                spaceSignUpDoctor,
+                spaceBetweenInputFields,
                 Row(
                   children: [
                     Checkbox(
@@ -401,7 +261,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                     ),
                   ],
                 ),
-                spaceSignUpDoctor,
+                spaceBetweenInputFields,
                 Container(
                   alignment: Alignment.center,
                   child: TextButton(
@@ -435,30 +295,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 25),
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SignIn()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                ),
+                buttonInPages(buttonText, context, callFunction, topPadding),
               ],
             ),
           ),

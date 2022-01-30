@@ -15,6 +15,10 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     final textTitleMain = 'SIGN UP';
     final textTitleSub = 'Patient';
+
+    final buttonText = 'Sign Up';
+    final callFunction = SignIn();
+    final topPadding = 25.0;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBarMain(textTitleMain, textTitleSub),
@@ -25,106 +29,16 @@ class _SignUpState extends State<SignUp> {
           child: Container(
             child: Column(
               children: [
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Name',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50.0,
-                ),
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Email',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50.0,
-                ),
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Password',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50.0,
-                ),
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'Province',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50.0,
-                ),
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      counterText: "",
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide.none),
-                      hintText: 'District',
-                      hintStyle: TextStyle(
-                        color: secondaryColorOne,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50.0,
-                ),
+                inputFields('Name'),
+                spaceBetweenInputFields,
+                inputFields('Email'),
+                spaceBetweenInputFields,
+                inputFields('Password'),
+                spaceBetweenInputFields,
+                inputFields('Province'),
+                spaceBetweenInputFields,
+                inputFields('District'),
+                spaceBetweenInputFields,
                 Container(
                   alignment: Alignment.center,
                   child: TextButton(
@@ -158,30 +72,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 25),
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SignIn()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                ),
+                buttonInPages(buttonText, context, callFunction, topPadding),
               ],
             ),
           ),
