@@ -1,8 +1,8 @@
+import 'package:ayu/pages/patient/buy_medicine/buy_medicine.dart';
 import 'package:ayu/pages/patient/channel_doctor/channel_doctor.dart';
 import 'package:ayu/pages/patient/check_symptoms/check_symptoms.dart';
 import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
 import 'package:ayu/pages/patient/online_consultation/online_consultation.dart';
-import 'package:ayu/pages/patient/yoga/online_yoga_class.dart';
 import 'package:ayu/pages/patient/yoga/yoga.dart';
 import 'package:ayu/styles/navigationDrawer.dart';
 import 'package:ayu/styles/variables.dart';
@@ -18,6 +18,19 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
+    final tileLink1 = OnlineConsultaion();
+    final tileText1 = 'Online \nConsultation';
+    final tileLink2 = BuyMedicine();
+    final tileText2 = 'Buy \nMedicine';
+    final tileLink3 = CheckSymptoms();
+    final tileText3 = 'Check \nSymptoms';
+    final tileLink4 = ChannelDoctor();
+    final tileText4 = 'Channel a \nDoctor';
+    final tileLink5 = FoodRecipes();
+    final tileText5 = 'Food \nRecipes';
+    final tileLink6 = Yoga();
+    final tileText6 = 'Yoga';
+
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: NavigationDrawer(),
@@ -82,146 +95,12 @@ class _MainMenuState extends State<MainMenu> {
               mainAxisSpacing: 30,
               crossAxisCount: 2,
               children: <Widget>[
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OnlineConsultaion()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Center(
-                      child: Text(
-                        'Online \nConsultation',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OnlineYogaClass()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Text(
-                      'Buy\nMedicine',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          shadows: [
-                            letterShadow,
-                          ],
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CheckSymptoms()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Center(
-                      child: Text(
-                        'Check \nSymptoms',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChannelDoctor()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Text(
-                      'Channel a\nDoctor',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          shadows: [
-                            letterShadow,
-                          ],
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => FoodRecipes()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Center(
-                      child: Text(
-                        'Food \nRecipes',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Yoga()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Text(
-                      'Yoga',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          shadows: [
-                            letterShadow,
-                          ],
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ),
+                mainMenuTile(context, tileLink1, tileText1),
+                mainMenuTile(context, tileLink2, tileText2),
+                mainMenuTile(context, tileLink3, tileText3),
+                mainMenuTile(context, tileLink4, tileText4),
+                mainMenuTile(context, tileLink5, tileText5),
+                mainMenuTile(context, tileLink6, tileText6),
               ],
             ),
           ),

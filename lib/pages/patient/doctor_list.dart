@@ -15,10 +15,14 @@ class _DoctorListState extends State<DoctorList> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Doctor List";
-    final appBarBg = 'images/appbar-light.png';
-    final textColor = primaryColor;
-    final iconColor = primaryColor;
-    final bgColor = primaryColor;
+    final appBarBg = 'images/appbar-dark.png';
+    final textColor = whiteColor;
+    final iconColor = whiteColor;
+    final bgColor = whiteColor;
+
+    final buttonText = "Doctor's Name";
+    final callFunction = DoctorProfile();
+    final topPadding = 0.0;
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -32,141 +36,20 @@ class _DoctorListState extends State<DoctorList> {
           child: Container(
             child: Column(
               children: [
-                SizedBox(
-                  height: 50,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Search Doctors',
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
                 Text(
                   'Click on doctor’s name to book an appointment for online consultation and also you can get their details',
-                  style: TextStyle(
-                      fontSize: 16.00, color: Color.fromRGBO(93, 131, 99, 1)),
+                  style: TextStyle(fontSize: 16.00, color: primaryColor),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(66),
-                    primary: Color.fromRGBO(93, 131, 99, 1), // NEW
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DoctorProfile()));
-                  },
-                  child: const Text(
-                    'Dr. Jhon Eric',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(66),
-                      primary: Color.fromRGBO(93, 131, 99, 1) // NEW
-                      ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DoctorProfile()));
-                  },
-                  child: const Text(
-                    'Dr. Jhon Eric',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(66),
-                      primary: Color.fromRGBO(93, 131, 99, 1) // NEW
-                      ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Dr. Jhon Eric',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(66),
-                      primary: Color.fromRGBO(93, 131, 99, 1) // NEW
-                      ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DoctorProfile()));
-                  },
-                  child: const Text(
-                    'Dr. Jhon Eric',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(66),
-                      primary: Color.fromRGBO(93, 131, 99, 1) // NEW
-                      ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DoctorProfile()));
-                  },
-                  child: const Text(
-                    'Dr. Jhon Eric',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(66),
-                      primary: Color.fromRGBO(93, 131, 99, 1) // NEW
-                      ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Dr. Jhon Eric',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(66),
-                      primary: Color.fromRGBO(93, 131, 99, 1) // NEW
-                      ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Dr. Jhon Eric',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
+                spaceBetweenInputFields,
+                inputFields('Search'),
+                spaceBetweenInputFields,
+                listView(buttonText, context, callFunction, topPadding),
+                spaceBetweenInputFields,
+                listView(buttonText, context, callFunction, topPadding),
+                spaceBetweenInputFields,
+                listView(buttonText, context, callFunction, topPadding),
+                spaceBetweenInputFields,
+                listView(buttonText, context, callFunction, topPadding),
               ],
             ),
           ),

@@ -1,5 +1,4 @@
 import 'package:ayu/pages/main_menu_patient.dart';
-import 'package:ayu/pages/reset_password.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawer.dart';
 import 'package:flutter/material.dart';

@@ -66,12 +66,61 @@ Container buttonInPages(buttonText, context, callFunction, topPadding) =>
               context, MaterialPageRoute(builder: (context) => callFunction));
         },
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(15.0),
           child: Text(
             buttonText,
             style: TextStyle(
                 color: Colors.white,
-                fontSize: 24.0,
+                fontSize: 20.0,
+                shadows: [
+                  letterShadow,
+                ],
+                fontWeight: FontWeight.w400),
+          ),
+        ),
+      ),
+    );
+
+Container listView(buttonText, context, callFunction, topPadding) => Container(
+      padding: EdgeInsets.symmetric(vertical: topPadding),
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(primary: primaryColor),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => callFunction));
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Text(
+            buttonText,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+                shadows: [
+                  letterShadow,
+                ],
+                fontWeight: FontWeight.w400),
+          ),
+        ),
+      ),
+    );
+
+ElevatedButton mainMenuTile(context, tileLink, tileText) => ElevatedButton(
+      style: ElevatedButton.styleFrom(primary: secondaryColorOne),
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => tileLink));
+      },
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
+        child: Center(
+          child: Text(
+            tileText,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
                 shadows: [
                   letterShadow,
                 ],
