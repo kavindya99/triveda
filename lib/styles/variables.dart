@@ -43,7 +43,7 @@ Container inputFields(hint) => Container(
         decoration: InputDecoration(
           counterText: "",
           contentPadding: EdgeInsets.all(10.0),
-          fillColor: Colors.white,
+          fillColor: whiteColor,
           border: OutlineInputBorder(
               borderRadius: new BorderRadius.circular(10.0),
               borderSide: BorderSide.none),
