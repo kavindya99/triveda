@@ -4,6 +4,7 @@ import 'package:ayu/pages/patient/channel_doctor/channel_doctor.dart';
 import 'package:ayu/pages/patient/check_symptoms/check_symptoms.dart';
 import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
 import 'package:ayu/pages/patient/doctor_list.dart';
+import 'package:ayu/pages/patient/online_consultation/consult_a_doctor.dart';
 import 'package:ayu/pages/patient/online_consultation/online_consultation.dart';
 import 'package:ayu/pages/patient/yoga/online_yoga_class.dart';
 import 'package:ayu/pages/patient/yoga/yoga.dart';
@@ -36,6 +37,8 @@ void main() {
           OnlineConsultaion(),
       '/sub_menus/online_consultation/doctor_list.dart': (context) =>
           DoctorList(),
+      '/sub_menus/online_consultation/consult_a_doctor.dart': (context) =>
+          ConsultADoctor(),
       '/sub_menus/onlineyoga': (context) => OnlineYogaClass(),
       '/sub_menus/yogaposes': (context) => Yoga(),
       '/sub_menus/': (context) => DoctorProfile(),

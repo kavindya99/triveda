@@ -13,8 +13,8 @@ PreferredSize appBarComponent(
             Image.asset(
               'images/profile-image.png',
               fit: BoxFit.contain,
-              height: 40.0,
-              width: 40.0,
+              height: 60.0,
+              width: 60.0,
             ),
           ],
         ),

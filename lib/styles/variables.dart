@@ -113,7 +113,7 @@ ElevatedButton mainMenuTile(context, tileLink, tileText) => ElevatedButton(
             context, MaterialPageRoute(builder: (context) => tileLink));
       },
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
         child: Center(
           child: Text(
             tileText,
