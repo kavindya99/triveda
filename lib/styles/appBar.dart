@@ -1,8 +1,9 @@
+import 'package:ayu/pages/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 PreferredSize appBarComponent(
-        pageTitle, appBarBg, textColor, iconColor, backgroundColor) =>
+        pageTitle, appBarBg, textColor, iconColor, backgroundColor, context) =>
     PreferredSize(
       preferredSize: Size.fromHeight(150),
       child: AppBar(
@@ -10,11 +11,36 @@ PreferredSize appBarComponent(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Image.asset(
-              'images/profile-image.png',
-              fit: BoxFit.contain,
-              height: 60.0,
-              width: 60.0,
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                padding: MaterialStateProperty.all(
+                  EdgeInsets.all(0),
+                ),
+                elevation: MaterialStateProperty.all<double>(0),
+              ),
+              // onPressed: () {
+              //   MaterialPageRoute(
+              //     builder: (context) => const Profile(),
+              //   );
+              // },
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Profile()));
+              },
+              // child: ClipRRect(
+              //   borderRadius: BorderRadius.circular(100.0),
+              //   child: Image.asset(
+              //     'images/mee.jpg',
+              //     fit: BoxFit.contain,
+              //     height: 40.0,
+              //     width: 40.0,
+              //   ),
+              // ),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundImage: AssetImage('images/mee.jpg'),
+              ),
             ),
           ],
         ),

@@ -1,11 +1,10 @@
 import 'dart:ui';
 
+import 'package:ayu/pages/payment.dart';
 import 'package:ayu/styles/appBar.dart';
-import 'package:ayu/styles/navigationDrawer.dart';
+import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
-
-import '../../main_menu_patient.dart';
 
 class ConsultADoctor extends StatefulWidget {
   const ConsultADoctor({Key key}) : super(key: key);
@@ -32,19 +31,24 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
     final bgColor = whiteColor;
 
     final buttonText = 'Book';
-    final callFunction = MainMenu();
+    final callFunction = Payment();
     final topPadding = 20.0;
 
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawer(),
-      appBar:
-          appBarComponent(pageTitle, appBarBg, textColor, iconColor, bgColor),
+      appBar: appBarComponent(
+          pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("images/sub-back.png"),
+                  fit: BoxFit.contain),
+            ),
             alignment: Alignment.center,
             child: Column(
               children: [
@@ -85,17 +89,21 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
                     style: ElevatedButton.styleFrom(primary: whiteColor),
                     onPressed: () => _openDatePicker(context),
                     child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        'Date',
-                        style: TextStyle(
-                            color: secondaryColorOne,
-                            fontSize: 16.0,
-                            // shadows: [
-                            //   letterShadow,
-                            // ],
-                            fontWeight: FontWeight.w400),
-                        textAlign: TextAlign.left,
+                      padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Date',
+                            style: TextStyle(
+                                color: secondaryColorOne,
+                                fontSize: 16.0,
+                                // shadows: [
+                                //   letterShadow,
+                                // ],
+                                fontWeight: FontWeight.w400),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -182,16 +190,17 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
           return Theme(
             data: Theme.of(context).copyWith(
               colorScheme: ColorScheme.light(
-                primary: Colors.yellow, // header background color
-                onPrimary: Colors.black, // header text color
-                onSurface: Colors.green, // body text color
+                primary: primaryColor, // header background color
+                onPrimary: whiteColor, // header text color
+                onSurface: primaryColor, // body text color
               ),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                  primary: Colors.red, // button text color
+                  primary: primaryColor, // button text color
                 ),
               ),
             ),
+            child: child ?? Text(""),
           );
         });
     if (date != null) {

@@ -1,3 +1,7 @@
+import 'package:ayu/pages/doctor/prescription/prescription.dart';
+import 'package:ayu/styles/appBar.dart';
+import 'package:ayu/styles/navigationDrawerPatient.dart';
+import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
 class AddNew extends StatefulWidget {
@@ -10,6 +14,45 @@ class AddNew extends StatefulWidget {
 class _AddNewState extends State<AddNew> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final pageTitle = "Add Prescription";
+    final appBarBg = 'images/appbar-dark.png';
+    final textColor = whiteColor;
+    final iconColor = whiteColor;
+    final bgColor = whiteColor;
+
+    final buttonText = 'Add ';
+    final callFunction = Prescription();
+    final topPadding = 20.0;
+
+    final items = [
+      'Patient Name',
+      'Patient Name1',
+      'Patient Name2',
+      'Patient Name3'
+    ];
+    String selectedValue = 'Patient Name';
+    return Scaffold(
+      backgroundColor: bgColor,
+      drawer: NavigationDrawer(),
+      appBar: appBarComponent(
+          pageTitle, appBarBg, textColor, iconColor, bgColor, context),
+      body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Container(
+            child: Column(
+              children: [
+                spaceBetweenInputFields,
+                dropDownItems(selectedValue, setState, items),
+                spaceBetweenInputFields,
+                inputFields('Prescription'),
+                buttonInPages(buttonText, context, callFunction, topPadding),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

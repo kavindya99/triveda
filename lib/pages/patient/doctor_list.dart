@@ -1,6 +1,6 @@
 import 'package:ayu/pages/doctor_profile.dart';
 import 'package:ayu/styles/appBar.dart';
-import 'package:ayu/styles/navigationDrawer.dart';
+import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -27,8 +27,8 @@ class _DoctorListState extends State<DoctorList> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawer(),
-      appBar:
-          appBarComponent(pageTitle, appBarBg, textColor, iconColor, bgColor),
+      appBar: appBarComponent(
+          pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(

@@ -1,9 +1,11 @@
-import 'package:ayu/pages/patient/channel_doctor/channel_doctor.dart';
-import 'package:ayu/pages/patient/check_symptoms/check_symptoms.dart';
-import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
-import 'package:ayu/pages/patient/doctor_list.dart';
-import 'package:ayu/pages/patient/yoga/online_yoga_class.dart';
-import 'package:ayu/pages/patient/yoga/yoga.dart';
+import 'package:ayu/pages/doctor/channeling_appointments/channeling_appointmnets.dart';
+import 'package:ayu/pages/doctor/prescription/add_new_prescription.dart';
+import 'package:ayu/pages/doctor/prescription/prescription.dart';
+import 'package:ayu/pages/doctor/wallet/wallet.dart';
+import 'package:ayu/pages/doctor/yoga_classes/yoga_classes.dart';
+import 'package:ayu/pages/doctor/online_consultation/online_consultation.dart';
+import 'package:ayu/styles/navigationDrawerDoctor.dart';
+import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:flutter/material.dart';
 import 'package:ayu/styles/variables.dart';
 
@@ -17,8 +19,22 @@ class MainMenuDoctor extends StatefulWidget {
 class _MainMenuDoctorState extends State<MainMenuDoctor> {
   @override
   Widget build(BuildContext context) {
+    final tileLink1 = OnlineConsultationDoctor();
+    final tileText1 = 'Online \nConsultation';
+    final tileLink2 = YogaClasses();
+    final tileText2 = 'Yoga Classes';
+    final tileLink3 = Prescription();
+    final tileText3 = 'Prescription';
+    final tileLink4 = Appointments();
+    final tileText4 = 'Channeling Appointment';
+    final tileLink5 = Wallet();
+    final tileText5 = 'Wallet';
+    final tileLink6 = AddNew();
+    final tileText6 = 'Add Prescription';
+
     return Scaffold(
       backgroundColor: Colors.white,
+      drawer: NavigationDrawerDoctor(),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(250),
         child: AppBar(
@@ -46,14 +62,14 @@ class _MainMenuDoctorState extends State<MainMenuDoctor> {
                           Text(
                             'Welcome back,',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: whiteColor,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
                             'Jhon',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: whiteColor,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w700),
                           ),
@@ -80,144 +96,12 @@ class _MainMenuDoctorState extends State<MainMenuDoctor> {
               mainAxisSpacing: 30,
               crossAxisCount: 2,
               children: <Widget>[
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => DoctorList()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Center(
-                      child: Text(
-                        'Online \nConsultation',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OnlineYogaClass()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Text(
-                      'Online Yoga\nClass',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          shadows: [
-                            letterShadow,
-                          ],
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CheckSymptoms()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Center(
-                      child: Text(
-                        'Check \nSymptoms',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChannelDoctor()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Text(
-                      'Channel a\nDoctor',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          shadows: [
-                            letterShadow,
-                          ],
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => FoodRecipes()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Center(
-                      child: Text(
-                        'Food \nRecipes',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Yoga()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 50),
-                    child: Text(
-                      'Yoga \nPoses',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          shadows: [
-                            letterShadow,
-                          ],
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ),
+                mainMenuTile(context, tileLink1, tileText1),
+                mainMenuTile(context, tileLink2, tileText2),
+                mainMenuTile(context, tileLink3, tileText3),
+                mainMenuTile(context, tileLink4, tileText4),
+                mainMenuTile(context, tileLink5, tileText5),
+                mainMenuTile(context, tileLink6, tileText6),
               ],
             ),
           ),

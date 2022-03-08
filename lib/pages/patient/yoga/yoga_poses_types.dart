@@ -1,6 +1,6 @@
 import 'package:ayu/pages/patient/yoga/types/sun_salutation.dart';
 import 'package:ayu/styles/appBar.dart';
-import 'package:ayu/styles/navigationDrawer.dart';
+import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -23,8 +23,8 @@ class _YogaPosesState extends State<YogaPoses> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawer(),
-      appBar:
-          appBarComponent(pageTitle, appBarBg, textColor, iconColor, bgColor),
+      appBar: appBarComponent(
+          pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: CustomScrollView(
         primary: false,
         slivers: <Widget>[

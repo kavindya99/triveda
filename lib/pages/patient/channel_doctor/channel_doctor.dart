@@ -1,7 +1,7 @@
 import 'package:ayu/pages/patient/channel_doctor/doctor_channleing.dart';
 import 'package:ayu/pages/patient/channel_doctor/doctor_list.dart';
 import 'package:ayu/styles/appBar.dart';
-import 'package:ayu/styles/navigationDrawer.dart';
+import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -31,8 +31,8 @@ class _ChannelDoctorState extends State<ChannelDoctor> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawer(),
-      appBar:
-          appBarComponent(pageTitle, appBarBg, textColor, iconColor, bgColor),
+      appBar: appBarComponent(
+          pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(

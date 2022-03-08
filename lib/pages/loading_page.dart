@@ -1,4 +1,5 @@
 import 'package:ayu/pages/sign_in.dart';
+import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
 class Loading extends StatefulWidget {
@@ -13,8 +14,7 @@ class _LoadingState extends State<Loading> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ElevatedButton(
-        style:
-            ElevatedButton.styleFrom(primary: Color.fromRGBO(95, 141, 136, 1)),
+        style: ElevatedButton.styleFrom(primary: primaryColor),
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => SignIn()));
@@ -39,7 +39,10 @@ class _LoadingState extends State<Loading> {
                         color: Colors.white,
                         fontSize: 18,
                         fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
+                        shadows: <Shadow>[
+                          letterShadow,
+                        ],
                       ),
                       textAlign: TextAlign.center,
                     ),

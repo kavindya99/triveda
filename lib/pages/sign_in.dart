@@ -1,4 +1,5 @@
 import 'package:ayu/pages/forget_password.dart';
+import 'package:ayu/pages/main_menu_doctor.dart';
 import 'package:ayu/pages/main_menu_patient.dart';
 import 'package:ayu/pages/sign_up_doctor.dart';
 import 'package:ayu/pages/sign_up_patient.dart';
@@ -19,7 +20,8 @@ class _SignInState extends State<SignIn> {
     final textTitle = 'SIGN IN';
 
     final buttonText = 'Sign In';
-    final callFunction = MainMenu();
+    // final callFunction = MainMenu();
+    final callFunction = MainMenuDoctor();
     final topPadding = 5.0;
 
     return Scaffold(

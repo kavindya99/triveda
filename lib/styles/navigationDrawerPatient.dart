@@ -310,21 +310,3 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         ],
       );
 }
-
-class DrawerItem {
-  final String title;
-
-  const DrawerItem(this.title);
-}
-
-final menuItems = [
-  DrawerItem('Online Consultation'),
-  DrawerItem('Check Symptoms'),
-  DrawerItem('Channel a Doctor'),
-  DrawerItem('Buy Medicine'),
-  DrawerItem('Prescriptions'),
-  DrawerItem('Food Recipes'),
-  DrawerItem('Yoga'),
-  DrawerItem('Doctor Search'),
-  DrawerItem('Support'),
-];

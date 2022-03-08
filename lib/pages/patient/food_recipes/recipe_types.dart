@@ -1,6 +1,7 @@
-import 'package:ayu/pages/patient/food_recipes/types/sweet_items.dart';
+import 'package:ayu/pages/patient/food_recipes/recipe_selection.dart';
+import 'package:ayu/pages/profile.dart';
 import 'package:ayu/styles/appBar.dart';
-import 'package:ayu/styles/navigationDrawer.dart';
+import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -23,8 +24,8 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawer(),
-      appBar:
-          appBarComponent(pageTitle, appBarBg, textColor, iconColor, bgColor),
+      appBar: appBarComponent(
+          pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: CustomScrollView(
         primary: false,
         slivers: <Widget>[
@@ -39,8 +40,10 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SweetItems()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RecipeSelection()));
                   },
                   child: Center(
                     child: Text(
@@ -59,8 +62,10 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorTwo),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SweetItems()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RecipeSelection()));
                   },
                   child: Center(
                     child: Text(
@@ -79,8 +84,10 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: primaryColor),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SweetItems()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RecipeSelection()));
                   },
                   child: Center(
                     child: Text(
@@ -99,8 +106,10 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SweetItems()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RecipeSelection()));
                   },
                   child: Center(
                     child: Text(
@@ -120,8 +129,10 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: primaryColor),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SweetItems()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RecipeSelection()));
                   },
                   child: Center(
                     child: Text(
@@ -141,7 +152,7 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                   style: ElevatedButton.styleFrom(primary: secondaryColorTwo),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SweetItems()));
+                        MaterialPageRoute(builder: (context) => Profile()));
                   },
                   child: Center(
                     child: Text(

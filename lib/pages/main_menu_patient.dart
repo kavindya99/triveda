@@ -4,7 +4,7 @@ import 'package:ayu/pages/patient/check_symptoms/check_symptoms.dart';
 import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
 import 'package:ayu/pages/patient/online_consultation/online_consultation.dart';
 import 'package:ayu/pages/patient/yoga/yoga.dart';
-import 'package:ayu/styles/navigationDrawer.dart';
+import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -32,13 +32,13 @@ class _MainMenuState extends State<MainMenu> {
     final tileText6 = 'Yoga';
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       drawer: NavigationDrawer(),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(250),
         child: AppBar(
           shadowColor: Colors.transparent,
-          backgroundColor: Colors.white,
+          backgroundColor: whiteColor,
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -61,14 +61,14 @@ class _MainMenuState extends State<MainMenu> {
                           Text(
                             'Welcome back,',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: whiteColor,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
                             'Jhon',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: whiteColor,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w700),
                           ),

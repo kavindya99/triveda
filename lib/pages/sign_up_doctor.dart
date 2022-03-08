@@ -36,9 +36,11 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
     final callFunction = SignIn();
     final topPadding = 25.0;
 
-    final items = ['From', 'To', 'Three', 'Four'];
+    final items = ['From', 'To', 'District', 'Province'];
     String selectedValue1 = 'From';
     String selectedValue2 = 'To';
+    String selectedValue3 = 'Province';
+    String selectedValue4 = 'District';
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -111,9 +113,9 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                 spaceBetweenInputFields,
                 inputFields('Lane'),
                 spaceBetweenInputFields,
-                inputFields('District'),
+                dropDownItems(selectedValue3, setState, items),
                 spaceBetweenInputFields,
-                inputFields('Province'),
+                dropDownItems(selectedValue4, setState, items),
                 spaceBetweenInputFields,
                 Row(
                   children: [
@@ -128,59 +130,9 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   ],
                 ),
                 spaceBetweenInputFields,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
-                    child: DropdownButton<String>(
-                      style: TextStyle(color: secondaryColorOne),
-                      isExpanded: true,
-                      value: selectedValue1,
-                      onChanged: (String newValue) =>
-                          setState(() => selectedValue1 = newValue),
-                      items: items
-                          .map<DropdownMenuItem<String>>(
-                              (String value) => DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  ))
-                          .toList(),
-                      // add extra sugar..
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: primaryColor,
-                      ),
-                      underline: SizedBox(),
-                    ),
-                  ),
-                ),
+                dropDownItems(selectedValue1, setState, items),
                 spaceBetweenInputFields,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
-                    child: DropdownButton<String>(
-                      style: TextStyle(color: secondaryColorOne),
-                      isExpanded: true,
-                      value: selectedValue2,
-                      onChanged: (String newValue) =>
-                          setState(() => selectedValue2 = newValue),
-                      items: items
-                          .map<DropdownMenuItem<String>>(
-                              (String value) => DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  ))
-                          .toList(),
-                      // add extra sugar..
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: primaryColor,
-                      ),
-                      underline: SizedBox(),
-                    ),
-                  ),
-                ),
+                dropDownItems(selectedValue2, setState, items),
                 spaceBetweenInputFields,
                 Row(
                   children: [
