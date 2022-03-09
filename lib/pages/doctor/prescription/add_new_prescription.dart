@@ -12,6 +12,23 @@ class AddNew extends StatefulWidget {
 }
 
 class _AddNewState extends State<AddNew> {
+  // ZefyrController _controller;
+  //
+  // FocusNode _focusNode;
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   final document = _loadDocument();
+  //   _controller = ZefyrController(document);
+  //   _focusNode = FocusNode();
+  // }
+  //
+  // NotusDocument _loadDocument() {
+  //   final Delta delta = Delta()..insert("Start");
+  //   return NotusDocument.fromDelta(delta);
+  // }
+
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Add Prescription";
@@ -47,7 +64,14 @@ class _AddNewState extends State<AddNew> {
                 dropDownItems(selectedValue, setState, items),
                 spaceBetweenInputFields,
                 inputFields('Prescription'),
-                buttonInPages(buttonText, context, callFunction, topPadding),
+                // ZefyrScaffold(
+                //   child: ZefyrEditor(
+                //     padding: EdgeInsets.all(20.0),
+                //     controller: _controller,
+                //     focusNode: _focusNode,
+                //   ),
+                // ),
+                // buttonInPages(buttonText, context, callFunction, topPadding),
               ],
             ),
           ),

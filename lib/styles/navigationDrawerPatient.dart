@@ -6,6 +6,7 @@ import 'package:ayu/pages/patient/doctor_list.dart';
 import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
 import 'package:ayu/pages/patient/online_consultation/online_consultation.dart';
 import 'package:ayu/pages/patient/prescriptions.dart';
+import 'package:ayu/pages/patient/service_appointments.dart';
 import 'package:ayu/pages/patient/support.dart';
 import 'package:ayu/pages/patient/yoga/yoga.dart';
 import 'package:ayu/pages/sign_in.dart';
@@ -199,6 +200,29 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       ),
                       onPressed: () {
                         Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BookedAppointments(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            'Appointment List',
+                            style:
+                                TextStyle(color: primaryColor, fontSize: 16.0),
+                          )
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: whiteColor,
+                        elevation: 0,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => DoctorList()));
@@ -233,9 +257,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 40.0,
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(

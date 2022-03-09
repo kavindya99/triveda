@@ -17,7 +17,7 @@ class _ProfileState extends State<Profile> {
       backgroundColor: whiteColor,
       drawer: NavigationDrawer(),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(220),
+        preferredSize: Size.fromHeight(230),
         child: AppBar(
           shadowColor: Colors.transparent,
           backgroundColor: whiteColor,
@@ -32,12 +32,9 @@ class _ProfileState extends State<Profile> {
             preferredSize: Size.fromHeight(0.0),
             child: Column(
               children: [
-                SizedBox(
-                  height: 100.0,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Column(
                       children: [
@@ -47,7 +44,7 @@ class _ProfileState extends State<Profile> {
                             'Hi Jhon',
                             style: TextStyle(
                                 color: whiteColor,
-                                fontSize: 15.0,
+                                fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -59,17 +56,20 @@ class _ProfileState extends State<Profile> {
                           child: Stack(
                             children: [
                               const CircleAvatar(
-                                radius: 60,
+                                radius: 70,
                                 backgroundImage: AssetImage('images/mee.jpg'),
                               ),
                               Positioned(
                                   bottom: -10.0,
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.edit_outlined,
-                                      size: 30,
-                                      color: Colors.lime,
+                                  child: Container(
+                                    decoration: inputFieldDecoration,
+                                    child: IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.edit_outlined,
+                                        size: 30,
+                                        color: Colors.lime,
+                                      ),
                                     ),
                                   ))
                             ],
@@ -93,9 +93,9 @@ class _ProfileState extends State<Profile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 profileTextMain('Role'),
-                profileTextSub('Doctor'),
+                profileTextSub('Patient'),
                 spaceBetweenInputFields,
-                profileTextMain('Personal'),
+                profileTextMain('Info'),
                 Container(
                   decoration: inputFieldDecoration,
                   child: Padding(
@@ -104,13 +104,25 @@ class _ProfileState extends State<Profile> {
                       children: [
                         Row(
                           children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                profileTextMain('Name'),
+                                profileTextSub('Jhon Walisara'),
+                              ],
+                            ),
+                          ],
+                        ),
+                        spaceBetweenInputFields,
+                        Row(
+                          children: [
                             Expanded(
-                              flex: 2,
+                              flex: 1,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  profileTextMain('Name'),
-                                  profileTextSub('Jhon Walisara'),
+                                  profileTextMain('District'),
+                                  profileTextSub('Ratnapura'),
                                 ],
                               ),
                             ),
@@ -119,10 +131,33 @@ class _ProfileState extends State<Profile> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  profileTextMain('Gender'),
-                                  profileTextSub('Female'),
+                                  profileTextMain('Province'),
+                                  profileTextSub('Sabaragamuwa'),
                                 ],
                               ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                spaceBetweenInputFields,
+                profileTextMain('Contact Info'),
+                Container(
+                  decoration: inputFieldDecoration,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                profileTextMain('Contact No'),
+                                profileTextSub('070 3532119'),
+                              ],
                             ),
                           ],
                         ),
@@ -134,68 +169,6 @@ class _ProfileState extends State<Profile> {
                               children: [
                                 profileTextMain('Email'),
                                 profileTextSub('jhonwalisara@gmail.com'),
-                              ],
-                            ),
-                          ],
-                        ),
-                        spaceBetweenInputFields,
-                        Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                profileTextMain('Address'),
-                                profileTextSub(
-                                    '1st Lane, avenra road, Ratnapura'),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                spaceBetweenInputFields,
-                profileTextMain('Professional'),
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  profileTextMain('Doctor ID'),
-                                  profileTextSub('12309874561E'),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  profileTextMain('Hospital'),
-                                  profileTextSub('New Town,Ratnapura'),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        spaceBetweenInputFields,
-                        Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                profileTextMain('Position'),
-                                profileTextSub('Eye Specialist'),
                               ],
                             ),
                           ],

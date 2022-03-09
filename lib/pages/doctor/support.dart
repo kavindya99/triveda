@@ -1,5 +1,6 @@
+import 'package:ayu/pages/main_menu_doctor.dart';
 import 'package:ayu/styles/appBar.dart';
-import 'package:ayu/styles/navigationDrawerPatient.dart';
+import 'package:ayu/styles/navigationDrawerDoctor.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
@@ -22,11 +23,11 @@ class _SupportDoctorState extends State<SupportDoctor> {
     final bgColor = whiteColor;
 
     final buttonText = 'Send';
-    final callFunction = MainMenu();
+    final callFunction = MainMenuDoctor();
     final topPadding = 20.0;
     return Scaffold(
       backgroundColor: bgColor,
-      drawer: NavigationDrawer(),
+      drawer: NavigationDrawerDoctor(),
       appBar: appBarComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(

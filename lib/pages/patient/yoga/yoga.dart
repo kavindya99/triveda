@@ -1,4 +1,5 @@
 import 'package:ayu/pages/patient/yoga/online_yoga_class.dart';
+import 'package:ayu/pages/patient/yoga/yoga_classes.dart';
 import 'package:ayu/pages/patient/yoga/yoga_poses_types.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
@@ -24,7 +25,7 @@ class _YogaState extends State<Yoga> {
     final buttonText1 = 'Yoga Posses';
     final callFunction1 = YogaPoses();
     final buttonText2 = 'Online Yoga Classes';
-    final callFunction2 = OnlineYogaClass();
+    final callFunction2 = YogaClass();
     final topPadding1 = 10.0;
     final topPadding2 = 0.0;
 

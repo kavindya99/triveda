@@ -296,7 +296,8 @@ Container listViewCart(mainText, medicine, amount, price) => Container(
       ),
     );
 
-Container listViewPatient(mainText, name, type, date, time, link) => Container(
+Container listViewOnlineConsult(mainText, name, type, date, time, link) =>
+    Container(
       decoration: inputFieldDecoration,
       child: ExpansionTile(
         title: Text(

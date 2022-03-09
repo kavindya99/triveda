@@ -40,13 +40,13 @@ class _PatientListState extends State<PatientList> {
             child: Column(
               children: [
                 spaceBetweenInputFields,
-                listViewPatient('Patient 1', "Jennifer Ronly", 'Video',
+                listViewOnlineConsult('Patient 1', "Jennifer Ronly", 'Video',
                     '2022.08.06.', '4.00 - 4.30', 'click to join meeting'),
                 spaceBetweenInputFields,
-                listViewPatient('Patient 2', "Jennifer Ronly", 'Video',
+                listViewOnlineConsult('Patient 2', "Jennifer Ronly", 'Video',
                     '2022.08.06.', '4.00 - 4.30', 'click to join meeting'),
                 spaceBetweenInputFields,
-                listViewPatient('Patient 3', "Jennifer Ronly", 'Video',
+                listViewOnlineConsult('Patient 3', "Jennifer Ronly", 'Video',
                     '2022.08.06.', '4.00 - 4.30', 'click to join meeting'),
                 spaceBetweenInputFields,
               ],

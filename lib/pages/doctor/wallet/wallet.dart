@@ -1,3 +1,4 @@
+import 'package:ayu/pages/doctor/wallet/account_details.dart';
 import 'package:ayu/pages/doctor/wallet/channel_appointment_wallet.dart';
 import 'package:ayu/pages/doctor/wallet/online_consultation_wallet.dart';
 import 'package:ayu/pages/doctor/wallet/yoga_class_wallet.dart';
@@ -34,8 +35,8 @@ class _WalletState extends State<Wallet> {
     final callFunction3 = YogaClassWallet();
     final topPadding3 = 10.0;
 
-    final buttonText4 = 'Account Details';
-    final callFunction4 = OnlineConsultationWallet();
+    final buttonText4 = 'Bank Details';
+    final callFunction4 = AccountDetails();
     final topPadding4 = 10.0;
 
     return Scaffold(

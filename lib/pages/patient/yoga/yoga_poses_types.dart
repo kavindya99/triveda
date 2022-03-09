@@ -1,4 +1,5 @@
 import 'package:ayu/pages/patient/yoga/types/sun_salutation.dart';
+import 'package:ayu/pages/patient/yoga/yoga_list.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
@@ -38,10 +39,8 @@ class _YogaPosesState extends State<YogaPoses> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorTwo),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SunSalutation()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => YogaList()));
                   },
                   child: Center(
                     child: Text(
@@ -61,10 +60,8 @@ class _YogaPosesState extends State<YogaPoses> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: primaryColor),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SunSalutation()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => YogaList()));
                   },
                   child: Center(
                     child: Text(
@@ -83,10 +80,8 @@ class _YogaPosesState extends State<YogaPoses> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SunSalutation()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => YogaList()));
                   },
                   child: Center(
                     child: Text(
