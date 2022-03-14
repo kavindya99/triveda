@@ -1,10 +1,7 @@
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerDoctor.dart';
-import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
-
-import '../../payment.dart';
 
 class PatientList extends StatefulWidget {
   const PatientList({Key key}) : super(key: key);

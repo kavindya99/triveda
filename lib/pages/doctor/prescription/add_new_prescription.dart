@@ -3,6 +3,7 @@ import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_quill/flutter_quill.dart';
 
 class AddNew extends StatefulWidget {
   const AddNew({Key key}) : super(key: key);
@@ -12,6 +13,7 @@ class AddNew extends StatefulWidget {
 }
 
 class _AddNewState extends State<AddNew> {
+  // QuillController _controller = QuillController.basic();
   // ZefyrController _controller;
   //
   // FocusNode _focusNode;
@@ -64,6 +66,20 @@ class _AddNewState extends State<AddNew> {
                 dropDownItems(selectedValue, setState, items),
                 spaceBetweenInputFields,
                 inputFields('Prescription'),
+                // QuillToolbar.basic(controller: _controller),
+                // Expanded(
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(20.0),
+                //     child: Container(
+                //       decoration: inputFieldDecoration,
+                //       height: 300.0,
+                //       child: QuillEditor.basic(
+                //         controller: _controller,
+                //         readOnly: false, // change to true to be view only mode
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 // ZefyrScaffold(
                 //   child: ZefyrEditor(
                 //     padding: EdgeInsets.all(20.0),
@@ -71,7 +87,7 @@ class _AddNewState extends State<AddNew> {
                 //     focusNode: _focusNode,
                 //   ),
                 // ),
-                // buttonInPages(buttonText, context, callFunction, topPadding),
+                buttonInPages(buttonText, context, callFunction, topPadding),
               ],
             ),
           ),

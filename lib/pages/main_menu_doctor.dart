@@ -38,6 +38,7 @@ class _MainMenuDoctorState extends State<MainMenuDoctor> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(250),
         child: AppBar(
+          elevation: 0,
           shadowColor: Colors.transparent,
           backgroundColor: Colors.white,
           flexibleSpace: Container(

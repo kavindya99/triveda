@@ -39,185 +39,57 @@ class _NavigationDrawerDoctorState extends State<NavigationDrawerDoctor> {
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: Container(
-                height: 530.0,
+                height: MediaQuery.of(context).size.height - 200.0,
                 decoration: new BoxDecoration(
                     color: whiteColor,
                     borderRadius: BorderRadius.circular(10.0)),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    OnlineConsultationDoctor()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Online Consultation',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Appointments()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Channeling Appointments',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => AddNew()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Add Prescription',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => YogaClasses()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Yoga Classes',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DoctorSearch()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Doctor Search',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SupportDoctor()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Support',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Wallet()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Wallet',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
+                    navigationDrawer(context, OnlineConsultationDoctor(),
+                        'Online Consultation'),
+                    navigationDrawer(
+                        context, Appointments(), 'Channeling Appointments'),
+                    navigationDrawer(context, AddNew(), 'Add Prescription'),
+                    navigationDrawer(context, YogaClasses(), 'Yoga Classes'),
+                    navigationDrawer(context, DoctorSearch(), 'Doctor Search'),
+                    navigationDrawer(context, SupportDoctor(), 'Support'),
+                    navigationDrawer(context, Wallet(), 'Wallet'),
                     SizedBox(
-                      height: 40.0,
+                      height: 100.0,
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => SignIn()));
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            height: 30.0,
-                            width: 30.0,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('images/logout.png'),
-                                fit: BoxFit.fill,
-                                alignment: Alignment.bottomRight,
-                              ),
-                              shape: BoxShape.circle,
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: whiteColor,
+                            elevation: 0,
                           ),
-                        ],
-                      ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignIn()));
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                height: 30.0,
+                                width: 30.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('images/logout.png'),
+                                    fit: BoxFit.fill,
+                                    alignment: Alignment.bottomRight,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -232,7 +104,9 @@ class _NavigationDrawerDoctorState extends State<NavigationDrawerDoctor> {
   Widget buildHeader(bool isCollpased) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CloseButton(),
+          CloseButton(
+            color: whiteColor,
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               primary: primaryColor,

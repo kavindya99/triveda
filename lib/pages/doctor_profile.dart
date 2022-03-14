@@ -18,6 +18,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(230),
         child: AppBar(
+          elevation: 0,
           shadowColor: Colors.transparent,
           backgroundColor: whiteColor,
           flexibleSpace: Container(

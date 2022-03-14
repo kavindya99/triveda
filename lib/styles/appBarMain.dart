@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 PreferredSize appBarMain(textTitleMain, textTitleSub) => PreferredSize(
       preferredSize: Size.fromHeight(240),
       child: AppBar(
+        elevation: 0,
         shadowColor: Colors.transparent,
         backgroundColor: Colors.white,
         flexibleSpace: Container(

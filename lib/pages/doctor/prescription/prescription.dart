@@ -1,4 +1,5 @@
 import 'package:ayu/pages/doctor/prescription/add_new_prescription.dart';
+import 'package:ayu/pages/doctor/prescription/added_prescriptions.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerDoctor.dart';
 import 'package:ayu/styles/variables.dart';
@@ -25,7 +26,7 @@ class _PrescriptionState extends State<Prescription> {
     final topPadding1 = 10.0;
 
     final buttonText2 = 'Added Prescriptions';
-    final callFunction2 = AddNew();
+    final callFunction2 = AddedList();
     final topPadding2 = 10.0;
 
     return Scaffold(

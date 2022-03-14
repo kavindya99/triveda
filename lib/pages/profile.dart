@@ -19,6 +19,7 @@ class _ProfileState extends State<Profile> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(230),
         child: AppBar(
+          elevation: 0,
           shadowColor: Colors.transparent,
           backgroundColor: whiteColor,
           flexibleSpace: Container(

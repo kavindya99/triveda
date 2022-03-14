@@ -8,6 +8,7 @@ PreferredSize appBarComponent(
       preferredSize: Size.fromHeight(150),
       child: AppBar(
         iconTheme: IconThemeData(color: iconColor),
+        elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

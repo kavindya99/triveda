@@ -144,7 +144,7 @@ ElevatedButton mainMenuTile(context, tileLink, tileText) => ElevatedButton(
             context, MaterialPageRoute(builder: (context) => tileLink));
       },
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: Center(
           child: Text(
             tileText,
@@ -672,4 +672,27 @@ Container dropDownItems(selectedValue, setState, itemsList) => Container(
           underline: SizedBox(),
         ),
       ),
+    );
+
+Column navigationDrawer(context, function, text) => Column(
+      children: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: whiteColor,
+            elevation: 0,
+          ),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => function));
+          },
+          child: Row(
+            children: [
+              Text(
+                text,
+                style: TextStyle(color: primaryColor, fontSize: 16.0),
+              )
+            ],
+          ),
+        ),
+      ],
     );

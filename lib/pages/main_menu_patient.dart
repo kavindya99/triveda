@@ -37,6 +37,7 @@ class _MainMenuState extends State<MainMenu> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(250),
         child: AppBar(
+          elevation: 0,
           shadowColor: Colors.transparent,
           backgroundColor: whiteColor,
           flexibleSpace: Container(

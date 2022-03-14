@@ -1,8 +1,12 @@
+import 'dart:convert';
+
+import 'package:ayu/models/api.services.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
+import '../../../models/medicine.dart';
 import 'medicine_details.dart';
 
 class MedicineSelection extends StatefulWidget {
@@ -13,6 +17,23 @@ class MedicineSelection extends StatefulWidget {
 }
 
 class _MedicineSelectionState extends State<MedicineSelection> {
+  List<Medicine> medicine;
+  getMedicine() {
+    APIService.fetchMedicine().then(
+      (response) {
+        Iterable list = json.decode(response.body);
+        List<Medicine> medicineList = List<Medicine>();
+        medicineList = list.map((model) => Medicine.fromObject(model)).toList();
+
+        setState(
+          () {
+            medicine = medicineList;
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Medicine Selection";
@@ -25,6 +46,7 @@ class _MedicineSelectionState extends State<MedicineSelection> {
     final callFunction = Buy();
     final topPadding = 0.0;
 
+    getMedicine();
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawer(),
@@ -41,16 +63,35 @@ class _MedicineSelectionState extends State<MedicineSelection> {
                   'You can search any medicine and buy',
                   style: TextStyle(fontSize: 16.00, color: primaryColor),
                 ),
-                spaceBetweenInputFields,
-                inputFields('Search'),
-                spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
-                spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
-                spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
-                spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
+                // spaceBetweenInputFields,
+                // inputFields('Search'),
+                // spaceBetweenInputFields,
+                // listView(buttonText, context, callFunction, topPadding),
+                // spaceBetweenInputFields,
+                // listView(buttonText, context, callFunction, topPadding),
+                // spaceBetweenInputFields,
+                // listView(buttonText, context, callFunction, topPadding),
+                // spaceBetweenInputFields,
+                // listView(buttonText, context, callFunction, topPadding),
+                medicine == null
+                    ? Center(
+                        child: Text('Empty'),
+                      )
+                    : ListView.builder(
+                        itemCount: medicine.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            color: whiteColor,
+                            elevation: 2.0,
+                            child: ListTile(
+                              title: ListTile(
+                                title: Text(medicine[index].name),
+                                onTap: null,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
               ],
             ),
           ),

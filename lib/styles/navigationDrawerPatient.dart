@@ -11,6 +11,7 @@ import 'package:ayu/pages/patient/support.dart';
 import 'package:ayu/pages/patient/yoga/yoga.dart';
 import 'package:ayu/pages/sign_in.dart';
 import 'package:ayu/styles/variables.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NavigationDrawer extends StatefulWidget {
@@ -42,248 +43,60 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: Container(
-                height: 530.0,
+                height: MediaQuery.of(context).size.height - 150.0,
                 decoration: new BoxDecoration(
                     color: whiteColor,
                     borderRadius: BorderRadius.circular(10.0)),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OnlineConsultaion()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Online Consultation',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CheckSymptoms()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Check Symptoms',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChannelDoctor()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Channel a Doctor',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BuyMedicine()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Buy Medicine',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Prescriptions()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Prescriptions',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FoodRecipes()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Food Recipes',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Yoga()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Yoga',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BookedAppointments(),
+                    navigationDrawer(
+                        context, OnlineConsultaion(), 'Online Consultation'),
+                    navigationDrawer(
+                        context, CheckSymptoms(), 'Check Symptoms'),
+                    navigationDrawer(
+                        context, ChannelDoctor(), 'Channel a Doctor'),
+                    navigationDrawer(context, BuyMedicine(), 'Buy Medicine'),
+                    navigationDrawer(context, Prescriptions(), 'Prescriptions'),
+                    navigationDrawer(context, FoodRecipes(), 'Food Recipes'),
+                    navigationDrawer(context, Yoga(), 'Yoga'),
+                    navigationDrawer(
+                        context, BookedAppointments(), 'Appointment List'),
+                    navigationDrawer(context, DoctorList(), 'Doctor Search'),
+                    navigationDrawer(context, SupportPatient(), 'Support'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: whiteColor,
+                            elevation: 0,
                           ),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Appointment List',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DoctorList()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Doctor Search',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          )
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SupportPatient()));
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Support',
-                            style:
-                                TextStyle(color: primaryColor, fontSize: 16.0),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => SignIn()));
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            height: 30.0,
-                            width: 30.0,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('images/logout.png'),
-                                fit: BoxFit.fill,
-                                alignment: Alignment.bottomRight,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignIn()));
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                height: 30.0,
+                                width: 30.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('images/logout.png'),
+                                    fit: BoxFit.fill,
+                                    alignment: Alignment.bottomRight,
+                                  ),
+                                  shape: BoxShape.circle,
+                                ),
                               ),
-                              shape: BoxShape.circle,
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -309,7 +122,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Widget buildHeader(bool isCollpased) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CloseButton(),
+          CloseButton(
+            color: whiteColor,
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               primary: primaryColor,
