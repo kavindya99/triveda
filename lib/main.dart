@@ -37,6 +37,7 @@ import 'package:ayu/pages/loading_page.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: ThemeData(
       primaryColor: Color.fromRGBO(95, 141, 136, 1),
       fontFamily: 'Roboto',
