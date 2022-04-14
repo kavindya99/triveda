@@ -35,7 +35,7 @@ class _MedicineTypesState extends State<MedicineTypes> {
               mainAxisSpacing: 20,
               crossAxisCount: 2,
               children: <Widget>[
-                Image.asset('images/food-recipe-types-2.gif'),
+                Image.asset('images/medicine-3.gif'),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                   onPressed: () {
@@ -124,7 +124,7 @@ class _MedicineTypesState extends State<MedicineTypes> {
                     ),
                   ),
                 ),
-                Image.asset('images/food-recipe-types-1.gif'),
+                Image.asset('images/medicine-2.gif'),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: primaryColor),
                   onPressed: () {
@@ -169,7 +169,7 @@ class _MedicineTypesState extends State<MedicineTypes> {
                     ),
                   ),
                 ),
-                Image.asset('images/food-recipe-types-1.gif'),
+                Image.asset('images/medicine-1.gif'),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                   onPressed: () {

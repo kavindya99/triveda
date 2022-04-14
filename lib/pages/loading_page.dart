@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:ayu/pages/sign_in.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,42 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+  AudioPlayer player = AudioPlayer();
+  AudioCache cache = new AudioCache();
+  bool isPlaying = false;
+  bool play = true;
+
+  Future<bool> _willPopCallback() async {
+    if (isPlaying == false) {
+      setState(() {
+        isPlaying = true;
+      });
+      player.stop();
+    }
+    return true;
+  }
+
+  openingActions() async {
+    player = await cache.loop('back-music/back.mp3');
+  }
+
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  void initState() {
+    openingActions();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    openingActions();
     return Scaffold(
       body: ElevatedButton(
         style: ElevatedButton.styleFrom(primary: primaryColor),
