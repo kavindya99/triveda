@@ -20,7 +20,7 @@ class _SignUpState extends State<SignUp> {
     final callFunction = SignIn();
     final topPadding = 25.0;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       appBar: appBarMain(textTitleMain, textTitleSub),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),

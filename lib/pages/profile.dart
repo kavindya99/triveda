@@ -1,6 +1,7 @@
+import 'package:ayu/pages/patient/Change_Password.dart';
+import 'package:ayu/pages/patient/edit_profile.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -65,7 +66,13 @@ class _ProfileState extends State<Profile> {
                                   child: Container(
                                     decoration: inputFieldDecoration,
                                     child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditProfile()));
+                                      },
                                       icon: const Icon(
                                         Icons.edit_outlined,
                                         size: 30,
@@ -173,6 +180,30 @@ class _ProfileState extends State<Profile> {
                               ],
                             ),
                           ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChangePassword()),
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Change Password",
+                          style: TextStyle(
+                            color: primaryColor,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),

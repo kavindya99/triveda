@@ -20,12 +20,12 @@ class _SignInState extends State<SignIn> {
     final textTitle = 'SIGN IN';
 
     final buttonText = 'Sign In';
-    //final callFunction = MainMenu();
-    final callFunction = MainMenuDoctor();
+    final callFunction = MainMenu();
+    //final callFunction = MainMenuDoctor();
     final topPadding = 5.0;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       appBar: appBarMain(textTitle, ''),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
