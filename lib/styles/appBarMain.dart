@@ -20,6 +20,7 @@ PreferredSize appBarMain(textTitleMain, textTitleSub) => PreferredSize(
               Row(
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
@@ -32,7 +33,7 @@ PreferredSize appBarMain(textTitleMain, textTitleSub) => PreferredSize(
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 0.0),
+                        padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
                         child: Text(
                           textTitleSub,
                           style: TextStyle(

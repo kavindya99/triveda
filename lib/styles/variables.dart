@@ -12,7 +12,7 @@ Color shadowColor = Color.fromRGBO(0, 0, 0, 0.25);
 Shadow letterShadow = Shadow(
   blurRadius: 4.0,
   color: shadowColor,
-  offset: Offset(1.0, 2.0),
+  offset: Offset(1.0, 1.0),
 );
 
 Shadow boxShadow = BoxShadow(
@@ -450,6 +450,193 @@ Container listViewOnlineConsult(mainText, name, type, date, time, link) =>
                     ],
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: secondaryColorThree),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context, MaterialPageRoute(builder: (context) => callFunction));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          'Completed',
+                          style: TextStyle(
+                              color: whiteColor,
+                              shadows: [
+                                letterShadow,
+                              ],
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+
+Container listViewChannelAppointments(mainText, name, type, date, time) =>
+    Container(
+      decoration: inputFieldDecoration,
+      child: ExpansionTile(
+        title: Text(
+          mainText,
+          style: TextStyle(
+            color: secondaryColorOne,
+          ),
+        ),
+        children: [
+          Container(
+            decoration: new BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(5.0),
+                bottomLeft: Radius.circular(5.0),
+              ),
+              image: new DecorationImage(
+                image: ExactAssetImage('images/light-bg.png'),
+                fit: BoxFit.fill,
+              ),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "Patient Name",
+                          style: TextStyle(
+                            color: whiteColor,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: whiteColor,
+                              fontSize: 18.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "Type",
+                          style: TextStyle(
+                            color: whiteColor,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          type,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: whiteColor,
+                              fontSize: 18.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "Date",
+                          style: TextStyle(
+                            color: whiteColor,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          date,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: whiteColor,
+                              fontSize: 18.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "Time",
+                          style: TextStyle(
+                            color: whiteColor,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          time,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: whiteColor,
+                              fontSize: 18.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: secondaryColorThree),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context, MaterialPageRoute(builder: (context) => callFunction));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          'Completed',
+                          style: TextStyle(
+                              color: whiteColor,
+                              shadows: [
+                                letterShadow,
+                              ],
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -582,6 +769,32 @@ Container listViewYoga(mainText, name, date, time, link) => Container(
                         ),
                       ),
                     ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: secondaryColorThree),
+                      onPressed: () {
+                        // Navigator.push(
+                        //     context, MaterialPageRoute(builder: (context) => callFunction));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          'Completed',
+                          style: TextStyle(
+                              color: whiteColor,
+                              shadows: [
+                                letterShadow,
+                              ],
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],

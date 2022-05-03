@@ -44,14 +44,14 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("images/sub-back.png"),
-                  fit: BoxFit.contain),
-            ),
             alignment: Alignment.center,
             child: Column(
               children: [
+                spaceBetweenInputFields,
+                Text(
+                  'You can book an appointment for a doctor, to get consultation via online ',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
                 spaceBetweenInputFields,
                 Container(
                   decoration: inputFieldDecoration,

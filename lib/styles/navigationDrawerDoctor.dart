@@ -70,7 +70,9 @@ class _NavigationDrawerDoctorState extends State<NavigationDrawerDoctor> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignIn()));
+                                    builder: (context) => SignIn(
+                                          key: null,
+                                        )));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,

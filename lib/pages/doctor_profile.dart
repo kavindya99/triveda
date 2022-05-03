@@ -1,6 +1,10 @@
+import 'package:ayu/styles/navigationDrawerDoctor.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
+
+import 'doctor/change_password.dart';
+import 'doctor/edit_profile.dart';
 
 class DoctorProfile extends StatefulWidget {
   const DoctorProfile({Key key}) : super(key: key);
@@ -14,7 +18,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      drawer: NavigationDrawer(),
+      drawer: NavigationDrawerDoctor(),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(230),
         child: AppBar(
@@ -60,18 +64,18 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                 backgroundImage: AssetImage('images/mee.jpg'),
                               ),
                               Positioned(
-                                  bottom: -10.0,
-                                  child: Container(
-                                    decoration: inputFieldDecoration,
-                                    child: IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.edit_outlined,
-                                        size: 30,
-                                        color: Colors.blueGrey,
-                                      ),
+                                bottom: -10.0,
+                                child: Container(
+                                  child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.camera_alt_rounded,
+                                      size: 35,
+                                      color: secondaryColorThree,
                                     ),
-                                  ))
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -92,8 +96,37 @@ class _DoctorProfileState extends State<DoctorProfile> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                profileTextMain('Role'),
-                profileTextSub('Doctor'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          profileTextMain('Role'),
+                          profileTextSub('Doctor'),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: inputFieldDecoration,
+                      child: IconButton(
+                        onPressed: () {
+                          // pickIMage();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfile()),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.edit_outlined,
+                          size: 30,
+                          color: primaryColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 spaceBetweenInputFields,
                 profileTextMain('Personal'),
                 Container(
@@ -199,6 +232,37 @@ class _DoctorProfileState extends State<DoctorProfile> {
                               ],
                             ),
                           ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChangePassword()),
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Icon(
+                            Icons.vpn_key,
+                            color: primaryColor,
+                          ),
+                        ),
+                        Text(
+                          "Change Password",
+                          style: TextStyle(
+                            color: primaryColor,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),

@@ -32,7 +32,7 @@ class _PrescriptionState extends State<Prescription> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawerDoctor(),
-      appBar: appBarComponent(
+      appBar: appBarDoctorComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),

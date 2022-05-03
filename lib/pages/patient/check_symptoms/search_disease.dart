@@ -49,6 +49,11 @@ class _SearchDiseaseState extends State<SearchDisease> {
             child: Column(
               children: [
                 spaceBetweenInputFields,
+                Text(
+                  'You can input five symptoms by selecting from the dropdown lists and search your disease.',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
+                spaceBetweenInputFields,
                 Container(
                   decoration: inputFieldDecoration,
                   child: Padding(

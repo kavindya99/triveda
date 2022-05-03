@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../styles/appBar.dart';
-import '../../styles/appBarMain.dart';
+import '../../styles/navigationDrawerPatient.dart';
 import '../../styles/variables.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -17,7 +17,7 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  File? image;
+  File image;
 
   Future pickIMage() async {
     try {
@@ -48,6 +48,7 @@ class _EditProfileState extends State<EditProfile> {
     final topPadding = 25.0;
     return Scaffold(
       backgroundColor: whiteColor,
+      drawer: NavigationDrawer(),
       appBar: appBarComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
@@ -57,6 +58,11 @@ class _EditProfileState extends State<EditProfile> {
           child: Container(
             child: Column(
               children: [
+                Text(
+                  'Enter new values to the fields which you need to update in your profile details',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
+                spaceBetweenInputFields,
                 inputFields('Name'),
                 spaceBetweenInputFields,
                 inputFields('Email'),
@@ -67,14 +73,48 @@ class _EditProfileState extends State<EditProfile> {
                 spaceBetweenInputFields,
                 inputFields('District'),
                 spaceBetweenInputFields,
-                inputFields('Profile Picture'),
-                spaceBetweenInputFields,
                 MaterialButton(
-                    child: Text("pick image"),
+                    child: Container(
+                      decoration: inputFieldDecoration,
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Profile Picture',
+                              style: TextStyle(
+                                  color: secondaryColorOne,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Icon(
+                              // <-- Icon
+                              Icons.image,
+                              size: 24.0,
+                              color: secondaryColorTwo,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     onPressed: () {
                       pickIMage();
                     }),
-                image != null ? Image.file(image!) : Text('no image selected'),
+                spaceBetweenInputFields,
+                AspectRatio(
+                  aspectRatio: 451 / 451,
+                  child: Container(
+                    child: image != null
+                        ? Image.file(
+                            image,
+                            fit: BoxFit.fitWidth,
+                            alignment: FractionalOffset.center,
+                          )
+                        : Text(''),
+                  ),
+                ),
                 buttonInPages(buttonText, context, callFunction, topPadding),
               ],
             ),

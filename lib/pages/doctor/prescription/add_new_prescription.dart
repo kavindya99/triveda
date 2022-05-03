@@ -1,5 +1,6 @@
 import 'package:ayu/pages/doctor/prescription/prescription.dart';
 import 'package:ayu/styles/appBar.dart';
+import 'package:ayu/styles/navigationDrawerDoctor.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
@@ -52,8 +53,8 @@ class _AddNewState extends State<AddNew> {
     String selectedValue = 'Patient Name';
     return Scaffold(
       backgroundColor: bgColor,
-      drawer: NavigationDrawer(),
-      appBar: appBarComponent(
+      drawer: NavigationDrawerDoctor(),
+      appBar: appBarDoctorComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
@@ -62,6 +63,11 @@ class _AddNewState extends State<AddNew> {
           child: Container(
             child: Column(
               children: [
+                spaceBetweenInputFields,
+                Text(
+                  'You can add prescription to the patients. First write the name of the medicine,then write the amount next by separating name and amount with a \' : \' mark.',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
                 spaceBetweenInputFields,
                 dropDownItems(selectedValue, setState, items),
                 spaceBetweenInputFields,

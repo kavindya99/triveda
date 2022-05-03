@@ -44,9 +44,15 @@ void main() {
     ),
     routes: {
       '/': (context) => Loading(),
-      '/signin': (context) => SignIn(),
-      '/signuppatient': (context) => SignUp(),
-      '/signupdoctor': (context) => SignUpDoctor(),
+      '/signin': (context) => SignIn(
+            key: null,
+          ),
+      '/signuppatient': (context) => SignUp(
+            key: null,
+          ),
+      '/signupdoctor': (context) => SignUpDoctor(
+            key: null,
+          ),
       '/forgetpassword': (context) => ForgetPassword(),
       '/resetpassword': (context) => ResetPassword(),
       '/payment': (context) => Payment(),

@@ -1,3 +1,4 @@
+import 'package:ayu/pages/view_doctor_profile.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerDoctor.dart';
 import 'package:ayu/styles/variables.dart';
@@ -22,13 +23,13 @@ class _DoctorSearchState extends State<DoctorSearch> {
     final bgColor = whiteColor;
 
     final buttonText = "Doctor's Name";
-    final callFunction = DoctorProfile();
+    final callFunction = ViewDoctorProfile();
     final topPadding = 0.0;
 
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawerDoctor(),
-      appBar: appBarComponent(
+      appBar: appBarDoctorComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),

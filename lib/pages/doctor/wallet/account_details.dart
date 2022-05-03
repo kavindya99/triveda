@@ -28,7 +28,7 @@ class _AccountDetailsState extends State<AccountDetails> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawerDoctor(),
-      appBar: appBarComponent(
+      appBar: appBarDoctorComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
@@ -37,201 +37,221 @@ class _AccountDetailsState extends State<AccountDetails> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                alignment: Alignment.topRight,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 30.0),
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorThree),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EditBankDetails()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Container(
-                      child: Icon(
-                        Icons.edit,
-                        color: primaryColor,
-                        size: 30.0,
-                      ),
-                    ),
-                  ),
+              Text(
+                'You can edit your bank details which displayed here if any you have any modifications. ',
+                style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 17.0,
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Name : ',
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: primaryColor,
-                              // fontWeight: FontWeight.w700,
+              Container(
+                decoration: inputFieldDecoration,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text(
+                                    'Name : ',
+                                    textDirection: TextDirection.ltr,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: primaryColor,
+                                      // fontWeight: FontWeight.w700,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Jeewandara Bandara',
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                color: Color.fromRGBO(95, 141, 136, 1),
-                                fontWeight: FontWeight.w700),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Account Number : ',
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: Color.fromRGBO(95, 141, 136, 1),
-                              // fontWeight: FontWeight.w700,
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text(
+                                    'Jeewandara Bandara',
+                                    textDirection: TextDirection.ltr,
+                                    style: TextStyle(
+                                        fontSize: 18.0,
+                                        color: Color.fromRGBO(95, 141, 136, 1),
+                                        fontWeight: FontWeight.w700),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
-                            '199980712150',
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                color: Color.fromRGBO(95, 141, 136, 1),
-                                fontWeight: FontWeight.w700),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Branch : ',
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: primaryColor,
-                              // fontWeight: FontWeight.w700,
+                        ],
+                      ),
+                      spaceBetweenInputFields,
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text(
+                                    'Account Number : ',
+                                    textDirection: TextDirection.ltr,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Color.fromRGBO(95, 141, 136, 1),
+                                      // fontWeight: FontWeight.w700,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Newtown',
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                color: Color.fromRGBO(95, 141, 136, 1),
-                                fontWeight: FontWeight.w700),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Bank : ',
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: primaryColor,
-                              // fontWeight: FontWeight.w700,
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text(
+                                    '199980712150',
+                                    textDirection: TextDirection.ltr,
+                                    style: TextStyle(
+                                        fontSize: 18.0,
+                                        color: Color.fromRGBO(95, 141, 136, 1),
+                                        fontWeight: FontWeight.w700),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Text(
-                            'Ratnapura',
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                color: Color.fromRGBO(95, 141, 136, 1),
-                                fontWeight: FontWeight.w700),
-                            textAlign: TextAlign.left,
+                        ],
+                      ),
+                      spaceBetweenInputFields,
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text(
+                                    'Branch : ',
+                                    textDirection: TextDirection.ltr,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: primaryColor,
+                                      // fontWeight: FontWeight.w700,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text(
+                                    'Newtown',
+                                    textDirection: TextDirection.ltr,
+                                    style: TextStyle(
+                                        fontSize: 18.0,
+                                        color: Color.fromRGBO(95, 141, 136, 1),
+                                        fontWeight: FontWeight.w700),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      spaceBetweenInputFields,
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text(
+                                    'Bank : ',
+                                    textDirection: TextDirection.ltr,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: primaryColor,
+                                      // fontWeight: FontWeight.w700,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text(
+                                    'Ratnapura',
+                                    textDirection: TextDirection.ltr,
+                                    style: TextStyle(
+                                        fontSize: 18.0,
+                                        color: Color.fromRGBO(95, 141, 136, 1),
+                                        fontWeight: FontWeight.w700),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      spaceBetweenInputFields,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            decoration: inputFieldDecoration,
+                            child: IconButton(
+                              onPressed: () {
+                                // pickIMage();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditBankDetails()),
+                                );
+                              },
+                              icon: Icon(
+                                Icons.edit_outlined,
+                                size: 30,
+                                color: primaryColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ],
           ),

@@ -28,15 +28,19 @@ class _EditBankDetailsState extends State<EditBankDetails> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawerDoctor(),
-      appBar: appBarComponent(
+      appBar: appBarDoctorComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.only(top: 100, left: 30.0, right: 30.0),
           child: Container(
             child: Column(
               children: [
+                Text(
+                  'Update your bank account details which are visible to the Admin ',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
                 spaceBetweenInputFields,
                 inputFields('Name'),
                 spaceBetweenInputFields,

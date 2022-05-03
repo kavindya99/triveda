@@ -43,14 +43,19 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("images/sub-back.png"),
-                  fit: BoxFit.contain),
-            ),
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //       image: AssetImage("images/sub-back.png"),
+            //       fit: BoxFit.contain),
+            // ),
             alignment: Alignment.center,
             child: Column(
               children: [
+                spaceBetweenInputFields,
+                Text(
+                  'You can book an appointment for a doctor, to get consultation physically ',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
                 spaceBetweenInputFields,
                 Container(
                   decoration: inputFieldDecoration,

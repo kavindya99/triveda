@@ -18,24 +18,51 @@ class _ResetPasswordState extends State<ResetPassword> {
     final topPadding = 25.0;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBarMain('RESET', ''),
+      appBar: appBarMain('RESET', 'Password'),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.only(top: 100.0, left: 30.0, right: 30.0),
           child: Container(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  'Enter your new password and type it again to confirm the newly entered password.',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
                 spaceBetweenInputFields,
                 inputFields('New Password'),
-                SizedBox(
-                  height: 50.0,
-                ),
+                spaceBetweenInputFields,
                 inputFields('Confirm Password'),
-                SizedBox(
-                  height: 50.0,
-                ),
+                spaceBetweenInputFields,
                 buttonInPages(buttonText, context, callFunction, topPadding),
+                Container(
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignIn()),
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "BACK TO SIGN IN",
+                          style: TextStyle(
+                            color: primaryColor,
+                            shadows: [
+                              letterShadow,
+                            ],
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

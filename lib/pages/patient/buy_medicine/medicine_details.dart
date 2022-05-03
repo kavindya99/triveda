@@ -44,6 +44,11 @@ class _BuyState extends State<Buy> {
             child: Column(
               children: [
                 spaceBetweenInputFields,
+                Text(
+                  'You can select the amount you want from the selected medicine and add that to the cart.',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
+                spaceBetweenInputFields,
                 Container(
                   decoration: inputFieldDecoration,
                   child: Padding(

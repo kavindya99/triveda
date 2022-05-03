@@ -36,6 +36,14 @@ class _SupportPatientState extends State<SupportPatient> {
             child: Column(
               children: [
                 spaceBetweenInputFields,
+                Text(
+                  'If you need have any issue, you can send it to the admin through this. ',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 17.0,
+                  ),
+                ),
+                spaceBetweenInputFields,
                 inputFields('Name'),
                 spaceBetweenInputFields,
                 inputFields('Email'),

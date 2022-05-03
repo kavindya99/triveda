@@ -33,7 +33,9 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
     final textTitleSub = 'Doctor';
 
     final buttonText = 'Sign Up';
-    final callFunction = SignIn();
+    final callFunction = SignIn(
+      key: null,
+    );
     final topPadding = 25.0;
 
     final items = ['From', 'To', 'District', 'Province'];
@@ -205,13 +207,17 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   ],
                 ),
                 spaceBetweenInputFields,
+                buttonInPages(buttonText, context, callFunction, topPadding),
                 Container(
                   alignment: Alignment.center,
                   child: TextButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignIn()),
+                        MaterialPageRoute(
+                            builder: (context) => SignIn(
+                                  key: null,
+                                )),
                       );
                     },
                     child: Row(
@@ -238,7 +244,6 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                     ),
                   ),
                 ),
-                buttonInPages(buttonText, context, callFunction, topPadding),
               ],
             ),
           ),

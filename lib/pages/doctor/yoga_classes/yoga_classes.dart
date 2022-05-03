@@ -28,7 +28,7 @@ class _YogaClassesState extends State<YogaClasses> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawerDoctor(),
-      appBar: appBarComponent(
+      appBar: appBarDoctorComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),

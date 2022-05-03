@@ -1,3 +1,5 @@
+import 'package:ayu/pages/patient/view_doctor_profile_patient.dart';
+import 'package:ayu/pages/view_doctor_profile.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
@@ -22,7 +24,7 @@ class _DoctorListState extends State<DoctorList> {
     final bgColor = whiteColor;
 
     final buttonText = "Doctor's Name";
-    final callFunction = DoctorProfile();
+    final callFunction = ViewDoctorProfilePatient();
     final topPadding = 0.0;
 
     return Scaffold(

@@ -37,6 +37,11 @@ class _PaymentState extends State<Payment> {
             child: Column(
               children: [
                 spaceBetweenInputFields,
+                Text(
+                  'You have to do your payment to complete the appointment',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
+                spaceBetweenInputFields,
                 inputFields('Name'),
                 spaceBetweenInputFields,
                 inputFields('Email'),

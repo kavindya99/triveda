@@ -23,20 +23,23 @@ class _ChannelAppointmentWalletState extends State<ChannelAppointmentWallet> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawerDoctor(),
-      appBar: appBarComponent(
+      appBar: appBarDoctorComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("images/sub-back.png"),
-                  fit: BoxFit.fitHeight),
-            ),
             child: Column(
               children: [
+                spaceBetweenInputFields,
+                Text(
+                  'All the payments which you are not received yet from channeling appointments are displayed here.',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 17.0,
+                  ),
+                ),
                 spaceBetweenInputFields,
                 listViewWallet('Appointment 1', '1200'),
                 spaceBetweenInputFields,

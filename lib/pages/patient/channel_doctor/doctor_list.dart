@@ -1,9 +1,11 @@
+import 'package:ayu/pages/patient/view_doctor_profile_patient.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
 import '../../doctor_profile.dart';
+import '../../view_doctor_profile.dart';
 
 class DoctorList extends StatefulWidget {
   const DoctorList({Key key}) : super(key: key);
@@ -22,7 +24,7 @@ class _DoctorListState extends State<DoctorList> {
     final bgColor = whiteColor;
 
     final buttonText = "Doctor's Name";
-    final callFunction = DoctorProfile();
+    final callFunction = ViewDoctorProfilePatient();
     final topPadding = 0.0;
 
     return Scaffold(

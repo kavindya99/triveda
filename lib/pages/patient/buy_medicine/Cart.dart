@@ -48,6 +48,11 @@ class _CartState extends State<Cart> {
             child: Column(
               children: [
                 spaceBetweenInputFields,
+                Text(
+                  'Items in your cart are displayed here. You can proceed to pay or continue shopping.',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
+                spaceBetweenInputFields,
                 listViewCart(
                     'Item 1', 'Nelli Kudu Nelli Kudu Nelli Kudu', '50', '150'),
                 spaceBetweenInputFields,

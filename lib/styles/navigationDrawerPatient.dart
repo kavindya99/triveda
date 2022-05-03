@@ -11,7 +11,6 @@ import 'package:ayu/pages/patient/support.dart';
 import 'package:ayu/pages/patient/yoga/yoga.dart';
 import 'package:ayu/pages/sign_in.dart';
 import 'package:ayu/styles/variables.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NavigationDrawer extends StatefulWidget {
@@ -43,12 +42,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: Container(
-                height: MediaQuery.of(context).size.height - 150.0,
+                height: MediaQuery.of(context).size.height - 200.0,
                 decoration: new BoxDecoration(
                     color: whiteColor,
                     borderRadius: BorderRadius.circular(10.0)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     navigationDrawer(
                         context, OnlineConsultaion(), 'Online Consultation'),
@@ -76,7 +76,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignIn()));
+                                    builder: (context) => SignIn(
+                                          key: null,
+                                        )));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,

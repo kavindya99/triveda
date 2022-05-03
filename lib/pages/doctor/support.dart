@@ -28,7 +28,7 @@ class _SupportDoctorState extends State<SupportDoctor> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawerDoctor(),
-      appBar: appBarComponent(
+      appBar: appBarDoctorComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
@@ -37,6 +37,14 @@ class _SupportDoctorState extends State<SupportDoctor> {
           child: Container(
             child: Column(
               children: [
+                spaceBetweenInputFields,
+                Text(
+                  'If you need have any issue, you can send it to the admin through this. ',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 17.0,
+                  ),
+                ),
                 spaceBetweenInputFields,
                 inputFields('Name'),
                 spaceBetweenInputFields,

@@ -11,48 +11,25 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  AudioPlayer player = AudioPlayer();
+  //AudioPlayer player = AudioPlayer();
   AudioCache cache = new AudioCache();
-  bool isPlaying = false;
-  bool play = true;
-
-  Future<bool> _willPopCallback() async {
-    if (isPlaying == false) {
-      setState(() {
-        isPlaying = true;
-      });
-      player.stop();
-    }
-    return true;
-  }
-
-  openingActions() async {
-    player = await cache.loop('back-music/back.mp3');
-  }
-
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   void initState() {
-    openingActions();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    openingActions();
     return Scaffold(
       body: ElevatedButton(
         style: ElevatedButton.styleFrom(primary: primaryColor),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SignIn()));
+          cache.load('images/back.wav');
+          cache.play('images/back.wav');
+          cache.loop('images/back.wav');
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => SignIn()));
         },
         child: Container(
           decoration: BoxDecoration(

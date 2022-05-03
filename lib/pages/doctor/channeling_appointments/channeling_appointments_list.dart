@@ -22,7 +22,7 @@ class _AppointmentListState extends State<AppointmentList> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawerDoctor(),
-      appBar: appBarComponent(
+      appBar: appBarDoctorComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
@@ -36,30 +36,22 @@ class _AppointmentListState extends State<AppointmentList> {
             ),
             child: Column(
               children: [
+                Text(
+                  'Channeling appointments appointed for you are displayed here. ',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 17.0,
+                  ),
+                ),
                 spaceBetweenInputFields,
-                listViewOnlineConsult(
-                    'Appointment 1',
-                    "Jennifer Ronly",
-                    'Video',
-                    '2022.08.06.',
-                    '4.00 - 4.30',
-                    'click to join meeting'),
+                listViewChannelAppointments('Appointment 2', "Jennifer Ronly",
+                    'Video', '2022.08.06.', '4.00 - 4.30'),
                 spaceBetweenInputFields,
-                listViewOnlineConsult(
-                    'Appointment 2',
-                    "Jennifer Ronly",
-                    'Video',
-                    '2022.08.06.',
-                    '4.00 - 4.30',
-                    'click to join meeting'),
+                listViewChannelAppointments('Appointment 2', "Jennifer Ronly",
+                    'Video', '2022.08.06.', '4.00 - 4.30'),
                 spaceBetweenInputFields,
-                listViewOnlineConsult(
-                    'Appointment 3',
-                    "Jennifer Ronly",
-                    'Video',
-                    '2022.08.06.',
-                    '4.00 - 4.30',
-                    'click to join meeting'),
+                listViewChannelAppointments('Appointment 2', "Jennifer Ronly",
+                    'Video', '2022.08.06.', '4.00 - 4.30'),
                 spaceBetweenInputFields,
               ],
             ),

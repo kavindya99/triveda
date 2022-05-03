@@ -22,20 +22,22 @@ class _PatientListState extends State<PatientList> {
     return Scaffold(
       backgroundColor: bgColor,
       drawer: NavigationDrawerDoctor(),
-      appBar: appBarComponent(
+      appBar: appBarDoctorComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("images/sub-back.png"),
-                  fit: BoxFit.fitHeight),
-            ),
             child: Column(
               children: [
+                Text(
+                  'Online consultations appointed for you are displayed here. ',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 17.0,
+                  ),
+                ),
                 spaceBetweenInputFields,
                 listViewOnlineConsult('Patient 1', "Jennifer Ronly", 'Video',
                     '2022.08.06.', '4.00 - 4.30', 'click to join meeting'),

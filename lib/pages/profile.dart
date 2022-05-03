@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:ayu/pages/patient/Change_Password.dart';
 import 'package:ayu/pages/patient/edit_profile.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key key}) : super(key: key);
@@ -12,6 +16,24 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  File image;
+
+  Future pickIMage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+      if (image == null) return;
+
+      final imageTemp = File(image.path);
+
+      setState(() {
+        this.image = imageTemp;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,29 +79,23 @@ class _ProfileState extends State<Profile> {
                         SizedBox(
                           child: Stack(
                             children: [
-                              const CircleAvatar(
+                              CircleAvatar(
                                 radius: 70,
                                 backgroundImage: AssetImage('images/mee.jpg'),
                               ),
                               Positioned(
-                                  bottom: -10.0,
-                                  child: Container(
-                                    decoration: inputFieldDecoration,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    EditProfile()));
-                                      },
-                                      icon: const Icon(
-                                        Icons.edit_outlined,
-                                        size: 30,
-                                        color: Colors.lime,
-                                      ),
+                                bottom: -10.0,
+                                child: Container(
+                                  child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.camera_alt_rounded,
+                                      size: 35,
+                                      color: secondaryColorThree,
                                     ),
-                                  ))
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -100,8 +116,37 @@ class _ProfileState extends State<Profile> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                profileTextMain('Role'),
-                profileTextSub('Patient'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          profileTextMain('Role'),
+                          profileTextSub('Patient'),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: inputFieldDecoration,
+                      child: IconButton(
+                        onPressed: () {
+                          // pickIMage();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfile()),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.edit_outlined,
+                          size: 30,
+                          color: primaryColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 spaceBetweenInputFields,
                 profileTextMain('Info'),
                 Container(
@@ -198,6 +243,13 @@ class _ProfileState extends State<Profile> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Icon(
+                            Icons.vpn_key,
+                            color: primaryColor,
+                          ),
+                        ),
                         Text(
                           "Change Password",
                           style: TextStyle(

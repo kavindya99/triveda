@@ -2,6 +2,7 @@ import 'package:ayu/pages/profile.dart';
 import 'package:flutter/material.dart';
 
 import '../../styles/appBar.dart';
+import '../../styles/navigationDrawerPatient.dart';
 import '../../styles/variables.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -25,28 +26,29 @@ class _ChangePasswordState extends State<ChangePassword> {
     final topPadding = 25.0;
     return Scaffold(
       backgroundColor: whiteColor,
+      drawer: NavigationDrawer(),
       appBar: appBarComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.only(top: 100.0, left: 30.0, right: 30.0),
           child: Container(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Text(
+                  'Enter your current password, new password and type it again to confirm the newly entered password.',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
+                ),
                 spaceBetweenInputFields,
                 inputFields('Current Password'),
-                SizedBox(
-                  height: 50.0,
-                ),
+                spaceBetweenInputFields,
                 inputFields('New Password'),
-                SizedBox(
-                  height: 50.0,
-                ),
+                spaceBetweenInputFields,
                 inputFields('Confirm Password'),
-                SizedBox(
-                  height: 50.0,
-                ),
+                spaceBetweenInputFields,
                 buttonInPages(buttonText, context, callFunction, topPadding),
               ],
             ),

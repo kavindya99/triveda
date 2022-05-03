@@ -60,8 +60,8 @@ class _MedicineSelectionState extends State<MedicineSelection> {
             child: Column(
               children: [
                 Text(
-                  'You can search any medicine and buy',
-                  style: TextStyle(fontSize: 16.00, color: primaryColor),
+                  'You can search any medicine related to the category you selected in the previous page',
+                  style: TextStyle(color: primaryColor, fontSize: 17.0),
                 ),
                 spaceBetweenInputFields,
                 inputFields('Search'),
