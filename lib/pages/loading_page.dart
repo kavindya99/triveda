@@ -11,13 +11,7 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  //AudioPlayer player = AudioPlayer();
-  AudioCache cache = new AudioCache();
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  AudioCache cache = AudioCache();
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +19,10 @@ class _LoadingState extends State<Loading> {
       body: ElevatedButton(
         style: ElevatedButton.styleFrom(primary: primaryColor),
         onPressed: () {
-          cache.load('images/back.wav');
-          cache.play('images/back.wav');
-          cache.loop('images/back.wav');
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => SignIn()));
+          cache.load('back.mp3');
+          cache.play('back.mp3');
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SignIn()));
         },
         child: Container(
           decoration: BoxDecoration(
