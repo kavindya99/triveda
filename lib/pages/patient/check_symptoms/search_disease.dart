@@ -3,6 +3,10 @@ import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'SymptomList.dart';
 
 class SearchDisease extends StatefulWidget {
   const SearchDisease({Key key}) : super(key: key);
@@ -12,11 +16,47 @@ class SearchDisease extends StatefulWidget {
 }
 
 class _SearchDiseaseState extends State<SearchDisease> {
-  String dropdownValue1 = 'Symptom 1';
-  String dropdownValue2 = 'Symptom 2';
-  String dropdownValue3 = 'Symptom 3';
-  String dropdownValue4 = 'Symptom 4';
-  String dropdownValue5 = 'Symptom 5';
+  String dropdownValue1 = "Itching";
+  String dropdownValue2 = "Itching";
+  String dropdownValue3 = "Itching";
+  String dropdownValue4 = "Itching";
+  String dropdownValue5 = "Itching";
+
+  predictDisease(String symptom1, String symptom2, String symptom3,
+      String symptom4, String symptom5) async {
+    try {
+      var url = Uri.parse("https://17805.gradio.app/api/predict/");
+
+      Map<String, dynamic> data = {
+        "data": [
+          [
+            dropdownValue1,
+            dropdownValue2,
+            dropdownValue3,
+            dropdownValue4,
+            dropdownValue5
+          ]
+        ]
+      };
+
+      var body = json.encode(data);
+      print(url);
+      var res = await http.post(url,
+          headers: {"Content-Type": "application/json"}, body: body);
+      print(res.body);
+      print(res.statusCode);
+      final jsonResponse = jsonDecode(res.body);
+      print(jsonResponse);
+      if (res.statusCode == 200) {
+        // jsonResponse = json.decode(res.body);
+        // print("Response Status: ${res.statusCode}");
+
+        // print(jsonResponse);
+      }
+    } catch (error) {
+      print(error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +67,6 @@ class _SearchDiseaseState extends State<SearchDisease> {
     final bgColor = whiteColor;
 
     final buttonText = 'Search';
-    final callFunction = SearchResult();
     final topPadding = 20.0;
 
     return Scaffold(
@@ -40,11 +79,11 @@ class _SearchDiseaseState extends State<SearchDisease> {
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("images/sub-back.png"),
-                  fit: BoxFit.contain),
-            ),
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //       image: AssetImage("images/sub-back.png"),
+            //       fit: BoxFit.contain),
+            // ),
             alignment: Alignment.center,
             child: Column(
               children: [
@@ -73,11 +112,11 @@ class _SearchDiseaseState extends State<SearchDisease> {
                           dropdownValue1 = newValue;
                         });
                       },
-                      items: <String>['Symptom 1', 'Two', 'Free', 'Four']
-                          .map<DropdownMenuItem<String>>((String value) {
+                      items: symptoms
+                          .map<DropdownMenuItem<String>>((String value1) {
                         return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
+                          value: value1,
+                          child: Text(value1),
                         );
                       }).toList(),
                     ),
@@ -103,7 +142,7 @@ class _SearchDiseaseState extends State<SearchDisease> {
                           dropdownValue2 = newValue;
                         });
                       },
-                      items: <String>['Symptom 2', 'Video']
+                      items: symptoms
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -133,7 +172,7 @@ class _SearchDiseaseState extends State<SearchDisease> {
                           dropdownValue3 = newValue;
                         });
                       },
-                      items: <String>['Symptom 3', 'Two', 'Free', 'Four']
+                      items: symptoms
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -163,7 +202,7 @@ class _SearchDiseaseState extends State<SearchDisease> {
                           dropdownValue4 = newValue;
                         });
                       },
-                      items: <String>['Symptom 4', 'Two', 'Free', 'Four']
+                      items: symptoms
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -193,7 +232,7 @@ class _SearchDiseaseState extends State<SearchDisease> {
                           dropdownValue5 = newValue;
                         });
                       },
-                      items: <String>['Symptom 5', 'Two', 'Free', 'Four']
+                      items: symptoms
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -204,7 +243,34 @@ class _SearchDiseaseState extends State<SearchDisease> {
                   ),
                 ),
                 spaceBetweenInputFields,
-                buttonInPages(buttonText, context, callFunction, topPadding),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: topPadding),
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: secondaryColorOne),
+                    onPressed: () {
+                      predictDisease(dropdownValue1, dropdownValue2,
+                          dropdownValue3, dropdownValue4, dropdownValue5);
+                      // Navigator.of(this.context).pushAndRemoveUntil(
+                      //     MaterialPageRoute(
+                      //         builder: (BuildContext context) => MainMenu()),
+                      //     (Route<dynamic> route) => false);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        buttonText,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            shadows: [
+                              letterShadow,
+                            ],
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -6,11 +6,11 @@ import 'package:ayu/pages/main_menu_patient.dart';
 import 'package:ayu/pages/sign_up_doctor.dart';
 import 'package:ayu/pages/sign_up_patient.dart';
 import 'package:ayu/styles/appBarMain.dart';
-import 'package:ayu/styles/body-dark.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../styles/customDialogBox.dart';
 
@@ -25,16 +25,26 @@ class _SignInState extends State<SignIn> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
+
+  _launchURL() async {
+    const url = 'https://slvms.software/auth/forgot-password';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   login(String userName, String password) async {
     print(userName);
-    var url = Uri.parse("https://vms-sl.azurewebsites.net/auth/login");
+    print(password);
+    var url = Uri.parse('https://vms-sl.azurewebsites.net/' + "auth/login");
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Map data = {"userName": userName, "password": password};
+    Map<String, dynamic> data = {"userName": userName, "password": password};
     var body = json.encode(data);
     print(url);
     var jsonResponse;
-
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
       showDialog(
           context: this.context,
@@ -47,83 +57,78 @@ class _SignInState extends State<SignIn> {
       var res = await http.post(url,
           headers: {"Content-Type": "application/json"}, body: body);
       print(res.statusCode);
+      print(res.body);
       if (res.statusCode == 200) {
+        setState(() {
+          _isLoading = false;
+        });
         jsonResponse = json.decode(res.body);
-        var role = jsonResponse["role"];
-        if (role == []) {
-          //if role is doctor
-          Navigator.of(this.context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (BuildContext context) => MainMenu()),
-              (Route<dynamic> route) => false);
-        } else if (role == "patient") {
-          //if role is patient
-          Navigator.of(this.context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (BuildContext context) => MainMenu()),
-              (Route<dynamic> route) => false);
-        } else if (role == "admin") {
-          //if role is admin
-          showDialog(
-              context: this.context,
-              builder: (context) => CustomDialog(
-                    title: "Error",
-                    description: "User doesn't has access to login",
-                  ));
-        }
-
         print("Response Status: ${res.statusCode}");
-        print(role);
         if (res.statusCode == 403) {
           print(json.decode(res.body));
         }
 
         if (jsonResponse != null) {
-          setState(() {
-            _isLoading = false;
-          });
-
-          sharedPreferences.setString("token", jsonResponse['token']);
-          sharedPreferences.setString("name", jsonResponse['userName']);
-
-          Navigator.of(this.context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (BuildContext context) => MainMenu()),
-              (Route<dynamic> route) => false);
+          print(jsonResponse['role']);
+          print(jsonResponse['token']);
+          print(jsonResponse['name']);
+          // sharedPreferences.setString("token", jsonResponse['token']);
+          // sharedPreferences.setString("name", jsonResponse['userName']);
+          // Navigator.of(this.context).pushAndRemoveUntil(
+          //     MaterialPageRoute(
+          //         builder: (BuildContext context) => MainMenuDoctor()),
+          //     (Route<dynamic> route) => false);
+          var role = jsonResponse["role"];
+          print(role);
+          if (role == []) {
+            //if role is doctor
+            Navigator.of(this.context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => MainMenuDoctor(),
+                ),
+                (Route<dynamic> route) => false);
+          } else {
+            Navigator.of(this.context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => MainMenu(),
+                ),
+                (Route<dynamic> route) => false);
+          }
+          // } else if (role == "patient") {
+          //   //if role is patient
+          //   Navigator.of(this.context).pushAndRemoveUntil(
+          //       MaterialPageRoute(
+          //           builder: (BuildContext context) => MainMenu()),
+          //       (Route<dynamic> route) => false);
+          // } else if (role == "admin") {
+          //   //if role is admin
+          //   showDialog(
+          //     context: this.context,
+          //     builder: (context) => CustomDialog(
+          //       title: "Error",
+          //       description: "User doesn't has access to login",
+          //     ),
+          //   );
+          // }
         } else {
           setState(() {
             _isLoading = false;
           });
         }
       }
+      if (res.statusCode == 401) {
+        setState(() {
+          _isLoading = false;
+        });
+        print(_passwordController.text);
+      }
       if (res.statusCode == 503) {
         print("Server under maintenance, Please check after a while ");
-        showDialog(
-            context: this.context,
-            builder: (context) => CustomDialog(
-                  title: "Error",
-                  description:
-                      "Server under maintenance, Please check after a while",
-                ));
       } else if (res.statusCode == 401) {
         print(json.decode(res.body));
-        showDialog(
-            context: this.context,
-            builder: (context) => CustomDialog(
-                  title: "Login Failed",
-                  description:
-                      "Login failed due to incorrect login credentials. Try with correct ones",
-                ));
       }
     } catch (error) {
       print(error);
-      showDialog(
-          context: this.context,
-          builder: (context) => CustomDialog(
-                title: "Error",
-                description: "Login Failed. Try Again",
-              ));
-      Navigator.of(this.context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (BuildContext context) => MainMenuDoctor()),
-          (Route<dynamic> route) => false);
     }
   }
 
@@ -149,7 +154,19 @@ class _SignInState extends State<SignIn> {
               children: [
                 Container(
                   decoration: inputFieldDecoration,
-                  child: TextField(
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        showDialog(
+                          context: this.context,
+                          builder: (context) => CustomDialog(
+                            title: "Error",
+                            description: "Please enter your email",
+                          ),
+                        );
+                      }
+                      return null;
+                    },
                     controller: _emailController,
                     decoration: InputDecoration(
                       counterText: "",
@@ -168,7 +185,19 @@ class _SignInState extends State<SignIn> {
                 spaceBetweenInputFields,
                 Container(
                   decoration: inputFieldDecoration,
-                  child: TextField(
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        showDialog(
+                          context: this.context,
+                          builder: (context) => CustomDialog(
+                            title: "Error",
+                            description: "Please enter your password",
+                          ),
+                        );
+                      }
+                      return null;
+                    },
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -216,13 +245,10 @@ class _SignInState extends State<SignIn> {
                     style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                     onPressed: () {
                       login(_emailController.text, _passwordController.text);
-                      // showDialog(
-                      //     context: context,
-                      //     builder: (context) => CustomDialog(
-                      //           title: "Success",
-                      //           description:
-                      //               "this is the success alert this is the success alert this is the success alert this is the success alert this is the success alert this is the success alert",
-                      //         ));
+                      // Navigator.of(this.context).pushAndRemoveUntil(
+                      //     MaterialPageRoute(
+                      //         builder: (BuildContext context) => MainMenu()),
+                      //     (Route<dynamic> route) => false);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),

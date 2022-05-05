@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 Color primaryColor = Color.fromRGBO(95, 141, 136, 1);
 // Color primaryColor = Color.fromRGBO(29, 49, 72, 1);
@@ -161,18 +162,23 @@ ElevatedButton mainMenuTile(context, tileLink, tileText) => ElevatedButton(
       ),
     );
 
-Container profileTextMain(text) => Container(
-      child: Text(
-        text,
-        style: TextStyle(
-          color: secondaryColorOne,
-          fontWeight: FontWeight.w700,
-          fontSize: 21.0,
-          // shadows: <Shadow>[
-          //   letterShadow,
-          // ],
+Row profileTextMain(text) => Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          child: Text(
+            text,
+            style: TextStyle(
+              color: secondaryColorOne,
+              fontWeight: FontWeight.w700,
+              fontSize: 21.0,
+              // shadows: <Shadow>[
+              //   letterShadow,
+              // ],
+            ),
+          ),
         ),
-      ),
+      ],
     );
 
 Container profileTextSub(text) => Container(
