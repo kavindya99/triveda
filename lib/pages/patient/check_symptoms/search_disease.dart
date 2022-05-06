@@ -2,10 +2,12 @@ import 'package:ayu/pages/patient/check_symptoms/search_result.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import '../../../styles/customDialogBox.dart';
+import '../../../styles/urlForAPI.dart';
 import 'SymptomList.dart';
 
 class SearchDisease extends StatefulWidget {
@@ -22,10 +24,12 @@ class _SearchDiseaseState extends State<SearchDisease> {
   String dropdownValue4 = "Itching";
   String dropdownValue5 = "Itching";
 
+  var predictedDisease;
+
   predictDisease(String symptom1, String symptom2, String symptom3,
       String symptom4, String symptom5) async {
     try {
-      var url = Uri.parse("https://17805.gradio.app/api/predict/");
+      var url = Uri.parse(diseasePredictingUrl);
 
       Map<String, dynamic> data = {
         "data": [
@@ -40,18 +44,21 @@ class _SearchDiseaseState extends State<SearchDisease> {
       };
 
       var body = json.encode(data);
-      print(url);
+      // print(url);
       var res = await http.post(url,
           headers: {"Content-Type": "application/json"}, body: body);
-      print(res.body);
-      print(res.statusCode);
-      final jsonResponse = jsonDecode(res.body);
-      print(jsonResponse);
-      if (res.statusCode == 200) {
-        // jsonResponse = json.decode(res.body);
-        // print("Response Status: ${res.statusCode}");
+      // print(res.body);
+      // print(res.statusCode);
+      var jsonResponse;
 
-        // print(jsonResponse);
+      if (res.statusCode == 200) {
+        jsonResponse = json.decode(res.body);
+        predictedDisease = jsonResponse['data'][0]
+            .split(',')[3]
+            .split('}')[0]
+            .split(':')[1]
+            .split('\'')[1];
+        print(predictedDisease);
       }
     } catch (error) {
       print(error);
@@ -249,11 +256,40 @@ class _SearchDiseaseState extends State<SearchDisease> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                     onPressed: () {
-                      predictDisease(dropdownValue1, dropdownValue2,
-                          dropdownValue3, dropdownValue4, dropdownValue5);
+                      // predictDisease(dropdownValue1, dropdownValue2,
+                      //     dropdownValue3, dropdownValue4, dropdownValue5);
+                      showDialog(
+                        context: this.context,
+                        builder: (context) => Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FutureBuilder(
+                                future: predictDisease(
+                                    dropdownValue1,
+                                    dropdownValue2,
+                                    dropdownValue3,
+                                    dropdownValue4,
+                                    dropdownValue5),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    return CustomDialog(
+                                      title: "Predicted Disease",
+                                      description: predictedDisease,
+                                    );
+                                  }
+                                  return CustomDialog(
+                                    title: "Predicted Disease",
+                                    description: "Wait for the response",
+                                  );
+                                })
+                          ],
+                        ),
+                      );
                       // Navigator.of(this.context).pushAndRemoveUntil(
                       //     MaterialPageRoute(
-                      //         builder: (BuildContext context) => MainMenu()),
+                      //         builder: (BuildContext context) =>
+                      //             SearchResult()),
                       //     (Route<dynamic> route) => false);
                     },
                     child: Padding(
@@ -271,6 +307,20 @@ class _SearchDiseaseState extends State<SearchDisease> {
                     ),
                   ),
                 ),
+                // Column(
+                //   children: [
+                //     FutureBuilder(
+                //         future: predictDisease(dropdownValue1, dropdownValue2,
+                //             dropdownValue3, dropdownValue4, dropdownValue5),
+                //         builder: (context, snapshot) {
+                //           if (snapshot.connectionState ==
+                //               ConnectionState.done) {
+                //             return Text(predictedDisease);
+                //           }
+                //           return Text("oops");
+                //         }),
+                //   ],
+                // ),
               ],
             ),
           ),

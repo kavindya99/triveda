@@ -14,6 +14,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dart:convert';
 
+import '../styles/urlForAPI.dart';
+
 List<TestModel> testModelFromMap(String str) =>
     List<TestModel>.from(json.decode(str).map((x) => TestModel.fromMap(x)));
 
@@ -161,32 +163,12 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  var testList;
-
-  // Future<List<TestModel>> getDataApi() async {
-  //   final response = await http.get(
-  //     Uri.parse('https://jsonplaceholder.typicode.com/posts'),
-  //   );
-  //   var data = jsonDecode((response.body.toString()));
-  //
-  //   print(response.statusCode);
-  //   if (response.statusCode == 200) {
-  //     testList = data[0]['body'];
-  //     // for (var i in data) {
-  //     //   print(data[i]['userId']);
-  //     // }
-  //     return data;
-  //   } else {
-  //     return data;
-  //   }
-  // }
+  Map userData;
 
   var email;
   var firstName;
   var lastName;
   var gender;
-  Map userData;
-
   var name;
   var doctor_Id;
   var specialization;
@@ -205,8 +187,8 @@ class _ProfileState extends State<Profile> {
   Future getDataFromApi() async {
     http.Response response;
     String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyODgzYzU3OS0wYjUzLTRhN2MtOWY5MC1lNDBiMDQ4OTk5MWEiLCJ1bmlxdWVfbmFtZSI6InNhbmphbmEiLCJlbWFpbCI6ImJpdGl3bzc4NDJAeWtzMjQ3LmNvbSIsImp0aSI6IjU2MGFlOGNiLWRkNDktNGM5ZS1hZjNhLTgwNGUyNDgwMzJlNyIsImV4cCI6MTY1MTc0MTI5MSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM0NCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMC8ifQ.xLWbUvtRqSx0UsUsjT8iMx3kPsJOnkOTihZdExFCiY8";
-    var url = Uri.parse('https://vms-sl.azurewebsites.net/user/profile');
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyODgzYzU3OS0wYjUzLTRhN2MtOWY5MC1lNDBiMDQ4OTk5MWEiLCJ1bmlxdWVfbmFtZSI6InNhbmphbmEiLCJlbWFpbCI6ImJpdGl3bzc4NDJAeWtzMjQ3LmNvbSIsImp0aSI6IjY0YzFmYTI1LWZkZjAtNDk2OC05ZjBhLTI1ZmNlNGFiOTEzMiIsImV4cCI6MTY1MTgxNzk1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM0NCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMC8ifQ.RjzrNhcMQOzcgfsktb0D9cXkQbIkZ4lT-Nx8wS_9fkE";
+    var url = Uri.parse(profileUrl);
 
     print(token);
     response = await http.get(url, headers: {
@@ -265,20 +247,42 @@ class _ProfileState extends State<Profile> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30.0),
-                          child: Text(
-                            'Hi Jhon',
-                            style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
+                    FutureBuilder(
+                        future: getDataFromApi(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 30.0),
+                                  child: Text(
+                                    'Hi ' + firstName.toString() + ' ,',
+                                    style: TextStyle(
+                                        color: whiteColor,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 30.0),
+                                  child: Text(
+                                    'Hi',
+                                    style: TextStyle(
+                                        color: whiteColor,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
+                        }),
                     Column(
                       children: [
                         SizedBox(
@@ -482,7 +486,7 @@ class _ProfileState extends State<Profile> {
                       );
                       // return Text("this is the email\n\n" + email);
                     }
-                    return Text("oops");
+                    return Center(child: Text("Loading"));
                   },
                 ),
               ],

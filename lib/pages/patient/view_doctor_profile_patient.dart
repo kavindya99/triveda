@@ -42,7 +42,7 @@ class _ViewDoctorProfilePatientState extends State<ViewDoctorProfilePatient> {
                         Padding(
                           padding: const EdgeInsets.only(left: 30.0),
                           child: Text(
-                            'Hi Jhon',
+                            'Dr Jhon',
                             style: TextStyle(
                                 color: whiteColor,
                                 fontSize: 20.0,
