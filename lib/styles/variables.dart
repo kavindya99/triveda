@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../pages/meeting_start.dart';
+
 Color primaryColor = Color.fromRGBO(95, 141, 136, 1);
 // Color primaryColor = Color.fromRGBO(29, 49, 72, 1);
 Color secondaryColorOne = Color.fromRGBO(174, 182, 142, 1);
@@ -43,9 +45,34 @@ SizedBox spaceInRecipe = SizedBox(
   height: 3.0,
 );
 
+Container inputFieldsReg(hint, controllerField, emptyMessage) => Container(
+      decoration: inputFieldDecoration,
+      child: TextFormField(
+        decoration: InputDecoration(
+          counterText: "",
+          contentPadding: EdgeInsets.all(10.0),
+          fillColor: whiteColor,
+          border: OutlineInputBorder(
+              borderRadius: new BorderRadius.circular(5.0),
+              borderSide: BorderSide.none),
+          hintText: hint,
+          hintStyle: TextStyle(
+            color: secondaryColorOne,
+          ),
+        ),
+        controller: controllerField,
+        validator: (String value) {
+          if (value.isEmpty) {
+            return emptyMessage;
+          }
+          return null;
+        },
+      ),
+    );
+
 Container inputFields(hint) => Container(
       decoration: inputFieldDecoration,
-      child: TextField(
+      child: TextFormField(
         decoration: InputDecoration(
           counterText: "",
           contentPadding: EdgeInsets.all(10.0),
@@ -302,191 +329,113 @@ Container listViewCart(mainText, medicine, amount, price) => Container(
       ),
     );
 
-Container listViewOnlineConsult(mainText, name, type, date, time, link) =>
-    Container(
-      decoration: inputFieldDecoration,
-      child: ExpansionTile(
-        title: Text(
-          mainText,
-          style: TextStyle(
-            color: secondaryColorOne,
+Column listViewOnlineConsult(mainText, name, type, date, time) => Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  "Patient Name",
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  name,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: whiteColor,
+                      fontSize: 18.0),
+                ),
+              ),
+            ],
           ),
         ),
-        children: [
-          Container(
-            decoration: new BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(5.0),
-                bottomLeft: Radius.circular(5.0),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  "Type",
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: 18.0,
+                  ),
+                ),
               ),
-              image: new DecorationImage(
-                image: ExactAssetImage('images/light-bg.png'),
-                fit: BoxFit.fill,
+              Expanded(
+                flex: 2,
+                child: Text(
+                  type,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: whiteColor,
+                      fontSize: 18.0),
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Patient Name",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          name,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: whiteColor,
-                              fontSize: 18.0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Type",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          type,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: whiteColor,
-                              fontSize: 18.0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Date",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          date,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: whiteColor,
-                              fontSize: 18.0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Time",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          time,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: whiteColor,
-                              fontSize: 18.0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Meeting Link",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          link,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: whiteColor,
-                              fontSize: 18.0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: secondaryColorThree),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context, MaterialPageRoute(builder: (context) => callFunction));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Text(
-                          'Completed',
-                          style: TextStyle(
-                              color: whiteColor,
-                              shadows: [
-                                letterShadow,
-                              ],
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  "Date",
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  date,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: whiteColor,
+                      fontSize: 18.0),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  "Time",
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  time,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: whiteColor,
+                      fontSize: 18.0),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
 
 Container listViewChannelAppointments(mainText, name, type, date, time) =>
@@ -650,164 +599,87 @@ Container listViewChannelAppointments(mainText, name, type, date, time) =>
       ),
     );
 
-Container listViewYoga(mainText, name, date, time, link) => Container(
-      decoration: inputFieldDecoration,
-      child: ExpansionTile(
-        title: Text(
-          mainText,
-          style: TextStyle(
-            color: secondaryColorOne,
+Column listViewYoga(mainText, name, date, time) => Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  "Patient Name",
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  name,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: whiteColor,
+                      fontSize: 18.0),
+                ),
+              ),
+            ],
           ),
         ),
-        children: [
-          Container(
-            decoration: new BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(5.0),
-                bottomLeft: Radius.circular(5.0),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  "Date",
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: 18.0,
+                  ),
+                ),
               ),
-              image: new DecorationImage(
-                image: ExactAssetImage('images/light-bg.png'),
-                fit: BoxFit.fill,
+              Expanded(
+                flex: 2,
+                child: Text(
+                  date,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: whiteColor,
+                      fontSize: 18.0),
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Patient Name",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          name,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: whiteColor,
-                              fontSize: 18.0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Date",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          date,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: whiteColor,
-                              fontSize: 18.0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Time",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          time,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: whiteColor,
-                              fontSize: 18.0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Meeting Link",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          link,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: whiteColor,
-                              fontSize: 18.0),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: secondaryColorThree),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context, MaterialPageRoute(builder: (context) => callFunction));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Text(
-                          'Completed',
-                          style: TextStyle(
-                              color: whiteColor,
-                              shadows: [
-                                letterShadow,
-                              ],
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  "Time",
+                  style: TextStyle(
+                    color: whiteColor,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  time,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: whiteColor,
+                      fontSize: 18.0),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
 
 Container listViewWallet(mainText, fee) => Container(

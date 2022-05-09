@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../styles/customDialogBox.dart';
+import 'lists_for.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key key}) : super(key: key);
@@ -25,30 +26,27 @@ class _SignUpState extends State<SignUp> {
     final buttonText = 'Sign Up';
     final callFunction = SignIn();
     final topPadding = 25.0;
+
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
     Map userDetails;
     String nic;
-    TextEditingController _nic = TextEditingController();
     TextEditingController _username = TextEditingController();
-    TextEditingController _firstname = TextEditingController();
-    TextEditingController _lastname = TextEditingController();
     TextEditingController _email = TextEditingController();
     TextEditingController _phone = TextEditingController();
     TextEditingController _password = TextEditingController();
+    TextEditingController _confirmPassword = TextEditingController();
     TextEditingController _gender = TextEditingController();
-    TextEditingController _dob = TextEditingController();
+    int currentStep = 0;
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final TextEditingController _nicController = TextEditingController();
     var res;
+    var getRes;
+    bool _isloading = false;
 
-    registerUser(
-      String email,
-      String password,
-      String nic,
-      String firstname,
-      String lastname,
-      String phone,
-    ) async {
-      print("recurring");
-      var url = Uri.parse("https://vms-sl.azurewebsites.net/auth/register");
+    registerUser() async {
+      print("re occurring");
+      var url = Uri.parse('https://vms-sl.azurewebsites.net/auth/register');
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -75,19 +73,27 @@ class _SignUpState extends State<SignUp> {
             body: body);
         print(res.statusCode);
 
-        if (res.statusCode == 400) {}
+        if (res.statusCode == 404) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Something went wrong'),
+            backgroundColor: Colors.red,
+          ));
+        }
         if (res.statusCode == 200) {
           var jsonResponse = json.decode(res.body);
-          CustomDialog(
-            title: "Error",
-            description: "User does not have permission to log",
-          );
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Found'),
+            backgroundColor: Colors.green,
+          ));
           print("Response Status: ${res.statusCode}");
         }
       } catch (error) {
         print(error);
       }
     }
+
+    String selectedValue1 = 'Central Province';
+    String selectedValue2 = 'Colombo';
 
     return Scaffold(
       backgroundColor: whiteColor,
@@ -99,16 +105,28 @@ class _SignUpState extends State<SignUp> {
           child: Container(
             child: Column(
               children: [
-                inputFields('Name'),
-                spaceBetweenInputFields,
-                inputFields('Email'),
-                spaceBetweenInputFields,
-                inputFields('Password'),
-                spaceBetweenInputFields,
-                inputFields('Province'),
-                spaceBetweenInputFields,
-                inputFields('District'),
-                spaceBetweenInputFields,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      inputFieldsReg(
+                          'Name', _username, "Username can't be empty"),
+                      spaceBetweenInputFields,
+                      inputFieldsReg('Email', _email, "Email can't be empty"),
+                      spaceBetweenInputFields,
+                      inputFieldsReg(
+                          'Contact No', _phone, "Contact No can't be empty"),
+                      spaceBetweenInputFields,
+                      inputFieldsReg(
+                          'Password', _password, "Password can't be empty"),
+                      spaceBetweenInputFields,
+                      dropDownItems(selectedValue1, setState, districts),
+                      spaceBetweenInputFields,
+                      dropDownItems(selectedValue2, setState, provinces),
+                      spaceBetweenInputFields,
+                    ],
+                  ),
+                ),
                 buttonInPages(buttonText, context, callFunction, topPadding),
                 Container(
                   alignment: Alignment.center,

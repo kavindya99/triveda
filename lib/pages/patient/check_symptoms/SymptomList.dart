@@ -1,8 +1,3 @@
-import 'package:ayu/styles/variables.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 List<String> symptoms = <String>[
   "Itching",
   "Skin Rash",

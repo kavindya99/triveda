@@ -31,8 +31,6 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
     final bgColor = whiteColor;
 
     final buttonText = 'Book';
-    final callFunction = Payment();
-    final topPadding = 20.0;
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -171,7 +169,27 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
                 spaceBetweenInputFields,
                 inputFields('Fee'),
                 spaceBetweenInputFields,
-                buttonInPages(buttonText, context, callFunction, topPadding),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Payment()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      buttonText,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          shadows: [
+                            letterShadow,
+                          ],
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ),
+                //buttonInPages(buttonText, context, callFunction, topPadding),
               ],
             ),
           ),

@@ -3,6 +3,8 @@ import 'package:ayu/styles/navigationDrawerDoctor.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
+import '../../meeting_start.dart';
+
 class ClassList extends StatefulWidget {
   const ClassList({Key key}) : super(key: key);
 
@@ -37,14 +39,167 @@ class _ClassListState extends State<ClassList> {
             child: Column(
               children: [
                 spaceBetweenInputFields,
-                listViewYoga('Class 1', "Jennifer Ronly", '2022.08.06.',
-                    '4.00 - 4.30', 'click to join meeting'),
+                Container(
+                  decoration: new BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(5.0),
+                      bottomLeft: Radius.circular(5.0),
+                    ),
+                    image: new DecorationImage(
+                      image: ExactAssetImage('images/light-bg.png'),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      listViewYoga('Class 1', "Jennifer Ronly", '2022.08.06.',
+                          '4.00 - 4.30'),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "Meeting Link",
+                                style: TextStyle(
+                                  color: whiteColor,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Builder(
+                                builder: (context) {
+                                  // The basic Material Design action button.
+                                  return ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary:
+                                          secondaryColorThree, // background
+                                      onPrimary: Colors.white, // foreground
+                                    ),
+                                    onPressed: () => {
+                                      {startMeeting(context)}
+                                    },
+                                    child: const Text('Start Meeting'),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 spaceBetweenInputFields,
-                listViewYoga('Class 2', "Jennifer Ronly", '2022.08.06.',
-                    '4.00 - 4.30', 'click to join meeting'),
+                Container(
+                  decoration: new BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(5.0),
+                      bottomLeft: Radius.circular(5.0),
+                    ),
+                    image: new DecorationImage(
+                      image: ExactAssetImage('images/light-bg.png'),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      listViewYoga('Class 2', "Jennifer Ronly", '2022.08.06.',
+                          '4.00 - 4.30'),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "Meeting Link",
+                                style: TextStyle(
+                                  color: whiteColor,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Builder(
+                                builder: (context) {
+                                  // The basic Material Design action button.
+                                  return ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary:
+                                          secondaryColorThree, // background
+                                      onPrimary: Colors.white, // foreground
+                                    ),
+                                    onPressed: () => {
+                                      {startMeeting(context)}
+                                    },
+                                    child: const Text('Start Meeting'),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 spaceBetweenInputFields,
-                listViewYoga('Class 3', "Jennifer Ronly", '2022.08.06.',
-                    '4.00 - 4.30', 'click to join meeting'),
+                Container(
+                  decoration: new BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(5.0),
+                      bottomLeft: Radius.circular(5.0),
+                    ),
+                    image: new DecorationImage(
+                      image: ExactAssetImage('images/light-bg.png'),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      listViewYoga('Class 3', "Jennifer Ronly", '2022.08.06.',
+                          '4.00 - 4.30'),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "Meeting Link",
+                                style: TextStyle(
+                                  color: whiteColor,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Builder(
+                                builder: (context) {
+                                  // The basic Material Design action button.
+                                  return ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary:
+                                          secondaryColorThree, // background
+                                      onPrimary: Colors.white, // foreground
+                                    ),
+                                    onPressed: () => {
+                                      {startMeeting(context)}
+                                    },
+                                    child: const Text('Start Meeting'),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 spaceBetweenInputFields,
               ],
             ),

@@ -3,6 +3,8 @@ import 'package:ayu/styles/appBarMain.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 
+import 'lists_for.dart';
+
 class SignUpDoctor extends StatefulWidget {
   const SignUpDoctor({Key key}) : super(key: key);
 
@@ -38,11 +40,10 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
     );
     final topPadding = 25.0;
 
-    final items = ['From', 'To', 'District', 'Province'];
     String selectedValue1 = 'From';
     String selectedValue2 = 'To';
-    String selectedValue3 = 'Province';
-    String selectedValue4 = 'District';
+    String selectedValue3 = 'Central Province';
+    String selectedValue4 = 'Colombo';
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -60,6 +61,8 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                 inputFields('Name'),
                 spaceBetweenInputFields,
                 inputFields('Email'),
+                spaceBetweenInputFields,
+                inputFields('Contact No'),
                 spaceBetweenInputFields,
                 Row(
                   children: [
@@ -115,9 +118,9 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                 spaceBetweenInputFields,
                 inputFields('Lane'),
                 spaceBetweenInputFields,
-                dropDownItems(selectedValue3, setState, items),
+                dropDownItems(selectedValue3, setState, provinces),
                 spaceBetweenInputFields,
-                dropDownItems(selectedValue4, setState, items),
+                dropDownItems(selectedValue4, setState, districts),
                 spaceBetweenInputFields,
                 Row(
                   children: [
@@ -132,9 +135,9 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   ],
                 ),
                 spaceBetweenInputFields,
-                dropDownItems(selectedValue1, setState, items),
+                dropDownItems(selectedValue1, setState, districts),
                 spaceBetweenInputFields,
-                dropDownItems(selectedValue2, setState, items),
+                dropDownItems(selectedValue2, setState, provinces),
                 spaceBetweenInputFields,
                 Row(
                   children: [
