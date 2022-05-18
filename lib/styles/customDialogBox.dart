@@ -59,7 +59,7 @@ class CustomDialog extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Confirm'),
+                  child: Text('Ok'),
                 ),
               ),
             ],

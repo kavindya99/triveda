@@ -29,11 +29,6 @@ class _AppointmentListState extends State<AppointmentList> {
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("images/sub-back.png"),
-                  fit: BoxFit.fitHeight),
-            ),
             child: Column(
               children: [
                 Text(

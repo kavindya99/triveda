@@ -45,9 +45,11 @@ SizedBox spaceInRecipe = SizedBox(
   height: 3.0,
 );
 
-Container inputFieldsReg(hint, controllerField, emptyMessage) => Container(
+Container inputFieldsReg(hint, controllerField, emptyMessage, showHide) =>
+    Container(
       decoration: inputFieldDecoration,
       child: TextFormField(
+        obscureText: showHide,
         decoration: InputDecoration(
           counterText: "",
           contentPadding: EdgeInsets.all(10.0),
@@ -738,32 +740,59 @@ Container listViewWallet(mainText, fee) => Container(
       ),
     );
 
+// Container dropDownItems(selectedValue, setState, itemsList) => Container(
+//       decoration: inputFieldDecoration,
+//       child: Padding(
+//         padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
+//         child: DropdownButton<String>(
+//           style: TextStyle(color: secondaryColorOne),
+//           isExpanded: true,
+//           value: selectedValue,
+//           onChanged: (String newValue) =>
+//               setState(() => selectedValue = newValue),
+//           items: itemsList
+//               .map<DropdownMenuItem<String>>(
+//                   (String value) => DropdownMenuItem<String>(
+//                         value: value,
+//                         child: Text(value),
+//                       ))
+//               .toList(),
+//           // add extra sugar..
+//           icon: Icon(
+//             Icons.arrow_drop_down,
+//             color: primaryColor,
+//           ),
+//           underline: SizedBox(),
+//         ),
+//       ),
+//     );
 Container dropDownItems(selectedValue, setState, itemsList) => Container(
-      decoration: inputFieldDecoration,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
-        child: DropdownButton<String>(
-          style: TextStyle(color: secondaryColorOne),
-          isExpanded: true,
-          value: selectedValue,
-          onChanged: (String newValue) =>
-              setState(() => selectedValue = newValue),
-          items: itemsList
-              .map<DropdownMenuItem<String>>(
-                  (String value) => DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      ))
-              .toList(),
-          // add extra sugar..
-          icon: Icon(
-            Icons.arrow_drop_down,
-            color: primaryColor,
-          ),
-          underline: SizedBox(),
+    decoration: inputFieldDecoration,
+    child: Padding(
+      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+      child: DropdownButton<String>(
+        style: TextStyle(
+          color: secondaryColorOne,
+          fontSize: 16.0,
         ),
+        isExpanded: true,
+        value: selectedValue,
+        icon: const Icon(Icons.arrow_drop_down),
+        elevation: 16,
+        underline: SizedBox(),
+        onChanged: (String newValue) {
+          setState(() {
+            selectedValue = newValue;
+          });
+        },
+        items: itemsList.map<DropdownMenuItem<String>>((String value1) {
+          return DropdownMenuItem<String>(
+            value: value1,
+            child: Text(value1),
+          );
+        }).toList(),
       ),
-    );
+    ));
 
 Column navigationDrawer(context, function, text) => Column(
       children: [

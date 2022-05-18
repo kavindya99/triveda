@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../styles/customDialogBox.dart';
+import '../styles/urlForAPI.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key key}) : super(key: key);
@@ -38,21 +39,14 @@ class _SignInState extends State<SignIn> {
   login(String userName, String password) async {
     print(userName);
     print(password);
-    var url = Uri.parse('https://vms-sl.azurewebsites.net/' + "auth/login");
+    var url = Uri.parse(baseUrl + "auth/login");
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Map<String, dynamic> data = {"userName": userName, "password": password};
+    Map<String, dynamic> data = {"email": userName, "password": password};
     var body = json.encode(data);
     print(url);
     var jsonResponse;
-    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
-      showDialog(
-          context: this.context,
-          builder: (context) => CustomDialog(
-                title: "Error",
-                description: "fill all",
-              ));
-    }
+
     try {
       var res = await http.post(url,
           headers: {"Content-Type": "application/json"}, body: body);
@@ -71,50 +65,82 @@ class _SignInState extends State<SignIn> {
         if (jsonResponse != null) {
           print(jsonResponse['role']);
           print(jsonResponse['token']);
-          print(jsonResponse['name']);
-          // sharedPreferences.setString("token", jsonResponse['token']);
-          // sharedPreferences.setString("name", jsonResponse['userName']);
+          print(jsonResponse['email']);
+          sharedPreferences.setString("token", jsonResponse['token']);
+          sharedPreferences.setString("email", jsonResponse['email']);
           // Navigator.of(this.context).pushAndRemoveUntil(
           //     MaterialPageRoute(
           //         builder: (BuildContext context) => MainMenuDoctor()),
           //     (Route<dynamic> route) => false);
           var role = jsonResponse["role"];
           print(role);
-          if (role == []) {
+          if (role == 1) {
             //if role is doctor
             Navigator.of(this.context).pushAndRemoveUntil(
                 MaterialPageRoute(
                   builder: (BuildContext context) => MainMenuDoctor(),
                 ),
                 (Route<dynamic> route) => false);
-          } else {
+          } else if (role == 2) {
             Navigator.of(this.context).pushAndRemoveUntil(
                 MaterialPageRoute(
                   builder: (BuildContext context) => MainMenu(),
                 ),
                 (Route<dynamic> route) => false);
+          } else {
+            showDialog(
+                context: this.context,
+                builder: (context) => CustomDialog(
+                      title: "Error",
+                      description:
+                          "You don't have access to mobile application",
+                    ));
           }
-          // } else if (role == "patient") {
-          //   //if role is patient
-          //   Navigator.of(this.context).pushAndRemoveUntil(
-          //       MaterialPageRoute(
-          //           builder: (BuildContext context) => MainMenu()),
-          //       (Route<dynamic> route) => false);
-          // } else if (role == "admin") {
-          //   //if role is admin
-          //   showDialog(
-          //     context: this.context,
-          //     builder: (context) => CustomDialog(
-          //       title: "Error",
-          //       description: "User doesn't has access to login",
-          //     ),
-          //   );
-          // }
         } else {
           setState(() {
             _isLoading = false;
           });
         }
+      }
+      if (_emailController.text.isEmpty &&
+          _passwordController.text.isNotEmpty) {
+        showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+                  title: "Error",
+                  description: "Please enter your email address",
+                ));
+      } else if (_emailController.text.isNotEmpty &&
+          _passwordController.text.isEmpty) {
+        showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+                  title: "Error",
+                  description: "Please enter your password",
+                ));
+      } else if (_emailController.text.isEmpty &&
+          _passwordController.text.isEmpty) {
+        showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+                  title: "Error",
+                  description: "Please enter your email address and password",
+                ));
+      } else if (!_emailController.text.contains('@')) {
+        showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+                  title: "Error",
+                  description:
+                      "Please enter your email address with the correct format",
+                ));
+      } else {
+        showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+                  title: "Success",
+                  description: "Successfully Logged\n Welcome to Triveda",
+                ));
       }
       if (res.statusCode == 401) {
         setState(() {

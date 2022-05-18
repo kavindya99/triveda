@@ -1,9 +1,10 @@
-import 'package:ayu/pages/patient/channel_doctor/doctor_channleing.dart';
 import 'package:ayu/pages/patient/channel_doctor/doctor_list.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
+
+import 'doctor_channleing.dart';
 
 class ChannelDoctor extends StatefulWidget {
   const ChannelDoctor({Key key}) : super(key: key);

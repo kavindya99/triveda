@@ -7,153 +7,8 @@ import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-// To parse this JSON data, do
-//
-//     final testModel = testModelFromMap(jsonString);
-
-import 'dart:convert';
-
+import '../styles/customDialogBox.dart';
 import '../styles/urlForAPI.dart';
-
-List<TestModel> testModelFromMap(String str) =>
-    List<TestModel>.from(json.decode(str).map((x) => TestModel.fromMap(x)));
-
-String testModelToMap(List<TestModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
-
-class TestModel {
-  TestModel({
-    this.userId,
-    this.id,
-    this.title,
-    this.body,
-  });
-
-  int userId;
-  int id;
-  String title;
-  String body;
-
-  factory TestModel.fromMap(Map<String, dynamic> json) => TestModel(
-        userId: json["userId"] == null ? null : json["userId"],
-        id: json["id"] == null ? null : json["id"],
-        title: json["title"] == null ? null : json["title"],
-        body: json["body"] == null ? null : json["body"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "userId": userId == null ? null : userId,
-        "id": id == null ? null : id,
-        "title": title == null ? null : title,
-        "body": body == null ? null : body,
-      };
-}
-
-// To parse this JSON data, do
-//
-//     final profileModel = profileModelFromMap(jsonString);
-
-ProfileModel profileModelFromMap(String str) =>
-    ProfileModel.fromMap(json.decode(str));
-
-String profileModelToMap(ProfileModel data) => json.encode(data.toMap());
-
-class ProfileModel {
-  ProfileModel({
-    this.id,
-    this.nic,
-    this.username,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.phoneNumber,
-    this.gender,
-    this.dob,
-    this.role,
-    this.vaccinationData,
-  });
-
-  String id;
-  String nic;
-  String username;
-  String firstName;
-  String lastName;
-  String email;
-  String phoneNumber;
-  int gender;
-  String dob;
-  String role;
-  List<VaccinationDatum> vaccinationData;
-
-  factory ProfileModel.fromMap(Map<String, dynamic> json) => ProfileModel(
-        id: json["id"] == null ? null : json["id"],
-        nic: json["nic"] == null ? null : json["nic"],
-        username: json["username"] == null ? null : json["username"],
-        firstName: json["firstName"] == null ? null : json["firstName"],
-        lastName: json["lastName"] == null ? null : json["lastName"],
-        email: json["email"] == null ? null : json["email"],
-        phoneNumber: json["phoneNumber"] == null ? null : json["phoneNumber"],
-        gender: json["gender"] == null ? null : json["gender"],
-        dob: json["dob"] == null ? null : json["dob"],
-        role: json["role"] == null ? null : json["role"],
-        vaccinationData: json["vaccinationData"] == null
-            ? null
-            : List<VaccinationDatum>.from(json["vaccinationData"]
-                .map((x) => VaccinationDatum.fromMap(x))),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "id": id == null ? null : id,
-        "nic": nic == null ? null : nic,
-        "username": username == null ? null : username,
-        "firstName": firstName == null ? null : firstName,
-        "lastName": lastName == null ? null : lastName,
-        "email": email == null ? null : email,
-        "phoneNumber": phoneNumber == null ? null : phoneNumber,
-        "gender": gender == null ? null : gender,
-        "dob": dob == null ? null : dob,
-        "role": role == null ? null : role,
-        "vaccinationData": vaccinationData == null
-            ? null
-            : List<dynamic>.from(vaccinationData.map((x) => x.toMap())),
-      };
-}
-
-class VaccinationDatum {
-  VaccinationDatum({
-    this.vCenter,
-    this.vaccineType,
-    this.batchNumber,
-    this.vaccinatedAt,
-    this.vaccinatedBy,
-  });
-
-  String vCenter;
-  String vaccineType;
-  String batchNumber;
-  String vaccinatedAt;
-  String vaccinatedBy;
-
-  factory VaccinationDatum.fromMap(Map<String, dynamic> json) =>
-      VaccinationDatum(
-        vCenter: json["vCenter"] == null ? null : json["vCenter"],
-        vaccineType: json["vaccineType"] == null ? null : json["vaccineType"],
-        batchNumber: json["batchNumber"] == null ? null : json["batchNumber"],
-        vaccinatedAt:
-            json["vaccinatedAt"] == null ? null : json["vaccinatedAt"],
-        vaccinatedBy:
-            json["vaccinatedBy"] == null ? null : json["vaccinatedBy"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "vCenter": vCenter == null ? null : vCenter,
-        "vaccineType": vaccineType == null ? null : vaccineType,
-        "batchNumber": batchNumber == null ? null : batchNumber,
-        "vaccinatedAt": vaccinatedAt == null ? null : vaccinatedAt,
-        "vaccinatedBy": vaccinatedBy == null ? null : vaccinatedBy,
-      };
-}
 
 class Profile extends StatefulWidget {
   const Profile({Key key}) : super(key: key);
@@ -165,30 +20,32 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   Map userData;
 
-  var email;
-  var firstName;
-  var lastName;
-  var gender;
+  var id;
   var name;
-  var doctor_Id;
+  var email;
+  var phoneNumber;
+  var gender;
+  var medicalCouncilRegId;
   var specialization;
-  var contact_no;
   var hospital;
-  var password;
   var lane;
   var province;
   var district;
-  var available_time_from;
-  var available_time_to;
-  var service_type;
+  var availableTimeFrom;
+  var availableTimeTo;
+  var serviceType;
   var status;
-  var address;
+  var deleteStatus;
+  var role;
 
   Future getDataFromApi() async {
     http.Response response;
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyODgzYzU3OS0wYjUzLTRhN2MtOWY5MC1lNDBiMDQ4OTk5MWEiLCJ1bmlxdWVfbmFtZSI6InNhbmphbmEiLCJlbWFpbCI6ImJpdGl3bzc4NDJAeWtzMjQ3LmNvbSIsImp0aSI6IjY0YzFmYTI1LWZkZjAtNDk2OC05ZjBhLTI1ZmNlNGFiOTEzMiIsImV4cCI6MTY1MTgxNzk1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM0NCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMC8ifQ.RjzrNhcMQOzcgfsktb0D9cXkQbIkZ4lT-Nx8wS_9fkE";
-    var url = Uri.parse(profileUrl);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = (prefs.getString('token') ?? '');
+    // String token =
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1ZWI5N2ZjNy1jODRkLTQ5MjMtODVkMC1lMWJmNTgyZTcwY2YiLCJ1bmlxdWVfbmFtZSI6ImthdmluZHlhc2FuZGVlcGFuaTE5OTlAZ21haWwuY29tIiwiZW1haWwiOiJrYXZpbmR5YXNhbmRlZXBhbmkxOTk5QGdtYWlsLmNvbSIsImp0aSI6Ijc1MTc2ZTdhLWQ5MDUtNDRhMy1hMDIyLTJkNTg2YWZiMTUyNiIsImV4cCI6MTY1MjM5Mjg4NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM0NCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMC8ifQ.tQ2Lp7lU8V4ZzgFV7wdzoT_N6j8jbYtywDmiLPmTAv4";
+    var url = Uri.parse(baseUrl + 'user/profile-patient');
 
     print(token);
     response = await http.get(url, headers: {
@@ -197,24 +54,32 @@ class _ProfileState extends State<Profile> {
       'Authorization': 'Bearer $token',
     });
 
+    if (response.statusCode == 405) {
+      showDialog(
+          context: this.context,
+          builder: (context) => CustomDialog(
+                title: "Error",
+                description: "405",
+              ));
+    }
+
     print(response.statusCode);
     if (response.statusCode == 200) {
       userData = json.decode(response.body);
-      print("hi");
+      //print("response body :" + json.decode(response.body));
+      //print("hi");
       print(userData);
       email = userData['email'];
-      contact_no = userData['phoneNumber'];
-      doctor_Id = userData['nic'];
-      firstName = userData['firstName'];
-      lastName = userData['lastName'];
-      gender = userData['gender'];
-      hospital = userData['dob'];
-      province = userData['dob'];
-      district = userData['dob'];
-      available_time_from = userData['dob'];
-      available_time_to = userData['dob'];
-      service_type = userData['dob'];
-      address = userData['dob'];
+      phoneNumber = userData['phoneNumber'];
+      // medicalCouncilRegId = userData['medicalCouncilRegID'];
+      name = userData['name'];
+      // gender = userData['gender'];
+      // hospital = userData['hospital'];
+      province = userData['province'];
+      district = userData['district'];
+      // availableTimeFrom = userData['availableTimeFrom'];
+      // availableTimeTo = userData['availableTimeTo'];
+      // serviceType = userData['serviceType'];
       return userData;
     } else {
       return "true";
@@ -257,7 +122,8 @@ class _ProfileState extends State<Profile> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 30.0),
                                   child: Text(
-                                    'Hi ' + firstName.toString() + ' ,',
+                                    //'Hi ' + firstName.toString() + ' ,',
+                                    'Hi ' + name.split(" ")[0] + " ,",
                                     style: TextStyle(
                                         color: whiteColor,
                                         fontSize: 20.0,
@@ -377,8 +243,7 @@ class _ProfileState extends State<Profile> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           profileTextMain('Name'),
-                                          profileTextSub(
-                                              firstName + " " + lastName),
+                                          profileTextSub(name),
                                         ],
                                       ),
                                     ],
@@ -429,7 +294,7 @@ class _ProfileState extends State<Profile> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           profileTextMain('Contact No'),
-                                          profileTextSub(contact_no),
+                                          profileTextSub(phoneNumber),
                                         ],
                                       ),
                                     ],

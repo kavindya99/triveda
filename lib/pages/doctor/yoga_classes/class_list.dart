@@ -31,59 +31,69 @@ class _ClassListState extends State<ClassList> {
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("images/sub-back.png"),
-                  fit: BoxFit.fitHeight),
-            ),
             child: Column(
               children: [
                 spaceBetweenInputFields,
                 Container(
-                  decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5.0),
-                      bottomLeft: Radius.circular(5.0),
+                  decoration: inputFieldDecoration,
+                  child: ExpansionTile(
+                    title: Text(
+                      'Appointment 1',
+                      style: TextStyle(
+                        color: secondaryColorOne,
+                      ),
                     ),
-                    image: new DecorationImage(
-                      image: ExactAssetImage('images/light-bg.png'),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  child: Column(
                     children: [
-                      listViewYoga('Class 1', "Jennifer Ronly", '2022.08.06.',
-                          '4.00 - 4.30'),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                        child: Row(
+                      Container(
+                        decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(5.0),
+                            bottomLeft: Radius.circular(5.0),
+                          ),
+                          image: new DecorationImage(
+                            image: ExactAssetImage('images/light-bg.png'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        child: Column(
                           children: [
-                            Expanded(
-                              child: Text(
-                                "Meeting Link",
-                                style: TextStyle(
-                                  color: whiteColor,
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Builder(
-                                builder: (context) {
-                                  // The basic Material Design action button.
-                                  return ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary:
-                                          secondaryColorThree, // background
-                                      onPrimary: Colors.white, // foreground
+                            listViewYoga('Class 1', "Jennifer Ronly",
+                                '2022.08.06.', '4.00 - 4.30'),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(17, 10, 30, 10),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Meeting Link",
+                                      style: TextStyle(
+                                        color: whiteColor,
+                                        fontSize: 18.0,
+                                      ),
                                     ),
-                                    onPressed: () => {
-                                      {startMeeting(context)}
-                                    },
-                                    child: const Text('Start Meeting'),
-                                  );
-                                },
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Builder(
+                                      builder: (context) {
+                                        // The basic Material Design action button.
+                                        return ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary:
+                                                secondaryColorThree, // background
+                                            onPrimary:
+                                                Colors.white, // foreground
+                                          ),
+                                          onPressed: () => {
+                                            {startMeeting(context)}
+                                          },
+                                          child: const Text('Start Meeting'),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -94,50 +104,65 @@ class _ClassListState extends State<ClassList> {
                 ),
                 spaceBetweenInputFields,
                 Container(
-                  decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5.0),
-                      bottomLeft: Radius.circular(5.0),
+                  decoration: inputFieldDecoration,
+                  child: ExpansionTile(
+                    title: Text(
+                      'Appointment 2',
+                      style: TextStyle(
+                        color: secondaryColorOne,
+                      ),
                     ),
-                    image: new DecorationImage(
-                      image: ExactAssetImage('images/light-bg.png'),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  child: Column(
                     children: [
-                      listViewYoga('Class 2', "Jennifer Ronly", '2022.08.06.',
-                          '4.00 - 4.30'),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                        child: Row(
+                      Container(
+                        decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(5.0),
+                            bottomLeft: Radius.circular(5.0),
+                          ),
+                          image: new DecorationImage(
+                            image: ExactAssetImage('images/light-bg.png'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        child: Column(
                           children: [
-                            Expanded(
-                              child: Text(
-                                "Meeting Link",
-                                style: TextStyle(
-                                  color: whiteColor,
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Builder(
-                                builder: (context) {
-                                  // The basic Material Design action button.
-                                  return ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary:
-                                          secondaryColorThree, // background
-                                      onPrimary: Colors.white, // foreground
+                            listViewYoga('Class 1', "Jennifer Ronly",
+                                '2022.08.06.', '4.00 - 4.30'),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(17, 10, 30, 10),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Meeting Link",
+                                      style: TextStyle(
+                                        color: whiteColor,
+                                        fontSize: 18.0,
+                                      ),
                                     ),
-                                    onPressed: () => {
-                                      {startMeeting(context)}
-                                    },
-                                    child: const Text('Start Meeting'),
-                                  );
-                                },
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Builder(
+                                      builder: (context) {
+                                        // The basic Material Design action button.
+                                        return ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary:
+                                                secondaryColorThree, // background
+                                            onPrimary:
+                                                Colors.white, // foreground
+                                          ),
+                                          onPressed: () => {
+                                            {startMeeting(context)}
+                                          },
+                                          child: const Text('Start Meeting'),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -148,50 +173,65 @@ class _ClassListState extends State<ClassList> {
                 ),
                 spaceBetweenInputFields,
                 Container(
-                  decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5.0),
-                      bottomLeft: Radius.circular(5.0),
+                  decoration: inputFieldDecoration,
+                  child: ExpansionTile(
+                    title: Text(
+                      'Appointment 3',
+                      style: TextStyle(
+                        color: secondaryColorOne,
+                      ),
                     ),
-                    image: new DecorationImage(
-                      image: ExactAssetImage('images/light-bg.png'),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  child: Column(
                     children: [
-                      listViewYoga('Class 3', "Jennifer Ronly", '2022.08.06.',
-                          '4.00 - 4.30'),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(17, 10, 30, 10),
-                        child: Row(
+                      Container(
+                        decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(5.0),
+                            bottomLeft: Radius.circular(5.0),
+                          ),
+                          image: new DecorationImage(
+                            image: ExactAssetImage('images/light-bg.png'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        child: Column(
                           children: [
-                            Expanded(
-                              child: Text(
-                                "Meeting Link",
-                                style: TextStyle(
-                                  color: whiteColor,
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Builder(
-                                builder: (context) {
-                                  // The basic Material Design action button.
-                                  return ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary:
-                                          secondaryColorThree, // background
-                                      onPrimary: Colors.white, // foreground
+                            listViewYoga('Class 1', "Jennifer Ronly",
+                                '2022.08.06.', '4.00 - 4.30'),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(17, 10, 30, 10),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Meeting Link",
+                                      style: TextStyle(
+                                        color: whiteColor,
+                                        fontSize: 18.0,
+                                      ),
                                     ),
-                                    onPressed: () => {
-                                      {startMeeting(context)}
-                                    },
-                                    child: const Text('Start Meeting'),
-                                  );
-                                },
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Builder(
+                                      builder: (context) {
+                                        // The basic Material Design action button.
+                                        return ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary:
+                                                secondaryColorThree, // background
+                                            onPrimary:
+                                                Colors.white, // foreground
+                                          ),
+                                          onPressed: () => {
+                                            {startMeeting(context)}
+                                          },
+                                          child: const Text('Start Meeting'),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

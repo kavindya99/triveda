@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../styles/customDialogBox.dart';
+import '../styles/urlForAPI.dart';
 import 'lists_for.dart';
 
 class SignUp extends StatefulWidget {
@@ -18,82 +19,94 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  TextEditingController _name = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _phone = TextEditingController();
+  TextEditingController _password = TextEditingController();
+  String district = 'Colombo';
+  String province = 'Central Province';
+
+  Map userDetails;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  var res;
+  var getRes;
+
+  registerUser(String name, String email, String phoneNumber, String password,
+      String district, String province) async {
+    print("re occurring");
+    var url = Uri.parse(baseUrl + 'auth/patient-register');
+    print(url);
+    print(name);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    Map<String, dynamic> data = {
+      "name": name,
+      "email": email,
+      "phoneNumber": phoneNumber,
+      "password": password,
+      "province": province,
+      "district": district,
+    };
+    print(data);
+    var body = json.encode(data);
+    print(name);
+
+    try {
+      res = await http.post(url,
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: body);
+      print(res.statusCode);
+
+      if (res.statusCode == 404) {
+        print(res.statusCode);
+      }
+      if (res.statusCode == 400) {
+        print(res.statusCode);
+        showDialog(
+          context: this.context,
+          builder: (context) => CustomDialog(
+            title: "Error",
+            description: "Please enter the values in the correct format.",
+          ),
+        );
+      }
+      if (res.statusCode == 200) {
+        var jsonResponse = json.decode(res.body);
+        print(jsonResponse);
+        print("Response Status: ${res.statusCode}");
+        showDialog(
+          context: this.context,
+          builder: (context) => CustomDialog(
+            title: "Success",
+            description: "You successfully created the account as a patient.",
+          ),
+        );
+        Navigator.of(this.context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (BuildContext context) => SignIn(),
+            ),
+            (Route<dynamic> route) => false);
+      }
+    } catch (error) {
+      print(error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTitleMain = 'SIGN UP';
     final textTitleSub = 'Patient';
 
     final buttonText = 'Sign Up';
-    final callFunction = SignIn();
     final topPadding = 25.0;
 
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
-    Map userDetails;
-    String nic;
-    TextEditingController _username = TextEditingController();
-    TextEditingController _email = TextEditingController();
-    TextEditingController _phone = TextEditingController();
-    TextEditingController _password = TextEditingController();
-    TextEditingController _confirmPassword = TextEditingController();
-    TextEditingController _gender = TextEditingController();
-    int currentStep = 0;
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final TextEditingController _nicController = TextEditingController();
-    var res;
-    var getRes;
-    bool _isloading = false;
-
-    registerUser() async {
-      print("re occurring");
-      var url = Uri.parse('https://vms-sl.azurewebsites.net/auth/register');
-
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-
-      Map data = {
-        "nic": nic,
-        "firstName": userDetails['firstName'],
-        "lastName": userDetails['lastName'],
-        "username": _username.text,
-        "email": _email.text,
-        "phoneNumber": _phone.text.toString(),
-        "password": _password.text,
-        "gender": userDetails['gender'],
-        "dob": userDetails["dateOfBirth"],
-      };
-      print(data);
-      var body = json.encode(data);
-
-      try {
-        res = await http.post(url,
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            },
-            body: body);
-        print(res.statusCode);
-
-        if (res.statusCode == 404) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('Something went wrong'),
-            backgroundColor: Colors.red,
-          ));
-        }
-        if (res.statusCode == 200) {
-          var jsonResponse = json.decode(res.body);
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('Found'),
-            backgroundColor: Colors.green,
-          ));
-          print("Response Status: ${res.statusCode}");
-        }
-      } catch (error) {
-        print(error);
-      }
-    }
-
-    String selectedValue1 = 'Central Province';
-    String selectedValue2 = 'Colombo';
 
     return Scaffold(
       backgroundColor: whiteColor,
@@ -110,24 +123,107 @@ class _SignUpState extends State<SignUp> {
                   child: Column(
                     children: [
                       inputFieldsReg(
-                          'Name', _username, "Username can't be empty"),
-                      spaceBetweenInputFields,
-                      inputFieldsReg('Email', _email, "Email can't be empty"),
+                          'Name', _name, "Username can't be empty", false),
                       spaceBetweenInputFields,
                       inputFieldsReg(
-                          'Contact No', _phone, "Contact No can't be empty"),
+                          'Email', _email, "Email can't be empty", false),
                       spaceBetweenInputFields,
-                      inputFieldsReg(
-                          'Password', _password, "Password can't be empty"),
+                      inputFieldsReg('Contact No', _phone,
+                          "Contact No can't be empty", false),
                       spaceBetweenInputFields,
-                      dropDownItems(selectedValue1, setState, districts),
+                      inputFieldsReg('Password', _password,
+                          "Password can't be empty", true),
                       spaceBetweenInputFields,
-                      dropDownItems(selectedValue2, setState, provinces),
+                      //dropDownItems(district, setState, districts),
+                      Container(
+                        decoration: inputFieldDecoration,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: DropdownButton<String>(
+                            style: TextStyle(
+                              color: secondaryColorOne,
+                              fontSize: 16.0,
+                            ),
+                            isExpanded: true,
+                            value: district,
+                            icon: const Icon(Icons.arrow_drop_down),
+                            elevation: 16,
+                            underline: SizedBox(),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                district = newValue;
+                              });
+                            },
+                            items: districts
+                                .map<DropdownMenuItem<String>>((String value1) {
+                              return DropdownMenuItem<String>(
+                                value: value1,
+                                child: Text(value1),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                      spaceBetweenInputFields,
+                      //dropDownItems(province, setState, provinces),
+                      Container(
+                        decoration: inputFieldDecoration,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: DropdownButton<String>(
+                            style: TextStyle(
+                              color: secondaryColorOne,
+                              fontSize: 16.0,
+                            ),
+                            isExpanded: true,
+                            value: province,
+                            icon: const Icon(Icons.arrow_drop_down),
+                            elevation: 16,
+                            underline: SizedBox(),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                province = newValue;
+                              });
+                            },
+                            items: provinces
+                                .map<DropdownMenuItem<String>>((String value1) {
+                              return DropdownMenuItem<String>(
+                                value: value1,
+                                child: Text(value1),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
                       spaceBetweenInputFields,
                     ],
                   ),
                 ),
-                buttonInPages(buttonText, context, callFunction, topPadding),
+                // buttonInPages(buttonText, context, callFunction, topPadding),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: topPadding),
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: secondaryColorOne),
+                    onPressed: () {
+                      registerUser(_name.text, _email.text, _phone.text,
+                          _password.text, district, province);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        buttonText,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            shadows: [
+                              letterShadow,
+                            ],
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ),
+                ),
                 Container(
                   alignment: Alignment.center,
                   child: TextButton(

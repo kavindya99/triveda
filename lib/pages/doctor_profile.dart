@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:ayu/styles/navigationDrawerDoctor.dart';
-import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../styles/customDialogBox.dart';
+import '../styles/urlForAPI.dart';
 import 'doctor/change_password.dart';
 import 'doctor/edit_profile.dart';
 
@@ -14,6 +19,82 @@ class DoctorProfile extends StatefulWidget {
 }
 
 class _DoctorProfileState extends State<DoctorProfile> {
+  Map userData;
+
+  var id;
+  var name;
+  var email;
+  var phoneNumber;
+  var genderType;
+  var gender;
+  var medicalCouncilRegId;
+  var specialization;
+  var hospital;
+  var lane;
+  var province;
+  var district;
+  var availableTimeFrom;
+  var availableTimeTo;
+  var serviceType;
+  var status;
+  var deleteStatus;
+  var role;
+
+  Future getDataFromApi() async {
+    http.Response response;
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = (prefs.getString('token') ?? '');
+    // String token =
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1ZWI5N2ZjNy1jODRkLTQ5MjMtODVkMC1lMWJmNTgyZTcwY2YiLCJ1bmlxdWVfbmFtZSI6ImthdmluZHlhc2FuZGVlcGFuaTE5OTlAZ21haWwuY29tIiwiZW1haWwiOiJrYXZpbmR5YXNhbmRlZXBhbmkxOTk5QGdtYWlsLmNvbSIsImp0aSI6Ijc1MTc2ZTdhLWQ5MDUtNDRhMy1hMDIyLTJkNTg2YWZiMTUyNiIsImV4cCI6MTY1MjM5Mjg4NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM0NCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMC8ifQ.tQ2Lp7lU8V4ZzgFV7wdzoT_N6j8jbYtywDmiLPmTAv4";
+    var url = Uri.parse(baseUrl + 'user/profile-doctor');
+
+    print(token);
+    response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+
+    if (response.statusCode == 405) {
+      showDialog(
+          context: this.context,
+          builder: (context) => CustomDialog(
+                title: "Error",
+                description: "405",
+              ));
+    }
+
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      userData = json.decode(response.body);
+      //print("response body :" + json.decode(response.body));
+      //print("hi");
+      print(userData);
+      email = userData['email'];
+      phoneNumber = userData['phoneNumber'];
+      medicalCouncilRegId = userData['medicalCouncilRegID'];
+      name = userData['name'];
+      genderType = userData['gender'];
+      if (genderType == 1) {
+        gender = "Female";
+      } else {
+        gender = "Male";
+      }
+      lane = userData['lane'];
+      hospital = userData['hospital'];
+      province = userData['province'];
+      district = userData['district'];
+      specialization = userData['specialization'];
+      // availableTimeFrom = userData['availableTimeFrom'];
+      // availableTimeTo = userData['availableTimeTo'];
+      // serviceType = userData['serviceType'];
+      return userData;
+    } else {
+      return "true";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,20 +121,42 @@ class _DoctorProfileState extends State<DoctorProfile> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30.0),
-                          child: Text(
-                            'Hi Jhon',
-                            style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
+                    FutureBuilder(
+                        future: getDataFromApi(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 30.0),
+                                  child: Text(
+                                    'Hi ' + name.split(" ")[0] + ",",
+                                    style: TextStyle(
+                                        color: whiteColor,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 30.0),
+                                  child: Text(
+                                    'Hi',
+                                    style: TextStyle(
+                                        color: whiteColor,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
+                        }),
                     Column(
                       children: [
                         SizedBox(
@@ -129,114 +232,141 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 ),
                 spaceBetweenInputFields,
                 profileTextMain('Personal'),
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        Row(
+                FutureBuilder(
+                    future: getDataFromApi(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return Column(
                           children: [
-                            Expanded(
-                              flex: 2,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  profileTextMain('Name'),
-                                  profileTextSub('Jhon Walisara'),
-                                ],
+                            Container(
+                              decoration: inputFieldDecoration,
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              profileTextMain('Name'),
+                                              profileTextSub(name),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              profileTextMain('Gender'),
+                                              profileTextSub(gender),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    spaceBetweenInputFields,
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              profileTextMain('Email'),
+                                              profileTextSub(email),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    spaceBetweenInputFields,
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              profileTextMain('Address'),
+                                              profileTextSub(lane +
+                                                  " ," +
+                                                  district +
+                                                  " ," +
+                                                  province),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  profileTextMain('Gender'),
-                                  profileTextSub('Female'),
-                                ],
+                            spaceBetweenInputFields,
+                            profileTextMain('Professional'),
+                            Container(
+                              decoration: inputFieldDecoration,
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              profileTextMain('Doctor ID'),
+                                              profileTextSub(
+                                                  medicalCouncilRegId),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              profileTextMain('Hospital'),
+                                              profileTextSub(hospital),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    spaceBetweenInputFields,
+                                    Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            profileTextMain('Specialization'),
+                                            profileTextSub(specialization),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
-                        ),
-                        spaceBetweenInputFields,
-                        Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                profileTextMain('Email'),
-                                profileTextSub('jhonwalisara@gmail.com'),
-                              ],
-                            ),
-                          ],
-                        ),
-                        spaceBetweenInputFields,
-                        Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                profileTextMain('Address'),
-                                profileTextSub(
-                                    '1st Lane, avenra road, Ratnapura'),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                spaceBetweenInputFields,
-                profileTextMain('Professional'),
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  profileTextMain('Doctor ID'),
-                                  profileTextSub('12309874561E'),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  profileTextMain('Hospital'),
-                                  profileTextSub('New Town,Ratnapura'),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        spaceBetweenInputFields,
-                        Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                profileTextMain('Position'),
-                                profileTextSub('Eye Specialist'),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                        );
+                      }
+                      return Center(child: Text("Loading"));
+                    }),
                 Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(

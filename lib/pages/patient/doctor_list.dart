@@ -5,6 +5,9 @@ import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../../styles/urlForAPI.dart';
 
 class DoctorList extends StatefulWidget {
   const DoctorList({Key key}) : super(key: key);
@@ -14,6 +17,41 @@ class DoctorList extends StatefulWidget {
 }
 
 class _DoctorListState extends State<DoctorList> {
+  var userData;
+  var dataFromResponse;
+
+  var sendId;
+
+  Future getDataFromApi() async {
+    http.Response response;
+    var url = Uri.parse(baseUrl + "user/doctors");
+
+    //print(token);
+    response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+
+    //print(response.statusCode);
+
+    if (response.body != null) {
+      //print(json.decode(response.body));
+      var jsonData = json.decode(response.body);
+      //print(jsonData[1]['name']);
+      dataFromResponse = jsonData;
+
+      var name;
+      for (int i = 0; i < jsonData.length; i++) {
+        name = jsonData[i]['id'];
+        sendId = dataFromResponse[i]['id'];
+        //print(name);
+      }
+      return userData;
+    } else {
+      return "true";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Doctor List";
@@ -23,7 +61,7 @@ class _DoctorListState extends State<DoctorList> {
     final bgColor = whiteColor;
 
     final buttonText = "Doctor's Name";
-    final callFunction = ViewDoctorProfilePatient();
+    //final callFunction = ViewDoctorProfilePatient(String );
     final topPadding = 0.0;
 
     return Scaffold(
@@ -43,15 +81,53 @@ class _DoctorListState extends State<DoctorList> {
                   style: TextStyle(fontSize: 16.00, color: primaryColor),
                 ),
                 spaceBetweenInputFields,
-                inputFields('Search'),
+                Container(
+                  decoration: inputFieldDecoration,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      counterText: "",
+                      contentPadding: EdgeInsets.all(10.0),
+                      fillColor: whiteColor,
+                      border: OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(5.0),
+                          borderSide: BorderSide.none),
+                      hintText: 'Search',
+                      hintStyle: TextStyle(
+                        color: secondaryColorOne,
+                      ),
+                    ),
+                  ),
+                ),
                 spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
-                spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
-                spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
-                spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
+                FutureBuilder(
+                    future: getDataFromApi(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return Column(
+                          children: [
+                            //for(var u in userData)
+                            for (int i = 0; i < dataFromResponse.length; i++)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 20.0),
+                                child: listView(
+                                    dataFromResponse[i]['name'],
+                                    context,
+                                    ViewDoctorProfilePatient(
+                                        dataFromResponse[i]['id']),
+                                    topPadding),
+                              ),
+                          ],
+                        );
+                      }
+                      return Center(
+                        child: Text(
+                          "Patiently wait until the Names are Loading",
+                          style: TextStyle(
+                            color: primaryColor,
+                          ),
+                        ),
+                      );
+                    }),
               ],
             ),
           ),
