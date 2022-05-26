@@ -43,7 +43,8 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) =>
+                                  MedicineSelection('Arishta')));
                     },
                     child: Center(
                       child: Text(
@@ -65,7 +66,8 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) =>
+                                  MedicineSelection('Kalka')));
                     },
                     child: Center(
                       child: Text(
@@ -87,7 +89,8 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) =>
+                                  MedicineSelection('Thaila')));
                     },
                     child: Center(
                       child: Text(
@@ -109,7 +112,8 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) =>
+                                  MedicineSelection('Kwaatha')));
                     },
                     child: Center(
                       child: Text(
@@ -132,7 +136,8 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) =>
+                                  MedicineSelection('Aasawa')));
                     },
                     child: Center(
                       child: Text(
@@ -154,7 +159,7 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) => MedicineSelection('Pani')));
                     },
                     child: Center(
                       child: Text(
@@ -177,7 +182,8 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) =>
+                                  MedicineSelection('Kasaaya')));
                     },
                     child: Center(
                       child: Text(
@@ -200,7 +206,8 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) =>
+                                  MedicineSelection('Paantha')));
                     },
                     child: Center(
                       child: Text(
@@ -222,7 +229,8 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) =>
+                                  MedicineSelection('Choorna')));
                     },
                     child: Center(
                       child: Text(
@@ -244,7 +252,8 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) =>
+                                  MedicineSelection('Beauty')));
                     },
                     child: Center(
                       child: Text(
@@ -267,7 +276,7 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedicineSelection()));
+                              builder: (context) => MedicineSelection('Guli')));
                     },
                     child: Center(
                       child: Text(

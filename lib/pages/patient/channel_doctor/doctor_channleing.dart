@@ -4,7 +4,6 @@ import 'package:ayu/pages/payment.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -37,7 +36,7 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
     }
   }
 
-  String dropdownValue1;
+  String dropdownValue1 = 'doctor one';
   String dropdownValue2 = 'District';
   String dropdownValue3 = 'Time Slot';
 
@@ -64,8 +63,7 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
   var userData;
   var dataFromResponse;
 
-  List<String> doctorList = [];
-  List<String> doctorsNameList = [];
+  //List<String> doctorsNameList = [];
 
   Future<String> getDataFromApi() async {
     http.Response response;
@@ -80,15 +78,18 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
     //print(response.body);
 
     if (response.body != null) {
-      //print(json.decode(response.body));
+      print(json.decode(response.body));
       var jsonData = json.decode(response.body);
       //print(jsonData[1]['name']);
       dataFromResponse = jsonData;
+      // dropdownValue1 = json.decode(response.body)[0]['name'];
 
-      for (var doctor in dataFromResponse) {
-        doctorsNameList.add(doctor['name']);
-        print(doctor['name']);
-      }
+      // for (var doctor in dataFromResponse) {
+      //   doctorList.add(doctor['name']);
+      //   print(doctor['name']);
+      // }
+
+      print(physicalChannelDoctorList);
 
       return userData;
     } else {
@@ -96,10 +97,10 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
     }
   }
 
-  List<String> doctorNamesDropDown() {
-    getDataFromApi();
-    return doctorsNameList;
-  }
+  // List<String> doctorNamesDropDown() {
+  //   getDataFromApi();
+  //   return doctorsNameList;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +114,7 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
     final callFunction = Payment();
     final topPadding = 20.0;
 
-    List<String> doctorNamesOf = doctorNamesDropDown();
+    // List<String> doctorNamesOf = doctorNamesDropDown();
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -167,169 +168,170 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                spaceBetweenInputFields,
-                // FutureBuilder(
-                //     future: getDataFromApi(),
-                //     builder: (context, snapshot) {
-                //       if (snapshot.connectionState == ConnectionState.done) {
-                //         return Column(
-                //           children: [
-                //             Container(
-                //               decoration: inputFieldDecoration,
-                //               child: Padding(
-                //                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                //                 child: DropdownButton<String>(
-                //                   style: TextStyle(
-                //                     color: secondaryColorOne,
-                //                     fontSize: 16.0,
-                //                   ),
-                //                   isExpanded: true,
-                //                   value: doctors.first,
-                //                   icon: const Icon(Icons.arrow_drop_down),
-                //                   elevation: 16,
-                //                   underline: SizedBox(),
-                //                   onChanged: (String newValue) {
-                //                     setState(
-                //                       () {
-                //                         doctors.first = newValue;
-                //                       },
-                //                     );
-                //                   },
-                //                   items: doctors.map<DropdownMenuItem<String>>(
-                //                       (String value) {
-                //                     return DropdownMenuItem<String>(
-                //                       value: value,
-                //                       child: Text(value),
-                //                     );
-                //                   }).toList(),
-                //                 ),
-                //               ),
-                //             ),
-                //           ],
-                //         );
-                //       }
-                //       return Center(
-                //         child: Text(
-                //           "Patiently wait until the Names are Loading",
-                //           style: TextStyle(
-                //             color: primaryColor,
-                //           ),
-                //         ),
-                //       );
-                //     }),
-                Column(
-                  children: [
-                    Container(
-                      decoration: inputFieldDecoration,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: DropdownButton<String>(
-                          style: TextStyle(
-                            color: secondaryColorOne,
-                            fontSize: 16.0,
-                          ),
-                          hint: Text('Select a Doctor'),
-                          isExpanded: true,
-                          value: dropdownValue1,
-                          icon: const Icon(Icons.arrow_drop_down),
-                          elevation: 16,
-                          underline: SizedBox(),
-                          onChanged: (String newValue) {
-                            setState(
-                              () {
-                                dropdownValue1 = newValue;
-                                getDataFromApi();
-                                print(dropdownValue1);
-                              },
-                            );
-                          },
-                          // items: doctors
-                          //     .map<DropdownMenuItem<String>>((String value) {
-                          //   return DropdownMenuItem<String>(
-                          //     value: value,
-                          //     child: new Text(value),
-                          //   );
-                          // }).toList(),
-                          items: doctorNamesOf
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                spaceBetweenInputFields,
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: whiteColor),
-                    onPressed: () => _openDatePicker(context),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                      child: Row(
+                      spaceBetweenInputFields,
+                      // FutureBuilder(
+                      //     future: getDataFromApi(),
+                      //     builder: (context, snapshot) {
+                      //       if (snapshot.connectionState == ConnectionState.done) {
+                      //         return Column(
+                      //           children: [
+                      //             Container(
+                      //               decoration: inputFieldDecoration,
+                      //               child: Padding(
+                      //                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      //                 child: DropdownButton<String>(
+                      //                   style: TextStyle(
+                      //                     color: secondaryColorOne,
+                      //                     fontSize: 16.0,
+                      //                   ),
+                      //                   isExpanded: true,
+                      //                   value: doctors.first,
+                      //                   icon: const Icon(Icons.arrow_drop_down),
+                      //                   elevation: 16,
+                      //                   underline: SizedBox(),
+                      //                   onChanged: (String newValue) {
+                      //                     setState(
+                      //                       () {
+                      //                         doctors.first = newValue;
+                      //                       },
+                      //                     );
+                      //                   },
+                      //                   items: doctors.map<DropdownMenuItem<String>>(
+                      //                       (String value) {
+                      //                     return DropdownMenuItem<String>(
+                      //                       value: value,
+                      //                       child: Text(value),
+                      //                     );
+                      //                   }).toList(),
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         );
+                      //       }
+                      //       return Center(
+                      //         child: Text(
+                      //           "Patiently wait until the Names are Loading",
+                      //           style: TextStyle(
+                      //             color: primaryColor,
+                      //           ),
+                      //         ),
+                      //       );
+                      //     }),
+                      Column(
                         children: [
-                          Text(
-                            getText(),
-                            style: TextStyle(
-                                color: secondaryColorOne,
-                                fontSize: 16.0,
-                                // shadows: [
-                                //   letterShadow,
-                                // ],
-                                fontWeight: FontWeight.w400),
-                            textAlign: TextAlign.left,
+                          Container(
+                            decoration: inputFieldDecoration,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: DropdownButton<String>(
+                                style: TextStyle(
+                                  color: secondaryColorOne,
+                                  fontSize: 16.0,
+                                ),
+                                hint: Text(dropdownValue1),
+                                isExpanded: true,
+                                value: dropdownValue1,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                elevation: 16,
+                                underline: SizedBox(),
+                                onChanged: (String newValue) {
+                                  setState(
+                                    () {
+                                      dropdownValue1 = newValue;
+                                      getDataFromApi();
+                                      print(dropdownValue1);
+                                    },
+                                  );
+                                },
+                                // items: doctors
+                                //     .map<DropdownMenuItem<String>>((String value) {
+                                //   return DropdownMenuItem<String>(
+                                //     value: value,
+                                //     child: new Text(value),
+                                //   );
+                                // }).toList(),
+                                items: physicalChannelDoctorList
+                                    .map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                ),
-                spaceBetweenInputFields,
-                Container(
-                  decoration: inputFieldDecoration,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: DropdownButton<String>(
-                      style: TextStyle(
-                        color: secondaryColorOne,
-                        fontSize: 16.0,
+                      spaceBetweenInputFields,
+                      Container(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(primary: whiteColor),
+                          onPressed: () => _openDatePicker(context),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                            child: Row(
+                              children: [
+                                Text(
+                                  getText(),
+                                  style: TextStyle(
+                                      color: secondaryColorOne,
+                                      fontSize: 16.0,
+                                      // shadows: [
+                                      //   letterShadow,
+                                      // ],
+                                      fontWeight: FontWeight.w400),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
-                      isExpanded: true,
-                      value: dropdownValue3,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      underline: SizedBox(),
-                      onChanged: (String newValue) {
-                        setState(() {
-                          dropdownValue3 = newValue;
-                        });
-                      },
-                      items: <String>['Time Slot', 'Two', 'Free', 'Four']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
+                      spaceBetweenInputFields,
+                      Container(
+                        decoration: inputFieldDecoration,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: DropdownButton<String>(
+                            style: TextStyle(
+                              color: secondaryColorOne,
+                              fontSize: 16.0,
+                            ),
+                            isExpanded: true,
+                            value: dropdownValue3,
+                            icon: const Icon(Icons.arrow_drop_down),
+                            elevation: 16,
+                            underline: SizedBox(),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                dropdownValue3 = newValue;
+                              });
+                            },
+                            items: <String>['Time Slot', 'Two', 'Free', 'Four']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                      spaceBetweenInputFields,
+                      inputFields('Fee'),
+                      spaceBetweenInputFields,
+                      buttonInPages(
+                          buttonText,
+                          context,
+                          apiCall(district, displayDate, dropdownValue1,
+                              dropdownValue3),
+                          topPadding),
+                    ],
                   ),
                 ),
-                spaceBetweenInputFields,
-                inputFields('Fee'),
-                spaceBetweenInputFields,
-                buttonInPages(
-                    buttonText,
-                    context,
-                    apiCall(
-                        district, displayDate, dropdownValue1, dropdownValue3),
-                    topPadding),
               ],
             ),
           ),

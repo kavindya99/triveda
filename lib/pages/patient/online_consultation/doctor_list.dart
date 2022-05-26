@@ -85,21 +85,31 @@ class _DoctorListState extends State<DoctorList> {
                     future: getDataFromApi(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
-                        return Column(
-                          children: [
-                            //for(var u in userData)
-                            for (int i = 0; i < dataFromResponse.length; i++)
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 20.0),
-                                child: listView(
-                                    dataFromResponse[i]['name'],
-                                    context,
-                                    ViewDoctorProfilePatient(
-                                        dataFromResponse[i]['id']),
-                                    topPadding),
-                              ),
-                          ],
-                        );
+                        if (dataFromResponse.length != 0)
+                          return Column(
+                            children: [
+                              //for(var u in userData)
+                              for (int i = 0; i < dataFromResponse.length; i++)
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 20.0),
+                                  child: listView(
+                                      dataFromResponse[i]['name'],
+                                      context,
+                                      ViewDoctorProfilePatient(
+                                          dataFromResponse[i]['id']),
+                                      topPadding),
+                                ),
+                            ],
+                          );
+                        else {
+                          return Center(
+                            child: Text(
+                              "Sorry, No doctors Available at this moment",
+                              style:
+                                  TextStyle(color: errorColor, fontSize: 17.0),
+                            ),
+                          );
+                        }
                       }
                       return Center(
                         child: Text(

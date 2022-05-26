@@ -43,7 +43,8 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RecipeSelection()));
+                            builder: (context) =>
+                                RecipeSelection('Sweet Beverages')));
                   },
                   child: Center(
                     child: Text(
@@ -65,7 +66,8 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RecipeSelection()));
+                            builder: (context) =>
+                                RecipeSelection('Sweet Items')));
                   },
                   child: Center(
                     child: Text(
@@ -87,7 +89,8 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RecipeSelection()));
+                            builder: (context) =>
+                                RecipeSelection('Beverages')));
                   },
                   child: Center(
                     child: Text(
@@ -109,7 +112,8 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RecipeSelection()));
+                            builder: (context) =>
+                                RecipeSelection('Non Vegetarian')));
                   },
                   child: Center(
                     child: Text(
@@ -132,7 +136,8 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RecipeSelection()));
+                            builder: (context) =>
+                                RecipeSelection('Cooking Recipes')));
                   },
                   child: Center(
                     child: Text(
@@ -151,8 +156,11 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorTwo),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profile()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                RecipeSelection('Pre-cooking Food Recipes')));
                   },
                   child: Center(
                     child: Text(

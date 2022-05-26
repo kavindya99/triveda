@@ -88,8 +88,6 @@ void main() {
       '/sub_menus/channel_appointments/channelAppointmentsList': (context) =>
           AppointmentList(),
       '/sub_menus/prescription/prescription': (context) => Prescription(),
-      '/sub_menus/prescription/editPrescription': (context) =>
-          EditPrescription(),
       '/sub_menus/prescription/addPrescription': (context) => AddNew(),
       '/sub_menus/prescription/addedPrescription': (context) => AddedList(),
       '/sub_menus/wallet/wallet': (context) => Wallet(),

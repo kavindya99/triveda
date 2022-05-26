@@ -8,6 +8,9 @@ import 'package:flutter_zoom_sdk/zoom_view.dart';
 
 Timer timer;
 
+var meetingIdController;
+var meetingPasswordController;
+
 startMeeting(BuildContext context) {
   bool _isMeetingEnded(String status) {
     var result = false;
@@ -100,4 +103,92 @@ startMeeting(BuildContext context) {
       print("[Error Generated] : " + error);
     }
   });
+}
+
+joinMeeting(BuildContext context) {
+  bool _isMeetingEnded(String status) {
+    var result = false;
+
+    if (Platform.isAndroid) {
+      result = status == "MEETING_STATUS_DISCONNECTING" ||
+          status == "MEETING_STATUS_FAILED";
+    } else {
+      result = status == "MEETING_STATUS_IDLE";
+    }
+
+    return result;
+  }
+
+  if (meetingIdController.text.isNotEmpty &&
+      meetingPasswordController.text.isNotEmpty) {
+    ZoomOptions zoomOptions = ZoomOptions(
+      domain: "zoom.us",
+      appKey: "XKE4uWfeLwWEmh78YMbC6mqKcF8oM4YHTr9I", //API KEY FROM ZOOM
+      appSecret: "bT7N61pQzaLXU6VLj9TVl7eYuLbqAiB0KAdb", //API SECRET FROM ZOOM
+    );
+    var meetingOptions = ZoomMeetingOptions(
+        userId: 'username',
+
+        /// pass username for join meeting only --- Any name eg:- EVILRATT.
+        meetingId: meetingIdController.text,
+
+        /// pass meeting id for join meeting only
+        meetingPassword: meetingPasswordController.text,
+
+        /// pass meeting password for join meeting only
+        disableDialIn: "true",
+        disableDrive: "true",
+        disableInvite: "true",
+        disableShare: "true",
+        disableTitlebar: "false",
+        viewOptions: "true",
+        noAudio: "false",
+        noDisconnectAudio: "false");
+
+    var zoom = ZoomView();
+    zoom.initZoom(zoomOptions).then((results) {
+      if (results[0] == 0) {
+        zoom.onMeetingStatus().listen((status) {
+          if (kDebugMode) {
+            print("[Meeting Status Stream] : " + status[0] + " - " + status[1]);
+          }
+          if (_isMeetingEnded(status[0])) {
+            if (kDebugMode) {
+              print("[Meeting Status] :- Ended");
+            }
+            timer.cancel();
+          }
+        });
+        if (kDebugMode) {
+          print("listen on event channel");
+        }
+        zoom.joinMeeting(meetingOptions).then((joinMeetingResult) {
+          timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+            zoom.meetingStatus(meetingOptions.meetingId).then((status) {
+              if (kDebugMode) {
+                print("[Meeting Status Polling] : " +
+                    status[0] +
+                    " - " +
+                    status[1]);
+              }
+            });
+          });
+        });
+      }
+    }).catchError((error) {
+      if (kDebugMode) {
+        print("[Error Generated] : " + error);
+      }
+    });
+  } else {
+    if (meetingIdController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Enter a valid meeting id to continue."),
+      ));
+    } else if (meetingPasswordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Enter a meeting password to start."),
+      ));
+    }
+  }
 }

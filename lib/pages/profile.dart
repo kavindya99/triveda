@@ -24,19 +24,8 @@ class _ProfileState extends State<Profile> {
   var name;
   var email;
   var phoneNumber;
-  var gender;
-  var medicalCouncilRegId;
-  var specialization;
-  var hospital;
-  var lane;
   var province;
   var district;
-  var availableTimeFrom;
-  var availableTimeTo;
-  var serviceType;
-  var status;
-  var deleteStatus;
-  var role;
 
   Future getDataFromApi() async {
     http.Response response;
@@ -71,15 +60,10 @@ class _ProfileState extends State<Profile> {
       print(userData);
       email = userData['email'];
       phoneNumber = userData['phoneNumber'];
-      // medicalCouncilRegId = userData['medicalCouncilRegID'];
       name = userData['name'];
-      // gender = userData['gender'];
-      // hospital = userData['hospital'];
       province = userData['province'];
       district = userData['district'];
-      // availableTimeFrom = userData['availableTimeFrom'];
-      // availableTimeTo = userData['availableTimeTo'];
-      // serviceType = userData['serviceType'];
+
       return userData;
     } else {
       return "true";
@@ -123,7 +107,7 @@ class _ProfileState extends State<Profile> {
                                   padding: const EdgeInsets.only(left: 30.0),
                                   child: Text(
                                     //'Hi ' + firstName.toString() + ' ,',
-                                    'Hi ' + name.split(" ")[0] + " ,",
+                                    'Hi ' + name.split(" ")[0] + " ," ?? '',
                                     style: TextStyle(
                                         color: whiteColor,
                                         fontSize: 20.0,
@@ -149,33 +133,37 @@ class _ProfileState extends State<Profile> {
                             );
                           }
                         }),
-                    Column(
-                      children: [
-                        SizedBox(
-                          child: Stack(
+                    FutureBuilder(
+                        future: getDataFromApi(),
+                        builder: (context, snapshot) {
+                          return Column(
                             children: [
-                              CircleAvatar(
-                                radius: 70,
-                                backgroundImage: AssetImage('images/mee.jpg'),
-                              ),
-                              Positioned(
-                                bottom: -10.0,
-                                child: Container(
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.camera_alt_rounded,
-                                      size: 35,
-                                      color: secondaryColorThree,
+                              SizedBox(
+                                child: Stack(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 70,
+                                      // backgroundImage: AssetImage('images/mee.jpg'),
+                                      backgroundColor: secondaryColorTwo,
                                     ),
-                                  ),
+                                    Container(
+                                      child: Text(
+                                        name.split(' ')[0][0] +
+                                                name.split(' ')[0][0] ??
+                                            ' ',
+                                        style: TextStyle(
+                                            backgroundColor: secondaryColorTwo,
+                                            fontSize: 60.0,
+                                            fontWeight: FontWeight.w900,
+                                            color: whiteColor),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                      ],
-                    ),
+                          );
+                        }),
                   ],
                 ),
               ],

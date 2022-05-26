@@ -49,3 +49,15 @@ List<String> availableTime = <String>[
   "3 PM",
   "4 PM",
 ];
+
+List<String> physicalChannelDoctorList = <String>[
+  'doctor one',
+  'doctor two',
+  'doctor three'
+];
+
+List<String> onlineConsultDoctorList = <String>[
+  'Doctor',
+  'jayaweera',
+  'chethana'
+];

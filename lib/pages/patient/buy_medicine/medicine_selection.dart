@@ -1,38 +1,63 @@
 import 'dart:convert';
 
-import 'package:ayu/models/api.services.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-import '../../../models/medicine.dart';
+import '../../../styles/urlForAPI.dart';
 import 'medicine_details.dart';
 
 class MedicineSelection extends StatefulWidget {
-  const MedicineSelection({Key key}) : super(key: key);
+  final String dataFromResponse;
+  const MedicineSelection(this.dataFromResponse, {Key key}) : super(key: key);
 
   @override
-  _MedicineSelectionState createState() => _MedicineSelectionState();
+  _MedicineSelectionState createState() =>
+      _MedicineSelectionState(dataFromResponse);
 }
 
 class _MedicineSelectionState extends State<MedicineSelection> {
-  // List<Medicine> medicine;
-  // getMedicine() {
-  //   APIService.fetchMedicine().then(
-  //     (response) {
-  //       Iterable list = json.decode(response.body);
-  //       List<Medicine> medicineList = List<Medicine>();
-  //       medicineList = list.map((model) => Medicine.fromObject(model)).toList();
-  //
-  //       setState(
-  //         () {
-  //           medicine = medicineList;
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
+  final String dataFromResponse;
+  _MedicineSelectionState(this.dataFromResponse);
+
+  var id;
+  var name;
+  var category;
+
+  var responseData;
+  var doctorData;
+  var ifNoData = "Sorry, there is problem with data";
+
+  Future getMedicine(String category) async {
+    http.Response response;
+    var url = Uri.parse(baseUrl + "api/Medicines/" + dataFromResponse);
+
+    //print(token);
+    response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+
+    print(response.statusCode);
+
+    if (response.body != null) {
+      //print(json.decode(response.body));
+      var jsonData = json.decode(response.body);
+      //print(jsonData[1]['name']);
+      responseData = jsonData;
+
+      //id = dataFromResponse;
+      print(responseData[1]['medicine']);
+      name = responseData['name'];
+      category = responseData['category'];
+      return responseData;
+    } else {
+      return ifNoData;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,32 +91,42 @@ class _MedicineSelectionState extends State<MedicineSelection> {
                 spaceBetweenInputFields,
                 inputFields('Search'),
                 spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
-                spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
-                spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
-                spaceBetweenInputFields,
-                listView(buttonText, context, callFunction, topPadding),
-                // medicine == null
-                //     ? Center(
-                //         child: Text('Empty'),
-                //       )
-                //     : ListView.builder(
-                //         itemCount: medicine.length,
-                //         itemBuilder: (context, index) {
-                //           return Card(
-                //             color: whiteColor,
-                //             elevation: 2.0,
-                //             child: ListTile(
-                //               title: ListTile(
-                //                 title: Text(medicine[index].name),
-                //                 onTap: null,
-                //               ),
-                //             ),
-                //           );
-                //         },
-                //       ),
+                FutureBuilder(
+                  future: getMedicine(category),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (responseData.length != 0) {
+                        return Column(
+                          children: [
+                            //for(var u in userData)
+                            for (int i = 0; i < responseData.length; i++)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 20.0),
+                                child: listView(responseData[i]['medicine'],
+                                    context, callFunction, topPadding),
+                              ),
+                          ],
+                        );
+                      } else {
+                        return Center(
+                          child: Text(
+                            "Sorry, No items Available for '$dataFromResponse' at this moment",
+                            style: TextStyle(color: errorColor, fontSize: 17.0),
+                          ),
+                        );
+                      }
+                    }
+                    return Center(
+                      child: Text(
+                        "Patiently wait until the Names are Loading",
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 17.0,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

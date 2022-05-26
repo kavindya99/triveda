@@ -134,6 +134,21 @@ class _SignInState extends State<SignIn> {
                   description:
                       "Please enter your email address with the correct format",
                 ));
+      } else if (res.statusCode == 401) {
+        setState(() {
+          _isLoading = false;
+        });
+        print(_passwordController.text);
+        showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+                  title: "Error",
+                  description: "Incorrect email or password",
+                ));
+      } else if (res.statusCode == 503) {
+        print("Server under maintenance, Please check after a while ");
+      } else if (res.statusCode == 401) {
+        print(json.decode(res.body));
       } else {
         showDialog(
             context: this.context,
@@ -141,17 +156,6 @@ class _SignInState extends State<SignIn> {
                   title: "Success",
                   description: "Successfully Logged\n Welcome to Triveda",
                 ));
-      }
-      if (res.statusCode == 401) {
-        setState(() {
-          _isLoading = false;
-        });
-        print(_passwordController.text);
-      }
-      if (res.statusCode == 503) {
-        print("Server under maintenance, Please check after a while ");
-      } else if (res.statusCode == 401) {
-        print(json.decode(res.body));
       }
     } catch (error) {
       print(error);

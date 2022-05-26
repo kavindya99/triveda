@@ -27,7 +27,7 @@ class _CartState extends State<Cart> {
     final topPadding = 20.0;
 
     final buttonText1 = 'Back to List';
-    final callFunction1 = MedicineSelection();
+    final callFunction1 = MedicineSelection('');
     final topPadding1 = 0.0;
 
     return Scaffold(
