@@ -14,7 +14,7 @@ class _YogaPoseState extends State<YogaPose> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Pose 1";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = Colors.transparent;

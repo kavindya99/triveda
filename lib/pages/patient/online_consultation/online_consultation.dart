@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:ayu/pages/patient/doctor_list.dart';
 import 'package:ayu/pages/patient/online_consultation/consult_a_doctor.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:ayu/pages/patient/online_consultation/doctor_list.dart';
 
 class OnlineConsultaion extends StatefulWidget {
   const OnlineConsultaion({Key key}) : super(key: key);
@@ -18,7 +18,7 @@ class _OnlineConsultaionState extends State<OnlineConsultaion> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Online Consultation";
-    final appBarBg = 'images/appbar-light.png';
+    final appBarBg = 'images/appbar-light.webp';
     final textColor = primaryColor;
     final iconColor = primaryColor;
     final bgColor = primaryColor;
@@ -46,7 +46,7 @@ class _OnlineConsultaionState extends State<OnlineConsultaion> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "images/online-consultation.gif",
+                      "images/online-consultation.webp",
                       height: 229.0,
                       width: 298.0,
                     ),

@@ -100,7 +100,7 @@ class _EditPrescriptionState extends State<EditPrescription> {
   Widget build(BuildContext context) {
     //editPrescription('p', 'p');
     final pageTitle = "Update Prescription";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

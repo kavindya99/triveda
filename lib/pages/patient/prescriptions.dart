@@ -68,7 +68,7 @@ class _PrescriptionsState extends State<Prescriptions> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Prescriptions";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -380,7 +380,15 @@ class _PrescriptionsState extends State<Prescriptions> {
                     );
                     // return Text("this is the email\n\n" + email);
                   }
-                  return Center(child: Text("Loading"));
+                  return Center(
+                      child: Column(
+                    children: [
+                      Image(
+                        image: AssetImage('images/waiting.webp'),
+                      ),
+                      Text("Patiently wait until the data is Loading.."),
+                    ],
+                  ));
                 },
               ),
             ],

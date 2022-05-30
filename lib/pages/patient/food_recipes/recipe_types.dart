@@ -16,7 +16,7 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Recipe Categories";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -36,7 +36,7 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
               mainAxisSpacing: 30,
               crossAxisCount: 2,
               children: <Widget>[
-                Image.asset('images/food-recipe-types-2.gif'),
+                Image.asset('images/food-recipe-types-2.webp'),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                   onPressed: () {
@@ -129,7 +129,7 @@ class _FoodRecipeTypesState extends State<FoodRecipeTypes> {
                     ),
                   ),
                 ),
-                Image.asset('images/food-recipe-types-1.gif'),
+                Image.asset('images/food-recipe-types-1.webp'),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: primaryColor),
                   onPressed: () {

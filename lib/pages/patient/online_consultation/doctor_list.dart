@@ -53,7 +53,7 @@ class _DoctorListState extends State<DoctorList> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Doctor List";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -112,11 +112,18 @@ class _DoctorListState extends State<DoctorList> {
                         }
                       }
                       return Center(
-                        child: Text(
-                          "Patiently wait until the Names are Loading",
-                          style: TextStyle(
-                            color: primaryColor,
-                          ),
+                        child: Column(
+                          children: [
+                            Image(
+                              image: AssetImage('images/waiting.webp'),
+                            ),
+                            Text(
+                              "Patiently wait until the Names are Loading..",
+                              style: TextStyle(
+                                color: primaryColor,
+                              ),
+                            ),
+                          ],
                         ),
                       );
                     }),

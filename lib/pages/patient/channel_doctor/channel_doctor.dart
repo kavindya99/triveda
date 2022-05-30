@@ -17,7 +17,7 @@ class _ChannelDoctorState extends State<ChannelDoctor> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Channel a Doctor";
-    final appBarBg = 'images/appbar-light.png';
+    final appBarBg = 'images/appbar-light.webp';
     final textColor = primaryColor;
     final iconColor = primaryColor;
     final bgColor = primaryColor;
@@ -45,7 +45,7 @@ class _ChannelDoctorState extends State<ChannelDoctor> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "images/channel-a-doctor.gif",
+                      "images/channel-a-doctor.webp",
                       height: 200.0,
                       width: 250.0,
                     ),

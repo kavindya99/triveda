@@ -16,7 +16,7 @@ class _OnlineConsultationDoctorState extends State<OnlineConsultationDoctor> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Online Consultation";
-    final appBarBg = 'images/appbar-light.png';
+    final appBarBg = 'images/appbar-light.webp';
     final textColor = primaryColor;
     final iconColor = primaryColor;
     final bgColor = primaryColor;
@@ -41,7 +41,7 @@ class _OnlineConsultationDoctorState extends State<OnlineConsultationDoctor> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "images/online-consultation.gif",
+                      "images/online-consultation.webp",
                       height: 229.0,
                       width: 298.0,
                     ),

@@ -1,15 +1,27 @@
+import 'dart:async';
+
 import 'package:ayu/styles/variables.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomDialog extends StatelessWidget {
-  final String title, description, buttonText;
+  final String title, description, img;
 
-  const CustomDialog({Key key, this.title, this.description, this.buttonText})
-      : super(key: key);
+  const CustomDialog({
+    Key key,
+    this.title,
+    this.description,
+    this.img,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    _timerToShowFirstDialog() async {
+      var duration = const Duration(seconds: 3);
+      return Timer(duration, () {
+        dialogContent(context);
+      });
+    }
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 0,
@@ -19,9 +31,15 @@ class CustomDialog extends StatelessWidget {
   }
 
   dialogContent(BuildContext context) {
+    Timer _timer;
+
+    _timer = Timer(Duration(seconds: 3), () {
+      Navigator.of(context).pop();
+    });
     return Stack(
       children: [
         Container(
+          width: double.infinity,
           padding: EdgeInsets.only(top: 100, bottom: 16, left: 16, right: 16),
           margin: EdgeInsets.only(top: 16),
           decoration: BoxDecoration(
@@ -51,17 +69,16 @@ class CustomDialog extends StatelessWidget {
                 description,
                 style: TextStyle(fontSize: 16.0),
               ),
-              SizedBox(height: 24.0),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Ok'),
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.bottomRight,
+              //   child: ElevatedButton(
+              //     style: ElevatedButton.styleFrom(primary: buttonColor),
+              //     onPressed: () {
+              //       Navigator.pop(context);
+              //     },
+              //     child: Text(buttonText),
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -72,7 +89,7 @@ class CustomDialog extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: primaryColor,
             radius: 50,
-            backgroundImage: AssetImage('images/food-recipe-types-2.gif'),
+            backgroundImage: AssetImage(img),
           ),
         ),
       ],

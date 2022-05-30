@@ -88,7 +88,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                                 width: 30.0,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage('images/logout.png'),
+                                    image: AssetImage('images/logout.webp'),
                                     fit: BoxFit.fill,
                                     alignment: Alignment.bottomRight,
                                   ),
@@ -139,7 +139,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             child: Container(
               child: Expanded(
                 child: Image.asset(
-                  'images/logo-app.png',
+                  'images/logo-app.webp',
                   width: 40.0,
                 ),
               ),

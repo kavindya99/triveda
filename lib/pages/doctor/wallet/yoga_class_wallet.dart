@@ -14,7 +14,7 @@ class _YogaClassWalletState extends State<YogaClassWallet> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Yoga Class Wallet";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

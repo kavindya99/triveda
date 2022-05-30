@@ -82,7 +82,7 @@ class _NavigationDrawerDoctorState extends State<NavigationDrawerDoctor> {
                                 width: 30.0,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage('images/logout.png'),
+                                    image: AssetImage('images/logout.webp'),
                                     fit: BoxFit.fill,
                                     alignment: Alignment.bottomRight,
                                   ),
@@ -121,7 +121,7 @@ class _NavigationDrawerDoctorState extends State<NavigationDrawerDoctor> {
             child: Container(
               child: Expanded(
                 child: Image.asset(
-                  'images/logo-app.png',
+                  'images/logo-app.webp',
                   width: 40.0,
                 ),
               ),

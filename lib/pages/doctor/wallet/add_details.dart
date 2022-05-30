@@ -91,7 +91,7 @@ class _AddBankDetailsState extends State<AddBankDetails> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Add Bank Details";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

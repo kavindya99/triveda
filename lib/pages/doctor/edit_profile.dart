@@ -54,7 +54,7 @@ class _EditProfileState extends State<EditProfile> {
     }
 
     final pageTitle = "Update Profile";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

@@ -17,7 +17,7 @@ class _YogaClassState extends State<YogaClass> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Yoga";
-    final appBarBg = 'images/appbar-light.png';
+    final appBarBg = 'images/appbar-light.webp';
     final textColor = primaryColor;
     final iconColor = primaryColor;
     final bgColor = primaryColor;
@@ -45,7 +45,7 @@ class _YogaClassState extends State<YogaClass> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "images/online-yoga-class.gif",
+                      "images/online-yoga-class.webp",
                       height: 180.0,
                       width: 220.0,
                     ),

@@ -19,7 +19,7 @@ class ConsultADoctor extends StatefulWidget {
 
 class _ConsultADoctorState extends State<ConsultADoctor> {
   String doctorName = 'Doctor';
-  String type = 'Audio';
+  String type = 'Online Consulation(Audio)';
   String timeSlot = 'Time Slot';
   String district = 'Colombo';
   //var fee;
@@ -27,18 +27,18 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
   DateTime selectedDate = DateTime.now();
   final firstDate = DateTime(DateTime.now().year - 5);
   final lastDate = DateTime(DateTime.now().year + 5);
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   DateTime date;
   var displayDate;
 
   // ignore: missing_return
-  String getText() {
-    if (date == null) {
-      return selectedDate.toString().split(' ')[0];
-    } else {
-      displayDate = date.toString();
-    }
-  }
+  // String getText() {
+  //   if (date == null) {
+  //     return selectedDate.toString();
+  //   } else {
+  //     displayDate = date.toString();
+  //   }
+  // }
 
   static const _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -47,17 +47,19 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
   String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
-  apiCall(String method, String date, String time, String doctor,
-      var password) async {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  apiCall(BuildContext context) async {
     http.Response response;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    var url = Uri.parse(baseUrl + 'appointment');
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = (prefs.getString('token') ?? '');
-    var url = Uri.parse("${baseUrl + 'appointment'}");
+    print(token);
 
     Map<String, dynamic> data = {
       "doctorName": doctorName,
-      "date": displayDate,
+      "date": '2022.08.05',
       "method": type,
       "timeSlot": timeSlot,
       "meetingPassword": getRandomString(6),
@@ -97,8 +99,8 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
     });
 
     if (response.body != null) {
-      print(url);
-      print(json.decode(response.body));
+      //print(url);
+      //print(json.decode(response.body));
       var jsonData = json.decode(response.body);
       feeData = jsonData;
 
@@ -110,7 +112,7 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
     //print(token);
   }
 
-  Future<String> getDataFromApi() async {
+  getDataFromApi() async {
     http.Response response;
     var url = Uri.parse(baseUrl + "user/doctors-online-consulting");
 
@@ -138,7 +140,7 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
     getFee();
 
     final pageTitle = "Consult a Doctor";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -188,7 +190,7 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
                                 doctorName = newValue;
                               });
                             },
-                            items: onlineConsultDoctorList
+                            items: <String>['doc1', 'doc2', 'doc3', 'Doctor']
                                 .map<DropdownMenuItem<String>>((String value1) {
                               return DropdownMenuItem<String>(
                                 value: value1,
@@ -244,8 +246,10 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
                                 type = newValue;
                               });
                             },
-                            items: <String>['Audio', 'Video']
-                                .map<DropdownMenuItem<String>>((String value) {
+                            items: <String>[
+                              'Online Consulation(Audio)',
+                              'Online Consulation(Video)'
+                            ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(value),
@@ -285,43 +289,92 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
                         ),
                       ),
                       spaceBetweenInputFields,
-                      Row(
-                        children: [
-                          Text(
-                            'Consulting Fee : ',
-                            style: TextStyle(
-                              color: secondaryColorOne,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20.0,
+                      FutureBuilder(
+                          future: getDataFromApi(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              return Row(
+                                children: [
+                                  Text(
+                                    'Consulting Fee : ',
+                                    style: TextStyle(
+                                      color: secondaryColorOne,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
+                                  if (type == 'Online Consulation(Audio)')
+                                    Text(
+                                      'LKR ' + feeData[1]['fee'],
+                                      style: TextStyle(
+                                        color: primaryColor,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    )
+                                  else if (type == 'Online Consulation(Video)')
+                                    Text(
+                                      'LKR ' + feeData[0]['fee'],
+                                      style: TextStyle(
+                                        color: primaryColor,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                ],
+                              );
+                            }
+                            return Row(
+                              children: [
+                                Text(
+                                  'Consulting Fee : ',
+                                  style: TextStyle(
+                                    color: secondaryColorOne,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                                Text("LKR ...",
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w700,
+                                    )),
+                              ],
+                            );
+                          }),
+                      spaceBetweenInputFields,
+                      // buttonInPages(
+                      //     buttonText,
+                      //     context,
+                      //     apiCall(type, displayDate, doctorName, timeSlot,
+                      //         'getRandomString(6)'),
+                      //     topPadding),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: topPadding),
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: secondaryColorOne),
+                          onPressed: () {
+                            apiCall(context);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(
+                              buttonText,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  shadows: [
+                                    letterShadow,
+                                  ],
+                                  fontWeight: FontWeight.w400),
                             ),
                           ),
-                          if (type == 'Audio')
-                            Text(
-                              'LKR ' + feeData[1]['fee'],
-                              style: TextStyle(
-                                color: primaryColor,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            )
-                          else if (type == 'Video')
-                            Text(
-                              'LKR ' + feeData[0]['fee'],
-                              style: TextStyle(
-                                color: primaryColor,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                        ],
+                        ),
                       ),
-                      spaceBetweenInputFields,
-                      buttonInPages(
-                          buttonText,
-                          context,
-                          apiCall(type, displayDate, doctorName, timeSlot,
-                              getRandomString(6)),
-                          topPadding),
                     ],
                   ),
                 ),
@@ -359,6 +412,7 @@ class _ConsultADoctorState extends State<ConsultADoctor> {
     if (date != null) {
       setState(() {
         selectedDate = date;
+        print(selectedDate);
       });
     }
   }

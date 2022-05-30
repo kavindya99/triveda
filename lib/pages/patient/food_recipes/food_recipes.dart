@@ -15,7 +15,7 @@ class _FoodRecipesState extends State<FoodRecipes> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Food Recipes";
-    final appBarBg = 'images/appbar-light.png';
+    final appBarBg = 'images/appbar-light.webp';
     final textColor = primaryColor;
     final iconColor = primaryColor;
     final bgColor = primaryColor;
@@ -40,7 +40,7 @@ class _FoodRecipesState extends State<FoodRecipes> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "images/food-recipes.gif",
+                      "images/food-recipes.webp",
                       height: 229.0,
                       width: 298.0,
                     ),

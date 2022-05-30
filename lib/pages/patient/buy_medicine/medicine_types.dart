@@ -15,7 +15,7 @@ class _MedicineTypesState extends State<MedicineTypes> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Medicine Categories";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -36,7 +36,7 @@ class _MedicineTypesState extends State<MedicineTypes> {
                 mainAxisSpacing: 20,
                 crossAxisCount: 2,
                 children: <Widget>[
-                  Image.asset('images/medicine-3.gif'),
+                  Image.asset('images/medicine-1.webp'),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                     onPressed: () {
@@ -129,7 +129,7 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       ),
                     ),
                   ),
-                  Image.asset('images/medicine-2.gif'),
+                  Image.asset('images/medicine-2.webp'),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: primaryColor),
                     onPressed: () {
@@ -175,7 +175,7 @@ class _MedicineTypesState extends State<MedicineTypes> {
                       ),
                     ),
                   ),
-                  Image.asset('images/medicine-1.gif'),
+                  Image.asset('images/medicine-3.webp'),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                     onPressed: () {

@@ -68,7 +68,7 @@ class _AddedListState extends State<AddedList> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Prescriptions";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -290,41 +290,6 @@ class _AddedListState extends State<AddedList> {
                                                 ),
                                               ),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 100.0),
-                                              child: Container(
-                                                child: Row(
-                                                  children: [
-                                                    // for (var med in userData[i]
-                                                    //         ['prescription']
-                                                    //     .split(',')
-                                                    //     .length)
-                                                    Column(
-                                                      children: [
-                                                        Text(
-                                                          userData[i]['prescription']
-                                                                  .split(',')[2]
-                                                                  .toString() ??
-                                                              '',
-                                                          style: TextStyle(
-                                                              fontSize: 18.0,
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      95,
-                                                                      141,
-                                                                      136,
-                                                                      1),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
                                             // Padding(
                                             //   padding:
                                             //       const EdgeInsets.fromLTRB(
@@ -448,7 +413,15 @@ class _AddedListState extends State<AddedList> {
                         );
                         // return Text("this is the email\n\n" + email);
                       }
-                      return Center(child: Text("Loading"));
+                      return Center(
+                          child: Column(
+                        children: [
+                          Image(
+                            image: AssetImage('images/waiting.webp'),
+                          ),
+                          Text("Patiently wait until the data is Loading.."),
+                        ],
+                      ));
                     },
                   ),
                 ],

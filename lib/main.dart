@@ -17,7 +17,6 @@ import 'package:ayu/pages/main_menu_patient.dart';
 import 'package:ayu/pages/patient/channel_doctor/channel_doctor.dart';
 import 'package:ayu/pages/patient/check_symptoms/check_symptoms.dart';
 import 'package:ayu/pages/patient/check_symptoms/search_disease.dart';
-import 'package:ayu/pages/patient/check_symptoms/search_result.dart';
 import 'package:ayu/pages/patient/food_recipes/food_recipes.dart';
 import 'package:ayu/pages/patient/doctor_list.dart';
 import 'package:ayu/pages/patient/online_consultation/consult_a_doctor.dart';
@@ -61,8 +60,6 @@ void main() {
       '/sub_menus/channeldoctor': (context) => ChannelDoctor(),
       '/sub_menus/checksymptoms': (context) => CheckSymptoms(),
       '/sub_menus/checksymptoms/searchdisease': (context) => SearchDisease(),
-      '/sub_menus/checksymptoms/searchdisease/searchresult': (context) =>
-          SearchResult(),
       '/sub_menus/foodrecipes': (context) => FoodRecipes(),
       '/sub_menus/online_consultation/onlineconsultation': (context) =>
           OnlineConsultaion(),

@@ -16,7 +16,7 @@ class _PaymentState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Payment";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

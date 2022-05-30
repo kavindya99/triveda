@@ -16,7 +16,7 @@ class _AppointmentsState extends State<Appointments> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Appointments";
-    final appBarBg = 'images/appbar-light.png';
+    final appBarBg = 'images/appbar-light.webp';
     final textColor = primaryColor;
     final iconColor = primaryColor;
     final bgColor = primaryColor;
@@ -41,7 +41,7 @@ class _AppointmentsState extends State<Appointments> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "images/appointment.gif",
+                      "images/appointment.webp",
                       height: 229.0,
                       width: 298.0,
                     ),

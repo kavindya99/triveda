@@ -93,7 +93,7 @@ class _SupportDoctorState extends State<SupportDoctor> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Support";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

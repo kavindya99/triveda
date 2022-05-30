@@ -15,7 +15,7 @@ class _BuyMedicineState extends State<BuyMedicine> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Buy Medicine";
-    final appBarBg = 'images/appbar-light.png';
+    final appBarBg = 'images/appbar-light.webp';
     final textColor = primaryColor;
     final iconColor = primaryColor;
     final bgColor = primaryColor;
@@ -40,7 +40,7 @@ class _BuyMedicineState extends State<BuyMedicine> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "images/buy-medicine.gif",
+                      "images/buy-medicine.webp",
                       height: 229.0,
                       width: 298.0,
                     ),

@@ -26,6 +26,8 @@ class _SignInState extends State<SignIn> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
+  var errorGif = 'images/error.webp';
+  var successGif = 'images/success.webp';
 
   _launchURL() async {
     const url = 'https://slvms.software/auth/forgot-password';
@@ -94,6 +96,7 @@ class _SignInState extends State<SignIn> {
                       title: "Error",
                       description:
                           "You don't have access to mobile application",
+                      img: errorGif,
                     ));
           }
         } else {
@@ -109,6 +112,7 @@ class _SignInState extends State<SignIn> {
             builder: (context) => CustomDialog(
                   title: "Error",
                   description: "Please enter your email address",
+                  img: errorGif,
                 ));
       } else if (_emailController.text.isNotEmpty &&
           _passwordController.text.isEmpty) {
@@ -117,6 +121,7 @@ class _SignInState extends State<SignIn> {
             builder: (context) => CustomDialog(
                   title: "Error",
                   description: "Please enter your password",
+                  img: errorGif,
                 ));
       } else if (_emailController.text.isEmpty &&
           _passwordController.text.isEmpty) {
@@ -125,14 +130,17 @@ class _SignInState extends State<SignIn> {
             builder: (context) => CustomDialog(
                   title: "Error",
                   description: "Please enter your email address and password",
+                  img: errorGif,
                 ));
-      } else if (!_emailController.text.contains('@')) {
+      } else if (!_emailController.text.contains('@') ||
+          !_emailController.text.contains('.')) {
         showDialog(
             context: this.context,
             builder: (context) => CustomDialog(
                   title: "Error",
                   description:
                       "Please enter your email address with the correct format",
+                  img: errorGif,
                 ));
       } else if (res.statusCode == 401) {
         setState(() {
@@ -144,17 +152,17 @@ class _SignInState extends State<SignIn> {
             builder: (context) => CustomDialog(
                   title: "Error",
                   description: "Incorrect email or password",
+                  img: errorGif,
                 ));
       } else if (res.statusCode == 503) {
         print("Server under maintenance, Please check after a while ");
-      } else if (res.statusCode == 401) {
-        print(json.decode(res.body));
       } else {
         showDialog(
             context: this.context,
             builder: (context) => CustomDialog(
                   title: "Success",
                   description: "Successfully Logged\n Welcome to Triveda",
+                  img: successGif,
                 ));
       }
     } catch (error) {
@@ -192,6 +200,7 @@ class _SignInState extends State<SignIn> {
                           builder: (context) => CustomDialog(
                             title: "Error",
                             description: "Please enter your email",
+                            img: 'images/error.webp',
                           ),
                         );
                       }
@@ -223,6 +232,7 @@ class _SignInState extends State<SignIn> {
                           builder: (context) => CustomDialog(
                             title: "Error",
                             description: "Please enter your password",
+                            img: 'images/error.webp',
                           ),
                         );
                       }

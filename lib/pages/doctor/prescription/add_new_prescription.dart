@@ -95,7 +95,7 @@ class _AddNewState extends State<AddNew> {
   Widget build(BuildContext context) {
     //addPrescription('miss', 'med1:5g,med2:3g');
     final pageTitle = "Add Prescription";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

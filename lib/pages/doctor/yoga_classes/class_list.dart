@@ -16,7 +16,7 @@ class _ClassListState extends State<ClassList> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Yoga Classes";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

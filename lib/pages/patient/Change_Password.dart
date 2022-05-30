@@ -24,7 +24,6 @@ class _ChangePasswordState extends State<ChangePassword> {
   TextEditingController _confirmPassword = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool checkColor = false;
   updatePassword(BuildContext context) async {
     var url = Uri.parse(baseUrl + '/auth/change-password');
 
@@ -81,18 +80,17 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Change Password";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
 
     final buttonText = 'Update';
-    final callFunction = Profile();
     final topPadding = 25.0;
     return Scaffold(
       backgroundColor: whiteColor,
       drawer: NavigationDrawer(),
-      appBar: appBarDoctorComponent(
+      appBar: appBarComponent(
           pageTitle, appBarBg, textColor, iconColor, bgColor, context),
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),

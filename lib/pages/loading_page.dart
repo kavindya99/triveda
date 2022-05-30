@@ -27,14 +27,14 @@ class _LoadingState extends State<Loading> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("images/aa.png"), fit: BoxFit.cover),
+                image: AssetImage("images/aa.webp"), fit: BoxFit.cover),
           ),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image(image: AssetImage('images/loading-img.png')),
+                Image(image: AssetImage('images/loading-img.webp')),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Center(

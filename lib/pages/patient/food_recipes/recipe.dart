@@ -31,6 +31,7 @@ class _RecipeState extends State<Recipe> {
   var responseData;
   var doctorData;
   var ifNoData = "Sorry, there is problem with data";
+  var img;
 
   Future getRecipe(String recipe) async {
     http.Response response;
@@ -51,16 +52,22 @@ class _RecipeState extends State<Recipe> {
       //print(jsonData[1]['name']);
       responseData = jsonData;
 
-      //id = dataFromResponse;
       print(responseData);
       name = responseData['name'];
       category = responseData['category'];
       ingredients = responseData['ingredients'];
       steps = responseData['steps'];
-      stepsLength = ingredients.split(',').length;
-      ingredientsLength = steps.split(',').length;
+      ingredientsLength = ingredients.split(',').length;
+      stepsLength = steps.split(',').length;
       print(ingredients.split(',')[0]);
       print(stepsLength);
+      if (category == "Beverages") {
+        img = "images/drink.webp";
+      } else if (category == "Sweet Beverages") {
+        img = "images/drink.webp";
+      } else {
+        img = "images/food.png";
+      }
       return responseData;
     } else {
       return ifNoData;
@@ -70,16 +77,17 @@ class _RecipeState extends State<Recipe> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Recipe";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = Colors.transparent;
 
-    getRecipe('Beli Juice');
+    getRecipe('Belli Juice');
     return Container(
       decoration: BoxDecoration(
+        color: secondaryColorThree,
         image: DecorationImage(
-          image: AssetImage("images/food.png"),
+          image: AssetImage(img),
           fit: BoxFit.fitHeight,
         ),
       ),
@@ -90,231 +98,116 @@ class _RecipeState extends State<Recipe> {
             name, appBarBg, textColor, iconColor, bgColor, context),
         body: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
-          child: Container(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 200.0,
-                ),
-                FutureBuilder(
-                    future: getRecipe(name),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        if (responseData.length != 0) {
-                          return Column(
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: new BorderRadius.circular(20.0),
-                                  color: whiteColor,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Ingredients",
-                                        style: TextStyle(
-                                          color: primaryColor,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          for (int i = 0;
-                                              i < ingredientsLength;
-                                              i++)
-                                            Text(
-                                              responseData['ingredients'],
-                                              style: TextStyle(
-                                                color: primaryColor,
-                                              ),
-                                            ),
-                                          spaceInRecipe,
-                                          Text(
-                                            "50 g carrot (cut into small peaces)",
-                                            style: TextStyle(
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                          spaceInRecipe,
-                                          Text(
-                                            "50 g carrot (cut into small peaces)",
-                                            style: TextStyle(
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                          spaceInRecipe,
-                                          Text(
-                                            "50 g chopped red onion",
-                                            style: TextStyle(
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                          spaceInRecipe,
-                                          Text(
-                                            "25 g chopped green chilli",
-                                            style: TextStyle(
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                          spaceInRecipe,
-                                          Text(
-                                            "25 g chopped green chilli",
-                                            style: TextStyle(
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                          spaceInRecipe,
-                                          Text(
-                                            "25 g chopped green chilli",
-                                            style: TextStyle(
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                          spaceInRecipe,
-                                          Text(
-                                            "25 g chopped green chilli",
-                                            style: TextStyle(
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                          spaceInRecipe,
-                                        ],
-                                      ),
-                                      spaceBetweenInputFields,
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: primaryColor,
-                                          borderRadius:
-                                              new BorderRadius.circular(5.0),
-                                          boxShadow: [
-                                            boxShadow,
-                                          ],
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Step 1 :',
-                                                style: TextStyle(
-                                                    color: whiteColor),
-                                              ),
-                                              spaceBetweenInputFields,
-                                              Text(
-                                                'biol water and add green jack and salt boil it about 10 minutes and drain water. then heat oil in a  pan and add ginger and garlic',
-                                                style: TextStyle(
-                                                    color: whiteColor),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      spaceBetweenInputFields,
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: primaryColor,
-                                          borderRadius:
-                                              new BorderRadius.circular(5.0),
-                                          boxShadow: [
-                                            boxShadow,
-                                          ],
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Step 1 :',
-                                                style: TextStyle(
-                                                    color: whiteColor),
-                                              ),
-                                              spaceBetweenInputFields,
-                                              Text(
-                                                'biol water and add green jack and salt boil it about 10 minutes and drain water. then heat oil in a  pan and add ginger and garlic',
-                                                style: TextStyle(
-                                                    color: whiteColor),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      spaceBetweenInputFields,
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: primaryColor,
-                                          borderRadius:
-                                              new BorderRadius.circular(5.0),
-                                          boxShadow: [
-                                            boxShadow,
-                                          ],
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Step 1 :',
-                                                style: TextStyle(
-                                                    color: whiteColor),
-                                              ),
-                                              spaceBetweenInputFields,
-                                              Text(
-                                                'biol water and add green jack and salt boil it about 10 minutes and drain water. then heat oil in a  pan and add ginger and garlic',
-                                                style: TextStyle(
-                                                    color: whiteColor),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        } else {
-                          return Center(
-                            child: Text(
-                              "Sorry, No items Available for '$dataFromResponse' at this moment",
-                              style:
-                                  TextStyle(color: errorColor, fontSize: 17.0),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 200.0,
+              ),
+              FutureBuilder(
+                  future: getRecipe(name),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return Column(
+                        children: <Widget>[
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: new BorderRadius.circular(20.0),
+                              color: whiteColor,
                             ),
-                          );
-                        }
-                      }
-                      return Center(
-                        child: Text(
-                          "Patiently wait until the Names are Loading",
-                          style: TextStyle(
-                            color: primaryColor,
-                            fontSize: 17.0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "Ingredients",
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  for (int i = 0; i < ingredientsLength; i++)
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          responseData['ingredients']
+                                              .split(',')[i]
+                                              .toString(),
+                                          style: TextStyle(
+                                            color: primaryColor,
+                                          ),
+                                        ),
+                                        spaceInRecipe,
+                                      ],
+                                    ),
+                                  spaceBetweenInputFields,
+                                  for (int i = 0; i < stepsLength; i++)
+                                    Column(
+                                      children: <Widget>[
+                                        Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: primaryColor,
+                                            borderRadius:
+                                                new BorderRadius.circular(5.0),
+                                            boxShadow: [
+                                              boxShadow,
+                                            ],
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  'Step $i:',
+                                                  style: TextStyle(
+                                                      color: whiteColor),
+                                                ),
+                                                spaceInRecipe,
+                                                Text(
+                                                  responseData['steps']
+                                                      .split(',')[i]
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: whiteColor),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        spaceBetweenInputFields,
+                                      ],
+                                    ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       );
-                    }),
-              ],
-            ),
+                    }
+                    return Center(
+                      child: Text(
+                        "Patiently wait until the Names are Loading",
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 17.0,
+                        ),
+                      ),
+                    );
+                  }),
+            ],
           ),
         ),
       ),

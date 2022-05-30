@@ -67,14 +67,69 @@ class _SignUpState extends State<SignUp> {
       }
       if (res.statusCode == 400) {
         print(res.statusCode);
-        showDialog(
-          context: this.context,
-          builder: (context) => CustomDialog(
-            title: "Error",
-            description: "Please enter the values in the correct format.",
-          ),
-        );
+        if (!_email.text.contains(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")) {
+          showDialog(
+              context: this.context,
+              builder: (context) => CustomDialog(
+                    title: "Error",
+                    description:
+                        "Please enter your email address with the correct format",
+                  ));
+        } else if (_password.text.length < 10 || _password.text.length > 10) {
+          print(res.statusCode);
+          showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+              title: "Error",
+              description: "Your contact number is less than 10 numbers",
+            ),
+          );
+        } else if (!_password.text.contains(
+                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$') &&
+            _password.text.length >= 8) {
+          print(res.statusCode);
+          showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+              title: "Error",
+              description:
+                  "Your password should contain at least one special character, one numeric number, one uppercase and one lowercase",
+            ),
+          );
+        } else if (_password.text.contains(
+                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$') &&
+            _password.text.length < 8) {
+          print(res.statusCode);
+          showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+              title: "Error",
+              description: "Your password length is less than 8 characters",
+            ),
+          );
+        } else if (!_password.text.contains(
+                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$') &&
+            _password.text.length < 8) {
+          print(res.statusCode);
+          showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+              title: "Error",
+              description: "Your password is not in the correct format",
+            ),
+          );
+        } else {
+          showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+              title: "Error",
+              description: "Please enter the values in the correct format.",
+            ),
+          );
+        }
       }
+
       if (res.statusCode == 200) {
         var jsonResponse = json.decode(res.body);
         print(jsonResponse);
@@ -115,153 +170,151 @@ class _SignUpState extends State<SignUp> {
         physics: AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(30.0),
-          child: Container(
-            child: Column(
-              children: [
-                Form(
-                  key: _formKey,
-                  child: Column(
+          child: Column(
+            children: [
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    inputFieldsReg(
+                        'Name', _name, "Username can't be empty", false),
+                    spaceBetweenInputFields,
+                    inputFieldsReg(
+                        'Email', _email, "Email can't be empty", false),
+                    spaceBetweenInputFields,
+                    inputFieldsReg('Contact No', _phone,
+                        "Contact No can't be empty", false),
+                    spaceBetweenInputFields,
+                    inputFieldsReg(
+                        'Password', _password, "Password can't be empty", true),
+                    spaceBetweenInputFields,
+                    //dropDownItems(district, setState, districts),
+                    Container(
+                      decoration: inputFieldDecoration,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        child: DropdownButton<String>(
+                          style: TextStyle(
+                            color: secondaryColorOne,
+                            fontSize: 16.0,
+                          ),
+                          isExpanded: true,
+                          value: district,
+                          icon: const Icon(Icons.arrow_drop_down),
+                          elevation: 16,
+                          underline: SizedBox(),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              district = newValue;
+                            });
+                          },
+                          items: districts
+                              .map<DropdownMenuItem<String>>((String value1) {
+                            return DropdownMenuItem<String>(
+                              value: value1,
+                              child: Text(value1),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                    spaceBetweenInputFields,
+                    //dropDownItems(province, setState, provinces),
+                    Container(
+                      decoration: inputFieldDecoration,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        child: DropdownButton<String>(
+                          style: TextStyle(
+                            color: secondaryColorOne,
+                            fontSize: 16.0,
+                          ),
+                          isExpanded: true,
+                          value: province,
+                          icon: const Icon(Icons.arrow_drop_down),
+                          elevation: 16,
+                          underline: SizedBox(),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              province = newValue;
+                            });
+                          },
+                          items: provinces
+                              .map<DropdownMenuItem<String>>((String value1) {
+                            return DropdownMenuItem<String>(
+                              value: value1,
+                              child: Text(value1),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                    spaceBetweenInputFields,
+                  ],
+                ),
+              ),
+              // buttonInPages(buttonText, context, callFunction, topPadding),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: topPadding),
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
+                  onPressed: () {
+                    registerUser(_name.text, _email.text, _phone.text,
+                        _password.text, district, province);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      buttonText,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          shadows: [
+                            letterShadow,
+                          ],
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SignIn(
+                                key: null,
+                              )),
+                    );
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      inputFieldsReg(
-                          'Name', _name, "Username can't be empty", false),
-                      spaceBetweenInputFields,
-                      inputFieldsReg(
-                          'Email', _email, "Email can't be empty", false),
-                      spaceBetweenInputFields,
-                      inputFieldsReg('Contact No', _phone,
-                          "Contact No can't be empty", false),
-                      spaceBetweenInputFields,
-                      inputFieldsReg('Password', _password,
-                          "Password can't be empty", true),
-                      spaceBetweenInputFields,
-                      //dropDownItems(district, setState, districts),
-                      Container(
-                        decoration: inputFieldDecoration,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: DropdownButton<String>(
-                            style: TextStyle(
-                              color: secondaryColorOne,
-                              fontSize: 16.0,
-                            ),
-                            isExpanded: true,
-                            value: district,
-                            icon: const Icon(Icons.arrow_drop_down),
-                            elevation: 16,
-                            underline: SizedBox(),
-                            onChanged: (String newValue) {
-                              setState(() {
-                                district = newValue;
-                              });
-                            },
-                            items: districts
-                                .map<DropdownMenuItem<String>>((String value1) {
-                              return DropdownMenuItem<String>(
-                                value: value1,
-                                child: Text(value1),
-                              );
-                            }).toList(),
-                          ),
+                      Text(
+                        "Already have an account?",
+                        style: TextStyle(
+                          color: secondaryColorOne,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                      spaceBetweenInputFields,
-                      //dropDownItems(province, setState, provinces),
-                      Container(
-                        decoration: inputFieldDecoration,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: DropdownButton<String>(
-                            style: TextStyle(
-                              color: secondaryColorOne,
-                              fontSize: 16.0,
-                            ),
-                            isExpanded: true,
-                            value: province,
-                            icon: const Icon(Icons.arrow_drop_down),
-                            elevation: 16,
-                            underline: SizedBox(),
-                            onChanged: (String newValue) {
-                              setState(() {
-                                province = newValue;
-                              });
-                            },
-                            items: provinces
-                                .map<DropdownMenuItem<String>>((String value1) {
-                              return DropdownMenuItem<String>(
-                                value: value1,
-                                child: Text(value1),
-                              );
-                            }).toList(),
-                          ),
+                      Text(
+                        "SIGN IN",
+                        style: TextStyle(
+                          color: primaryColor,
+                          shadows: [
+                            letterShadow,
+                          ],
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      spaceBetweenInputFields,
                     ],
                   ),
                 ),
-                // buttonInPages(buttonText, context, callFunction, topPadding),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: topPadding),
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: secondaryColorOne),
-                    onPressed: () {
-                      registerUser(_name.text, _email.text, _phone.text,
-                          _password.text, district, province);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        buttonText,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SignIn(
-                                  key: null,
-                                )),
-                      );
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already have an account?",
-                          style: TextStyle(
-                            color: secondaryColorOne,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Text(
-                          "SIGN IN",
-                          style: TextStyle(
-                            color: primaryColor,
-                            shadows: [
-                              letterShadow,
-                            ],
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

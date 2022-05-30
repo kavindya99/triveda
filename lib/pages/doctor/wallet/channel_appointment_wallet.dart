@@ -15,7 +15,7 @@ class _ChannelAppointmentWalletState extends State<ChannelAppointmentWallet> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Channel Appointment \nWallet";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

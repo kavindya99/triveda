@@ -10,7 +10,7 @@ PreferredSize appBarMain(textTitleMain, textTitleSub) => PreferredSize(
         flexibleSpace: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/appbar-main.png'), fit: BoxFit.fill),
+                image: AssetImage('images/appbar-main.webp'), fit: BoxFit.fill),
           ),
         ),
         bottom: PreferredSize(

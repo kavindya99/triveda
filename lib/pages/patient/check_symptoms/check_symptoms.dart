@@ -15,7 +15,7 @@ class _CheckSymptomsState extends State<CheckSymptoms> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Check Symptoms";
-    final appBarBg = 'images/appbar-light.png';
+    final appBarBg = 'images/appbar-light.webp';
     final textColor = primaryColor;
     final iconColor = primaryColor;
     final bgColor = primaryColor;
@@ -39,7 +39,7 @@ class _CheckSymptomsState extends State<CheckSymptoms> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "images/check-symptoms.gif",
+                      "images/check-symptoms.webp",
                       height: 229.0,
                       width: 298.0,
                     ),

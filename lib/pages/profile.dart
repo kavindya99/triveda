@@ -26,6 +26,8 @@ class _ProfileState extends State<Profile> {
   var phoneNumber;
   var province;
   var district;
+  var nameFLetter;
+  var nameLLetter;
 
   Future getDataFromApi() async {
     http.Response response;
@@ -63,6 +65,14 @@ class _ProfileState extends State<Profile> {
       name = userData['name'];
       province = userData['province'];
       district = userData['district'];
+      if (userData['name'].split(' ').length > 1) {
+        nameFLetter =
+            userData['name'].split(' ')[0][0].toString().toUpperCase();
+        nameLLetter = name.split(' ')[1][0].toString().toUpperCase();
+      } else {
+        nameFLetter = name[0].toString().toUpperCase();
+        nameLLetter = name[0].toString().toUpperCase();
+      }
 
       return userData;
     } else {
@@ -84,7 +94,7 @@ class _ProfileState extends State<Profile> {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('images/profile-back.png'),
+                  image: AssetImage('images/profile-back.webp'),
                   fit: BoxFit.fill),
             ),
           ),
@@ -107,7 +117,7 @@ class _ProfileState extends State<Profile> {
                                   padding: const EdgeInsets.only(left: 30.0),
                                   child: Text(
                                     //'Hi ' + firstName.toString() + ' ,',
-                                    'Hi ' + name.split(" ")[0] + " ," ?? '',
+                                    'Hi ' + name.split(" ")[0] + " ," ?? 'user',
                                     style: TextStyle(
                                         color: whiteColor,
                                         fontSize: 20.0,
@@ -122,7 +132,7 @@ class _ProfileState extends State<Profile> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 30.0),
                                   child: Text(
-                                    'Hi',
+                                    'Hi user',
                                     style: TextStyle(
                                         color: whiteColor,
                                         fontSize: 20.0,
@@ -136,31 +146,98 @@ class _ProfileState extends State<Profile> {
                     FutureBuilder(
                         future: getDataFromApi(),
                         builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done)
+                            return Column(
+                              children: [
+                                SizedBox(
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(
+                                            25), //You can use Edge
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: secondaryColorTwo,
+                                        ),
+                                        child: Text(
+                                          nameFLetter + nameLLetter,
+                                          style: TextStyle(
+                                              fontSize: 80.0,
+                                              fontWeight: FontWeight.w600,
+                                              color: whiteColor),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom: -10.0,
+                                        child: Container(
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.camera_alt_rounded,
+                                              size: 35,
+                                              color: secondaryColorThree,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
                           return Column(
                             children: [
                               SizedBox(
                                 child: Stack(
                                   children: [
-                                    CircleAvatar(
-                                      radius: 70,
-                                      // backgroundImage: AssetImage('images/mee.jpg'),
-                                      backgroundColor: secondaryColorTwo,
-                                    ),
                                     Container(
+                                      padding:
+                                          EdgeInsets.all(25), //You can use Edge
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: secondaryColorTwo,
+                                      ),
                                       child: Text(
-                                        name.split(' ')[0][0] +
-                                                name.split(' ')[0][0] ??
-                                            ' ',
+                                        'UU',
                                         style: TextStyle(
-                                            backgroundColor: secondaryColorTwo,
-                                            fontSize: 60.0,
-                                            fontWeight: FontWeight.w900,
+                                            fontSize: 80.0,
+                                            fontWeight: FontWeight.w600,
                                             color: whiteColor),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: -10.0,
+                                      child: Container(
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.camera_alt_rounded,
+                                            size: 35,
+                                            color: secondaryColorThree,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
+                              // Container(
+                              //   margin: EdgeInsets.only(bottom: 20.0),
+                              //   padding: EdgeInsets.all(25), //You can use Edge
+                              //   decoration: BoxDecoration(
+                              //     shape: BoxShape.circle,
+                              //     color: secondaryColorTwo,
+                              //   ),
+                              //   child: Text(
+                              //     name.split(' ')[0][0] +
+                              //             name.split(' ')[0][0] ??
+                              //         ' ',
+                              //     style: TextStyle(
+                              //         fontSize: 80.0,
+                              //         fontWeight: FontWeight.w600,
+                              //         color: whiteColor),
+                              //   ),
+                              // ),
                             ],
                           );
                         }),
@@ -226,13 +303,15 @@ class _ProfileState extends State<Profile> {
                                 children: [
                                   Row(
                                     children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          profileTextMain('Name'),
-                                          profileTextSub(name),
-                                        ],
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            profileTextMain('Name'),
+                                            profileTextSub(name),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -339,7 +418,15 @@ class _ProfileState extends State<Profile> {
                       );
                       // return Text("this is the email\n\n" + email);
                     }
-                    return Center(child: Text("Loading"));
+                    return Center(
+                        child: Column(
+                      children: [
+                        Image(
+                          image: AssetImage('images/waiting.webp'),
+                        ),
+                        Text("Patiently wait until the data is Loading.."),
+                      ],
+                    ));
                   },
                 ),
               ],

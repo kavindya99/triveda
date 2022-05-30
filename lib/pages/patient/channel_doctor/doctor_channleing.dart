@@ -105,7 +105,7 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Doctor Channeling";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

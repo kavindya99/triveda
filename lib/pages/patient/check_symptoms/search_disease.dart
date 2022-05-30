@@ -1,4 +1,3 @@
-import 'package:ayu/pages/patient/check_symptoms/search_result.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
 import 'package:ayu/styles/variables.dart';
@@ -25,6 +24,7 @@ class _SearchDiseaseState extends State<SearchDisease> {
   String dropdownValue5 = "Itching";
 
   var predictedDisease;
+  var statusCodeFor;
 
   predictDisease(String symptom1, String symptom2, String symptom3,
       String symptom4, String symptom5) async {
@@ -50,6 +50,8 @@ class _SearchDiseaseState extends State<SearchDisease> {
       // print(res.body);
       // print(res.statusCode);
       var jsonResponse;
+      statusCodeFor = res.statusCode;
+      print(res.statusCode);
 
       if (res.statusCode == 200) {
         jsonResponse = json.decode(res.body);
@@ -59,6 +61,13 @@ class _SearchDiseaseState extends State<SearchDisease> {
             .split(':')[1]
             .split('\'')[1];
         print(predictedDisease);
+        print(jsonResponse);
+      } else {
+        CustomDialog(
+          title: "Predicted Disease",
+          description: 'error',
+          img: 'images/error.gif',
+        );
       }
     } catch (error) {
       print(error);
@@ -68,7 +77,7 @@ class _SearchDiseaseState extends State<SearchDisease> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Search Disease";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -260,31 +269,38 @@ class _SearchDiseaseState extends State<SearchDisease> {
                       //     dropdownValue3, dropdownValue4, dropdownValue5);
                       showDialog(
                         context: this.context,
-                        builder: (context) => Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FutureBuilder(
-                                future: predictDisease(
-                                    dropdownValue1,
-                                    dropdownValue2,
-                                    dropdownValue3,
-                                    dropdownValue4,
-                                    dropdownValue5),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    return CustomDialog(
-                                      title: "Predicted Disease",
-                                      description: predictedDisease,
-                                    );
-                                  }
+                        builder: (context) => FutureBuilder(
+                            future: predictDisease(
+                                dropdownValue1,
+                                dropdownValue2,
+                                dropdownValue3,
+                                dropdownValue4,
+                                dropdownValue5),
+                            builder: (context, snapshot) {
+                              if (statusCodeFor == 200) {
+                                if (snapshot.connectionState ==
+                                        ConnectionState.done &&
+                                    snapshot != null) {
                                   return CustomDialog(
                                     title: "Predicted Disease",
-                                    description: "Wait for the response",
+                                    description: predictedDisease,
+                                    img: 'images/success.webp',
                                   );
-                                })
-                          ],
-                        ),
+                                }
+                                return CustomDialog(
+                                  title: "Predicted Disease",
+                                  description: "Wait for the response",
+                                  img: 'images/waiting.webp',
+                                );
+                              } else {
+                                return CustomDialog(
+                                  title: "Predicted Disease",
+                                  description:
+                                      "Try again!! Something Went Wrong",
+                                  img: 'images/error.webp',
+                                );
+                              }
+                            }),
                       );
                       // Navigator.of(this.context).pushAndRemoveUntil(
                       //     MaterialPageRoute(

@@ -1,4 +1,3 @@
-import 'package:ayu/pages/patient/yoga/types/sun_salutation.dart';
 import 'package:ayu/pages/patient/yoga/yoga_list.dart';
 import 'package:ayu/styles/appBar.dart';
 import 'package:ayu/styles/navigationDrawerPatient.dart';
@@ -15,8 +14,8 @@ class YogaPoses extends StatefulWidget {
 class _YogaPosesState extends State<YogaPoses> {
   @override
   Widget build(BuildContext context) {
-    final pageTitle = "Recipe Categories";
-    final appBarBg = 'images/appbar-dark.png';
+    final pageTitle = "Yoga Pose Categories";
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -56,7 +55,7 @@ class _YogaPosesState extends State<YogaPoses> {
                     ),
                   ),
                 ),
-                Image.asset('images/yoga-pose-types.gif'),
+                Image.asset('images/yoga-pose-types.webp'),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: primaryColor),
                   onPressed: () {

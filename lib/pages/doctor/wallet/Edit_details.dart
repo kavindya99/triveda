@@ -82,7 +82,7 @@ class _EditBankDetailsState extends State<EditBankDetails> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Update Bank Details";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;

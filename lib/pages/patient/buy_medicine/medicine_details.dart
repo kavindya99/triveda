@@ -16,7 +16,7 @@ class _BuyState extends State<Buy> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Add to Cart";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -35,11 +35,6 @@ class _BuyState extends State<Buy> {
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("images/sub-back.png"),
-                  fit: BoxFit.contain),
-            ),
             alignment: Alignment.center,
             child: Column(
               children: [

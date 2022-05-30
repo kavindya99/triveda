@@ -18,7 +18,7 @@ class _WalletState extends State<Wallet> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Wallet";
-    final appBarBg = 'images/appbar-light.png';
+    final appBarBg = 'images/appbar-light.webp';
     final textColor = primaryColor;
     final iconColor = primaryColor;
     final bgColor = primaryColor;
@@ -55,7 +55,7 @@ class _WalletState extends State<Wallet> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "images/money.gif",
+                      "images/money.webp",
                       height: 229.0,
                       width: 298.0,
                     ),

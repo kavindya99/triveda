@@ -60,7 +60,7 @@ class _RecipeSelectionState extends State<RecipeSelection> {
 
   @override
   Widget build(BuildContext context) {
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -116,12 +116,19 @@ class _RecipeSelectionState extends State<RecipeSelection> {
                         }
                       }
                       return Center(
-                        child: Text(
-                          "Patiently wait until the Names are Loading",
-                          style: TextStyle(
-                            color: primaryColor,
-                            fontSize: 17.0,
-                          ),
+                        child: Column(
+                          children: [
+                            Image(
+                              image: AssetImage('images/waiting.webp'),
+                            ),
+                            Text(
+                              "Patiently wait until the Names are Loading",
+                              style: TextStyle(
+                                color: primaryColor,
+                                fontSize: 17.0,
+                              ),
+                            ),
+                          ],
                         ),
                       );
                     }),

@@ -16,7 +16,7 @@ class _PrescriptionState extends State<Prescription> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Prescription";
-    final appBarBg = 'images/appbar-light.png';
+    final appBarBg = 'images/appbar-light.webp';
     final textColor = primaryColor;
     final iconColor = primaryColor;
     final bgColor = primaryColor;
@@ -45,7 +45,7 @@ class _PrescriptionState extends State<Prescription> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "images/online-yoga-class.gif",
+                      "images/prescription.webp",
                       height: 229.0,
                       width: 298.0,
                     ),
@@ -55,7 +55,7 @@ class _PrescriptionState extends State<Prescription> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Yoga Class',
+                      'Prescriptions',
                       style: TextStyle(
                         fontSize: 30.0,
                         fontWeight: FontWeight.w600,
@@ -72,7 +72,7 @@ class _PrescriptionState extends State<Prescription> {
                     children: [
                       Expanded(
                         child: Text(
-                          'You can conduct classes for yoga via online ',
+                          'You can add new prescriptions and all the prescriptions you added are listed here',
                           style: TextStyle(
                             fontSize: 13.0,
                             color: whiteColor,

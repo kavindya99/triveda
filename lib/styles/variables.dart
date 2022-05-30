@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import '../pages/meeting_start.dart';
 
-Color primaryColor = Color.fromRGBO(95, 141, 136, 1);
+Color primaryColor = Color.fromRGBO(95, 141, 136, 1.0);
 // Color primaryColor = Color.fromRGBO(29, 49, 72, 1);
 Color secondaryColorOne = Color.fromRGBO(174, 182, 142, 1);
 Color secondaryColorTwo = Color.fromRGBO(186, 198, 184, 1);

@@ -19,7 +19,7 @@ class _BookedAppointmentsState extends State<BookedAppointments> {
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Booked Appointments";
-    final appBarBg = 'images/appbar-dark.png';
+    final appBarBg = 'images/appbar-dark.webp';
     final textColor = whiteColor;
     final iconColor = whiteColor;
     final bgColor = whiteColor;
@@ -87,7 +87,7 @@ class _BookedAppointmentsState extends State<BookedAppointments> {
                           bottomLeft: Radius.circular(5.0),
                         ),
                         image: new DecorationImage(
-                          image: ExactAssetImage('images/light-bg.png'),
+                          image: ExactAssetImage('images/light-bg.webp'),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -175,7 +175,7 @@ class _BookedAppointmentsState extends State<BookedAppointments> {
                           bottomLeft: Radius.circular(5.0),
                         ),
                         image: new DecorationImage(
-                          image: ExactAssetImage('images/light-bg.png'),
+                          image: ExactAssetImage('images/light-bg.webp'),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -263,7 +263,7 @@ class _BookedAppointmentsState extends State<BookedAppointments> {
                           bottomLeft: Radius.circular(5.0),
                         ),
                         image: new DecorationImage(
-                          image: ExactAssetImage('images/light-bg.png'),
+                          image: ExactAssetImage('images/light-bg.webp'),
                           fit: BoxFit.fill,
                         ),
                       ),
