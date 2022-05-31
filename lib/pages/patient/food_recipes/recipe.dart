@@ -50,7 +50,11 @@ class _RecipeState extends State<Recipe> {
       //print(json.decode(response.body));
       var jsonData = json.decode(response.body);
       //print(jsonData[1]['name']);
+
       responseData = jsonData;
+      // setState(() {
+      //   responseData = jsonData;
+      // });
 
       print(responseData);
       name = responseData['name'];
@@ -62,16 +66,28 @@ class _RecipeState extends State<Recipe> {
       print(ingredients.split(',')[0]);
       print(stepsLength);
       if (category == "Beverages") {
-        img = "images/drink.webp";
+        img = "images/beverages.webp";
       } else if (category == "Sweet Beverages") {
         img = "images/drink.webp";
-      } else {
-        img = "images/food.png";
+      } else if (category == "Sweet Items") {
+        img = "images/sweet.webp";
+      } else if (category == "Non Vegetarian") {
+        img = "images/non-veg.webp";
+      } else if (category == "Cooking Recipes") {
+        img = "images/food.webp";
+      } else if (category == "Pre-cooking Food Recipes") {
+        img = "images/pre-cooking.webp";
       }
+
       return responseData;
     } else {
       return ifNoData;
     }
+  }
+
+  void initState() {
+    getRecipe(dataFromResponse.toString());
+    super.initState();
   }
 
   @override
@@ -82,7 +98,7 @@ class _RecipeState extends State<Recipe> {
     final iconColor = whiteColor;
     final bgColor = Colors.transparent;
 
-    getRecipe('Belli Juice');
+    //getRecipe('Belli Juice');
     return Container(
       decoration: BoxDecoration(
         color: secondaryColorThree,
@@ -199,7 +215,7 @@ class _RecipeState extends State<Recipe> {
                     }
                     return Center(
                       child: Text(
-                        "Patiently wait until the Names are Loading",
+                        "Patiently wait until the Recipe are Loading",
                         style: TextStyle(
                           color: primaryColor,
                           fontSize: 17.0,

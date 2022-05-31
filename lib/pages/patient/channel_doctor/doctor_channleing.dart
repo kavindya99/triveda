@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:ayu/pages/payment.dart';
 import 'package:ayu/styles/appBar.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../styles/customDialogBox.dart';
 import '../../../styles/urlForAPI.dart';
 import '../../../pages/lists_for.dart';
 
@@ -19,7 +21,6 @@ class ChannelingDoctor extends StatefulWidget {
 }
 
 class _ChannelingDoctorState extends State<ChannelingDoctor> {
-  String district = 'Colombo';
   DateTime selectedDate = DateTime.now();
   final firstDate = DateTime(DateTime.now().year - 5);
   final lastDate = DateTime(DateTime.now().year + 5);
@@ -37,70 +38,124 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
   }
 
   String dropdownValue1 = 'doctor one';
-  String dropdownValue2 = 'District';
   String dropdownValue3 = 'Time Slot';
+  String timeSlot = '8 AM - 8.30 AM';
+  String district = 'Colombo';
 
-  Future apiCall(
-      String district, String date, String time, String doctor) async {
+  String _mySelection;
+  List data = List();
+
+  apiCall(BuildContext context) async {
     http.Response response;
+
+    var url = Uri.parse(baseUrl + 'channel');
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     String token = (prefs.getString('token') ?? '');
-    var url = Uri.parse("${baseUrl + '/appointment'}");
-
     print(token);
+
+    Map<String, dynamic> data = {
+      "district": district,
+      "doctorName": _mySelection,
+      "date": selectedDate.toString().split(' ')[0],
+      "timeSlot": timeSlot
+    };
+
+    //print(data);
+    var body = json.encode(data);
+    //print(body);
+
+    //print(token);
     print(url);
-    response = await http.post(url, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    });
-    print(response);
+    response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: body);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      showDialog(
+          context: this.context,
+          builder: (context) => CustomDialog(
+                title: "Success",
+                description: "Successfully added the Channel",
+                img: 'images/success.webp',
+              ));
+    }
 
     return response.body;
   }
 
   var userData;
   var dataFromResponse;
+  var feeData;
 
-  //List<String> doctorsNameList = [];
+  // List<String> doctorsNameList = [''];
 
-  Future<String> getDataFromApi() async {
+  // Future<String> getDataFromApi() async {
+  //   http.Response response;
+  //   var url = Uri.parse(baseUrl + "user/doctors-physical-consult/" + district);
+  //
+  //   response = await http.get(url, headers: {
+  //     'Content-Type': 'application/json',
+  //     'Accept': 'application/json',
+  //   });
+  //
+  //   var resBody = json.decode(response.body);
+  //
+  //   //data = resBody;
+  //   setState(() {
+  //     data = resBody;
+  //   });
+  //   return resBody;
+  // }
+
+  List<Doctor> doctor = List<Doctor>();
+
+  Future<Doctor> getDataFromApi() async {
     http.Response response;
-    var url = Uri.parse(baseUrl + "user/doctors-physical-consult");
+    var url = Uri.parse(baseUrl + "user/doctors-physical-consult/" + district);
+    response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+    var data = json.decode(response.body);
 
-    //print(token);
+    List<Doctor> results = [];
+    data.forEach((data) {
+      var model = Doctor();
+
+      model.name = data["name"].toString();
+
+      results.add(model);
+    });
+    if (mounted) {
+      doctor = results;
+    }
+  }
+
+  Future<String> getFee() async {
+    http.Response response;
+    var url = Uri.parse(baseUrl + "api/Fees");
+
     response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     });
 
-    //print(response.body);
-
     if (response.body != null) {
-      print(json.decode(response.body));
-      var jsonData = json.decode(response.body);
-      //print(jsonData[1]['name']);
-      dataFromResponse = jsonData;
-      // dropdownValue1 = json.decode(response.body)[0]['name'];
+      //print(url);
+      //print(json.decode(response.body));
+      var jsonData = json.decode(response.body.toString());
+      feeData = jsonData;
 
-      // for (var doctor in dataFromResponse) {
-      //   doctorList.add(doctor['name']);
-      //   print(doctor['name']);
-      // }
-
-      print(physicalChannelDoctorList);
-
-      return userData;
+      return feeData;
     } else {
       return "true";
     }
   }
-
-  // List<String> doctorNamesDropDown() {
-  //   getDataFromApi();
-  //   return doctorsNameList;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +168,8 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
     final buttonText = 'Book';
     final callFunction = Payment();
     final topPadding = 20.0;
+
+    Doctor dropdownValue;
 
     // List<String> doctorNamesOf = doctorNamesDropDown();
 
@@ -169,101 +226,60 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
                         ),
                       ),
                       spaceBetweenInputFields,
-                      // FutureBuilder(
-                      //     future: getDataFromApi(),
-                      //     builder: (context, snapshot) {
-                      //       if (snapshot.connectionState == ConnectionState.done) {
-                      //         return Column(
-                      //           children: [
-                      //             Container(
-                      //               decoration: inputFieldDecoration,
-                      //               child: Padding(
-                      //                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      //                 child: DropdownButton<String>(
-                      //                   style: TextStyle(
-                      //                     color: secondaryColorOne,
-                      //                     fontSize: 16.0,
-                      //                   ),
-                      //                   isExpanded: true,
-                      //                   value: doctors.first,
-                      //                   icon: const Icon(Icons.arrow_drop_down),
-                      //                   elevation: 16,
-                      //                   underline: SizedBox(),
-                      //                   onChanged: (String newValue) {
-                      //                     setState(
-                      //                       () {
-                      //                         doctors.first = newValue;
-                      //                       },
-                      //                     );
-                      //                   },
-                      //                   items: doctors.map<DropdownMenuItem<String>>(
-                      //                       (String value) {
-                      //                     return DropdownMenuItem<String>(
-                      //                       value: value,
-                      //                       child: Text(value),
-                      //                     );
-                      //                   }).toList(),
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           ],
-                      //         );
-                      //       }
-                      //       return Center(
-                      //         child: Text(
-                      //           "Patiently wait until the Names are Loading",
-                      //           style: TextStyle(
-                      //             color: primaryColor,
-                      //           ),
-                      //         ),
-                      //       );
-                      //     }),
-                      Column(
-                        children: [
-                          Container(
-                            decoration: inputFieldDecoration,
-                            child: Padding(
+                      Container(
+                          width: double.infinity,
+                          decoration: inputFieldDecoration,
+                          child: Padding(
                               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: DropdownButton<String>(
-                                style: TextStyle(
-                                  color: secondaryColorOne,
-                                  fontSize: 16.0,
-                                ),
-                                hint: Text(dropdownValue1),
-                                isExpanded: true,
-                                value: dropdownValue1,
-                                icon: const Icon(Icons.arrow_drop_down),
-                                elevation: 16,
-                                underline: SizedBox(),
-                                onChanged: (String newValue) {
-                                  setState(
-                                    () {
-                                      dropdownValue1 = newValue;
-                                      getDataFromApi();
-                                      print(dropdownValue1);
-                                    },
-                                  );
-                                },
-                                // items: doctors
-                                //     .map<DropdownMenuItem<String>>((String value) {
-                                //   return DropdownMenuItem<String>(
-                                //     value: value,
-                                //     child: new Text(value),
-                                //   );
-                                // }).toList(),
-                                items: physicalChannelDoctorList
-                                    .map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                              child: FutureBuilder(
+                                  future: getDataFromApi(), // async work
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      return DropdownButton<Doctor>(
+                                        hint: Text(
+                                          _mySelection == null
+                                              ? "Select a Doctor"
+                                              : _mySelection.toString(),
+                                          style: TextStyle(
+                                              color: secondaryColorOne),
+                                        ),
+                                        value: dropdownValue,
+                                        style: TextStyle(
+                                          color: secondaryColorOne,
+                                          fontSize: 16.0,
+                                        ),
+                                        isExpanded: true,
+                                        elevation: 16,
+                                        underline: SizedBox(),
+                                        onChanged: (Doctor newVal) {
+                                          setState(() {
+                                            dropdownValue = newVal;
+                                            _mySelection = dropdownValue.name;
+                                          });
+                                        },
+                                        items: doctor
+                                            .map<DropdownMenuItem<Doctor>>(
+                                                (Doctor value) {
+                                          return DropdownMenuItem<Doctor>(
+                                            value: value,
+                                            child: Text(value.name.toString()),
+                                          );
+                                        }).toList(),
+                                      );
+                                    }
+                                    return Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 15, 0, 15),
+                                      child: Text(
+                                        "Checking Doctor..",
+                                        style: TextStyle(
+                                          color: secondaryColorOne,
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                    );
+                                  }))),
                       spaceBetweenInputFields,
                       Container(
                         width: double.infinity,
@@ -301,16 +317,16 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
                               fontSize: 16.0,
                             ),
                             isExpanded: true,
-                            value: dropdownValue3,
+                            value: timeSlot,
                             icon: const Icon(Icons.arrow_drop_down),
                             elevation: 16,
                             underline: SizedBox(),
                             onChanged: (String newValue) {
                               setState(() {
-                                dropdownValue3 = newValue;
+                                timeSlot = newValue;
                               });
                             },
-                            items: <String>['Time Slot', 'Two', 'Free', 'Four']
+                            items: timeSlots
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -321,14 +337,111 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
                         ),
                       ),
                       spaceBetweenInputFields,
-                      inputFields('Fee'),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              'Doctor Name : ',
+                              style: TextStyle(
+                                color: secondaryColorOne,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: Text(
+                              _mySelection.toString(),
+                              style: TextStyle(
+                                color: primaryColor,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       spaceBetweenInputFields,
-                      buttonInPages(
-                          buttonText,
-                          context,
-                          apiCall(district, displayDate, dropdownValue1,
-                              dropdownValue3),
-                          topPadding),
+                      FutureBuilder(
+                          future: getFee(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              return Row(
+                                children: [
+                                  Text(
+                                    'Consulting Fee : ',
+                                    style: TextStyle(
+                                      color: secondaryColorOne,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    'LKR ' + feeData[3]['fee'],
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }
+                            return Row(
+                              children: [
+                                Text(
+                                  'Consulting Fee : ',
+                                  style: TextStyle(
+                                    color: secondaryColorOne,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                                Text("LKR ...",
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w700,
+                                    )),
+                              ],
+                            );
+                          }),
+                      spaceBetweenInputFields,
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: topPadding),
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: secondaryColorOne),
+                          onPressed: () {
+                            apiCall(context);
+                            // showDialog(
+                            //   context: this.context,
+                            //   builder: (context) => CustomDialog(
+                            //     title: "Success",
+                            //     description:
+                            //         "You successfully booked an appointment.",
+                            //   ),
+                            // );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(
+                              buttonText,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  shadows: [
+                                    letterShadow,
+                                  ],
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -370,4 +483,24 @@ class _ChannelingDoctorState extends State<ChannelingDoctor> {
       });
     }
   }
+}
+
+class Doctor {
+  String id;
+  String name;
+  String email;
+  String phoneNumber;
+  Bool gender;
+  String medicalCouncilRegID;
+  String specialization;
+  String hospital;
+  String lane;
+  String province;
+  String district;
+  String availableTimeFrom;
+  String availableTimeTo;
+  String serviceType;
+  Bool status;
+  Bool deleteStatus;
+  Bool role;
 }

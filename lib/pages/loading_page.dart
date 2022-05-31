@@ -39,7 +39,7 @@ class _LoadingState extends State<Loading> {
                   padding: const EdgeInsets.all(20.0),
                   child: Center(
                     child: Text(
-                      'Ayurvedic mobile application for \nonline channeling,\nonline consulting, online ayurvedic shop, \nonline yoga class, food recipes \nand yoga poses.',
+                      'Ayurvedic mobile application for \nonline channeling,\n consulting, ayurvedic shop, \nyoga class, food recipes \nand yoga poses.',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,

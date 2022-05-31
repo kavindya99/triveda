@@ -14,6 +14,8 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+  TextEditingController _deliveryAddress = TextEditingController();
+  TextEditingController _contactNo = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final pageTitle = "Cart";
@@ -57,6 +59,11 @@ class _CartState extends State<Cart> {
                 listViewCart(
                     'Item 3', 'Nelli Kudu Nelli Kudu Nelli Kudu', '50', '150'),
                 spaceBetweenInputFields,
+                inputFieldsReg('Delivery Address', _deliveryAddress,
+                    "Name can't be empty", false),
+                spaceBetweenInputFields,
+                inputFieldsReg(
+                    'Contact No', _contactNo, "Name can't be empty", false),
                 buttonInPages(buttonText, context, callFunction, topPadding),
                 buttonInPages(buttonText1, context, callFunction1, topPadding1),
               ],

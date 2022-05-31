@@ -68,7 +68,7 @@ class _MedicineSelectionState extends State<MedicineSelection> {
     final bgColor = whiteColor;
 
     final buttonText = "Medicine's Name";
-    final callFunction = Buy();
+    //final callFunction = Buy();
     final topPadding = 0.0;
 
     // getMedicine();
@@ -102,8 +102,12 @@ class _MedicineSelectionState extends State<MedicineSelection> {
                             for (int i = 0; i < responseData.length; i++)
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 20.0),
-                                child: listView(responseData[i]['medicine'],
-                                    context, callFunction, topPadding),
+                                child: listView(
+                                    responseData[i]['medicine'],
+                                    context,
+                                    Buy(responseData[i]['id'],
+                                        responseData[i]['medicine']),
+                                    topPadding),
                               ),
                           ],
                         );

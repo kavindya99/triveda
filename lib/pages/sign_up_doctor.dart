@@ -87,17 +87,86 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
 
       if (res.statusCode == 404) {
         print(res.statusCode);
+        showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+                  title: "Error",
+                  description: "Something went wrong",
+                  img: 'images/error.webp',
+                ));
       }
+
       if (res.statusCode == 400) {
         print(res.statusCode);
-        showDialog(
-          context: this.context,
-          builder: (context) => CustomDialog(
-            title: "Error",
-            description: "Please enter the values in the correct format.",
-          ),
-        );
+        if (!_email.text.contains(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")) {
+          showDialog(
+              context: this.context,
+              builder: (context) => CustomDialog(
+                    title: "Error",
+                    description:
+                        "Please enter your email address with the correct format",
+                    img: 'images/error.webp',
+                  ));
+        } else if (_password.text.length < 10 || _password.text.length > 10) {
+          print(res.statusCode);
+          showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+              title: "Error",
+              description: "Your contact number is less than 10 numbers",
+              img: 'images/error.webp',
+            ),
+          );
+        } else if (!_password.text.contains(
+                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$') &&
+            _password.text.length >= 8) {
+          print(res.statusCode);
+          showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+              title: "Error",
+              description:
+                  "Your password should contain at least one special character, one numeric number, one uppercase and one lowercase",
+              img: 'images/error.webp',
+            ),
+          );
+        } else if (_password.text.contains(
+                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$') &&
+            _password.text.length < 8) {
+          print(res.statusCode);
+          showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+              title: "Error",
+              description: "Your password length is less than 8 characters",
+              img: 'images/error.webp',
+            ),
+          );
+        } else if (!_password.text.contains(
+                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$') &&
+            _password.text.length < 8) {
+          print(res.statusCode);
+          showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+              title: "Error",
+              description: "Your password is not in the correct format",
+              img: 'images/error.webp',
+            ),
+          );
+        } else {
+          showDialog(
+            context: this.context,
+            builder: (context) => CustomDialog(
+              title: "Error",
+              description: "Please enter the values in the correct format.",
+              img: 'images/error.webp',
+            ),
+          );
+        }
       }
+
       if (res.statusCode == 200) {
         var jsonResponse = json.decode(res.body);
         print(jsonResponse);
@@ -107,6 +176,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
           builder: (context) => CustomDialog(
             title: "Success",
             description: "You successfully created the account as a patient.",
+            img: 'images/success.webp',
           ),
         );
         Navigator.of(this.context).pushAndRemoveUntil(

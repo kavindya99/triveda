@@ -58,7 +58,7 @@ class _PatientListState extends State<PatientList> {
                             bottomLeft: Radius.circular(5.0),
                           ),
                           image: new DecorationImage(
-                            image: ExactAssetImage('images/light-bg.png'),
+                            image: ExactAssetImage('images/light-bg.webp'),
                             fit: BoxFit.fill,
                           ),
                         ),

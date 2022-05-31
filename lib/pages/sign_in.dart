@@ -30,7 +30,7 @@ class _SignInState extends State<SignIn> {
   var successGif = 'images/success.webp';
 
   _launchURL() async {
-    const url = 'https://slvms.software/auth/forgot-password';
+    const url = 'https://triveda.azurewebsites.net/auth/forgot-Password';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -254,6 +254,15 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                 ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.end,
+                //   children: [
+                //     GestureDetector(
+                //       onTap: _launchURL,
+                //       child: Text("Forgot password?"),
+                //     ),
+                //   ],
+                // ),
                 Container(
                   padding: EdgeInsets.only(bottom: 50.0),
                   alignment: Alignment.centerRight,

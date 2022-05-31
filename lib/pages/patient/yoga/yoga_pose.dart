@@ -22,7 +22,7 @@ class _YogaPoseState extends State<YogaPose> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("images/yoga.jpg"),
+          image: AssetImage("images/yoga.webp"),
           fit: BoxFit.cover,
         ),
       ),

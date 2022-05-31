@@ -113,11 +113,11 @@ class _MedicineTypesState extends State<MedicineTypes> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  MedicineSelection('Kwaatha')));
+                                  MedicineSelection('Kwatha')));
                     },
                     child: Center(
                       child: Text(
-                        'Kwaatha',
+                        'Kwatha',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.white,

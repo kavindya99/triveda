@@ -43,7 +43,7 @@ class _YogaPosesState extends State<YogaPoses> {
                   },
                   child: Center(
                     child: Text(
-                      'Sun \nSalutation',
+                      'Hot yoga',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -64,7 +64,7 @@ class _YogaPosesState extends State<YogaPoses> {
                   },
                   child: Center(
                     child: Text(
-                      'Kundalanee \nYoga',
+                      'Ashtanga\n yoga',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -84,7 +84,7 @@ class _YogaPosesState extends State<YogaPoses> {
                   },
                   child: Center(
                     child: Text(
-                      'Chandra \nNamaskaraya',
+                      'Hatha\n yoga',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -96,35 +96,16 @@ class _YogaPosesState extends State<YogaPoses> {
                     ),
                   ),
                 ),
-/*                ElevatedButton(
+                Image.asset('images/online-yoga-class.webp'),
+                ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: secondaryColorOne),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SweetItems()));
+                        MaterialPageRoute(builder: (context) => YogaList()));
                   },
                   child: Center(
                     child: Text(
-                      'Non \nVegetarian',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          shadows: [
-                            letterShadow,
-                          ],
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: primaryColor),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SweetItems()));
-                  },
-                  child: Center(
-                    child: Text(
-                      'Cooking \nRecipes',
+                      'Iyengar\n yoga',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -140,11 +121,11 @@ class _YogaPosesState extends State<YogaPoses> {
                   style: ElevatedButton.styleFrom(primary: secondaryColorTwo),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SweetItems()));
+                        MaterialPageRoute(builder: (context) => YogaList()));
                   },
                   child: Center(
                     child: Text(
-                      'Pre-cooking Food \nRecipes',
+                      'Kundalini\n yoga',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -155,7 +136,67 @@ class _YogaPosesState extends State<YogaPoses> {
                           fontWeight: FontWeight.w400),
                     ),
                   ),
-                ),*/
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: secondaryColorTwo),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => YogaList()));
+                  },
+                  child: Center(
+                    child: Text(
+                      'Power\n yoga',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          shadows: [
+                            letterShadow,
+                          ],
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: primaryColor),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => YogaList()));
+                  },
+                  child: Center(
+                    child: Text(
+                      'Restorative\n yoga',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          shadows: [
+                            letterShadow,
+                          ],
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: secondaryColorOne),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => YogaList()));
+                  },
+                  child: Center(
+                    child: Text(
+                      'Vinyasa\n yoga',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          shadows: [
+                            letterShadow,
+                          ],
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

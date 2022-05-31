@@ -49,6 +49,7 @@ Container inputFieldsReg(hint, controllerField, emptyMessage, showHide) =>
     Container(
       decoration: inputFieldDecoration,
       child: TextFormField(
+        style: TextStyle(color: primaryColor),
         obscureText: showHide,
         decoration: InputDecoration(
           counterText: "",
@@ -240,7 +241,7 @@ Container listViewCart(mainText, medicine, amount, price) => Container(
                 bottomLeft: Radius.circular(5.0),
               ),
               image: new DecorationImage(
-                image: ExactAssetImage('images/light-bg.png'),
+                image: ExactAssetImage('images/light-bg.webp'),
                 fit: BoxFit.fill,
               ),
             ),
